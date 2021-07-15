@@ -1,0 +1,125 @@
+html
+{
+    min-height: 100vh;
+}
+ 
+/* Header */
+nav
+{   
+    
+    background-image: url(../Images/NavBG.jpg);
+    background-repeat: repeat-x;
+    background-color: aqua;
+    background-size: 36em auto;
+}
+
+#navBar .row
+{
+    background: none;
+    margin-top: 4.5em;
+}
+
+#title
+{
+    width: 18em;
+    height: auto;
+    margin-top: .5em;
+}
+
+.login-button, .book-genre, .admin-link 
+{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.login-text.centered 
+{
+position: absolute;
+top: 100%;
+left: 40%;
+transform: translate(-50%, -30%);
+}
+
+.centered 
+{
+position: absolute;
+top: 60%;
+left: 40%;
+transform: translate(-50%, -50%);
+}
+
+#hamburger-toggle
+{
+    width: 4em;
+    height: auto;
+}
+
+.ham-collapse
+{
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.account-collapse
+{
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.navbar-toggler:focus
+{
+    border: none;
+}
+
+
+/* Slider */
+.carousel-item
+{
+    background: #777
+}
+
+.col
+{
+    padding: 1em;
+    color: rgb(255, 255, 255);
+}
+
+.row
+{
+    background: #AFB9C8;
+}
+
+div.shelf
+{
+    border-bottom: 50px solid transparent;
+    border-image: url(../Images/ImgBorder.JPG) 20% round;
+}
+
+form
+{
+    margin-left: 2em;
+}
+
+label
+{
+    width: 6em;
+}
+
+body
+{
+    background: url(../Images/WoodBackground.jpg) repeat center center fixed;
+}
+
+.wood-label
+{
+    position:absolute;
+    background-image: url(../Images/ImgBorder.JPG);
+    color: white;
+    text-align: center;
+}
+
+.bookpic
+{
+    float: left;
+}

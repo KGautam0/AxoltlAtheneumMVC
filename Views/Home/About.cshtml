@@ -1,7 +1,119 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<body>
 
-<p>Use this area to provide additional information.</p>
+    <header>
+        <!-- NavBar -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid" id="navBar">
+                <div class="row">
+                    <div class="col" id="navBar">
+                        <!-- Drop Down -->
+                        <div class="container">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navMenu">
+                                <span>
+                                    <img src="@Url.Content("~/Images/Hamburger.png")" alt="Menu" id="hamburger-toggle">
+                                </span>
+                            </button>
+                        </div>
+                        <!-- Collapsed Content -->
+                        <div class="collapse navbar-collapse" id="navMenu">
+                            <ul class="navbar-nav ham-collapse">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Homepage", "Home")" >Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Search.html">Browse</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("About", "Home")">About Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="col">
+                        <a href="./Homepage.html" class="navbar-brand text-center">
+                            <img src="@Url.Content("~/Images/Title.png")"id="title" alt="Axolotl Atheneum" style="margin-right: 575px;">
+                        </a>
+                    </div>
+
+                    <!-- Login -->
+                    <div class="col">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accountMenu">
+                            <span class="login-button">
+                                <img src="@Url.Content("~/Images/BookSpine.png")"alt="Account" style="width:6em;">
+                                <div class="centered login-text">Account</div>
+                            </span>
+                        </button>
+                        <!-- Collapsed Content -->
+                        <div class="collapse navbar-collapse" id="accountMenu">
+                            <ul class="navbar-nav account-collapse">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Login.html">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Registration.html">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./OrderHistory.html">Order History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./EditProfile.html">Edit Profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Cart -->
+                    <div class="col ms-auto">
+                        <a href="./Cart.html">
+                            <img src="@Url.Content("~/Images/Cart.png")"alt="Cart" style="width:9em; height:auto;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <h2>About Us:</h2>
+                <img src="@Url.Content("~/Images/AboutUs.png")"width="100%" height="auto" id="About">
+            </div>
+            <div class="col">
+                <p id="definition">
+                    ax·o·lotl<br>
+                    /ˈaksəˌlädl/<br>
+                    noun<br>
+                    a Mexican salamander that in natural conditions<br>
+                    retains its aquatic larval form throughout life<br>
+                    but is able to breed.<br><br>
+
+                    Ath·e·nae·um<br>
+                    /ˌaTHəˈnēəm/<br>
+                    noun<br>
+                    used in the names of libraries or institutions <br>
+                    for literary or scientific study.<br><br>
+                    used in the titles of periodicals concerned <br>
+                    with literature, science, and art.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</body>
+<!-- Footer -->
+<footer class="p-2 position-relative container-md wood-label">
+    <p>Axolotl Atheneum &copy; 2021 </p>
+</footer>
+</html>
