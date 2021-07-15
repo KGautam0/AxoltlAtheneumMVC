@@ -10,9 +10,14 @@ namespace AxolotlAtheneum.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("Homepage");
         }
+        public ActionResult Homepage()
+        {
+            
 
+            return Index();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
