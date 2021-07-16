@@ -36,5 +36,15 @@ namespace AxolotlAtheneum.Controllers
         {
             return View();
         }
+
+        public ActionResult Book()
+        {
+            return View();
+        }
+
+        public ActionResult Cart()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,26 @@
+﻿<body>
+    @Html.Partial("_MenuBar")
+
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <h2>Pride and Prejudice</h2> <p>$17.99</p>
+                    <div class="col">
+                        <a href="Book.html">
+                            <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")" width="15%" align="left">
+                        </a>
+                    </div>
+                    <div class="col" style="padding-left:275px">
+                        <h6>In Jane Austen's beloved novel, Elizabeth Bennet lives with her mother, father and sisters in the English countryside. As the eldest, she faces mounting pressure from her parents to marry. When the outspoken Elizabeth is introduced to the handsome and upper-class Mr. Darcy, sparks fly. Although there is obvious chemistry between the two, Darcy's overly reserved nature threatens the fledgling relationship.</h6>
+                        <a href="@Url.Action("Cart", "Home")" class="btn btn-default" role="button">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+@Html.Partial("_Footer")
