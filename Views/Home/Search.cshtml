@@ -1,0 +1,54 @@
+﻿<body>
+    @Html.Partial("_MenuBar")
+
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <div class="container">
+                        <h2>Advanced Search</h2>
+                        <hr>
+
+                        <form action="/action_page.php">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for books" name="search">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <p> </p>
+                        <p>Filter by:</p>
+                        <form>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" checked>Title</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio">Author</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio">ISBN</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" checked>Publisher</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" checked>Year</label>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+                            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@Html.Partial("_Footer")
