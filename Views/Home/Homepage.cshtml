@@ -1,142 +1,138 @@
 ﻿<html lang="en">
 <span>.</span>
+    <body>
+        @Html.Partial("_MenuBar")
+        <div class="container">
+            <div class="row shelf"> </div>
+            <div class="row">
 
-
-
-<body>
-
-    @Html.Partial("_MenuBar")
-
-    <div class="container-md">
-        <div class="row shelf"> </div>
-        <div class="row">
-
-            <div class="col" id="col">
-                <h2 class=wood-label>Welcome to Axolotl Atheneum!</h2>
-                <!-- Carousel -->
-                <div class="container" style="margin-top: 50px;">
-                    <div class="row">
-                        <div class="col">
+                <div class="col" id="col">
+                    <h2 class=wood-label>Welcome to Axolotl Atheneum!</h2>
+                    <!-- Carousel -->
+                    <div class="container" style="margin-top: 50px;">
+                        <div class="row featuredBook">
                             <h2 class=>Featured Books:</h2>
-                            <div class="container">
-                                <a href="@Url.Action("Book", "Home")">
-                                    <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")" max-width="30%"
-                                         max-height="auto">
-                                </a>
-                            </div>
-                            <!--     <a href="#">
-                            <img src="Images/Books/PrideAndPrejudice.jpg" max-width="30%"
-                                max-height="auto"></a>
-                    </div>
-
-                    <div id="myCarousel carouselControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner" style="width: 500px; height: 250px;">
-                            <div class="carousel-item active">
+                            <div class="col">
                                 <div class="container">
-                                    <a href="#">
-                                        <img src="Images/Books/PrideAndPrejudice.jpg" max-width="50%"
-                                            max-height="auto" class="centered"></a>
+                                    <a href="Book.html">
+                                        <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")">
+                                    </a>
                                 </div>
                             </div>
-
-                            <div class=" carousel-item">
+                            <div class="col">
                                 <div class="container">
-                                    <a href="#">
-                                        <img src="Images/Books/LOTR.jpg" max-width="100%" max-height="auto"
-                                            class="centered"></a>
+                                    <a href="Book.html">
+                                        <img src="@Url.Content("~/Images/Books/LOTR.jpg")">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="carousel-item">
+                            <div class="col">
                                 <div class="container">
-                                    <a href="#">
-                                        <img src="Images/Books/Algebra.jpg" max-width="100%"
-                                            max-height="auto" class="centered"></a>
+                                    <a href="Book.html">
+                                        <img src="@Url.Content("~/Images/Books/Algebra.jpg")">
+                                    </a>
                                 </div>
-                            </div>
-
-                        </div>
-                    </div>
-                -->
-                        </div>
-                        <div class="col">
-                            <h2>Browse Genres:</h2>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <ul>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Nonfiction"
-                                                         style="width:10em;">
-                                                    <div class="centered">Nonfiction</div>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Fiction"
-                                                         style="width:10em;">
-                                                    <div class="centered">Fiction</div>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Classics"
-                                                         style="width:10em;">
-                                                    <div class="centered">Classics</div>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Poems"
-                                                         style="width:10em;">
-                                                    <div class="centered">Poems</div>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col">
-                                        <ul>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Historical"
-                                                         style="width:10em; height:auto">
-                                                    <div class="centered">Historical</div>
-                                                    </span>
-                                                </a>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Romance"
-                                                         style="width:10em;">
-                                                    <div class="centered">Romance</div>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="book-genre">
-                                                    <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Thriller"
-                                                         style="width:10em;">
-                                                    <div class="centered">Thriller</div>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
 
+                    <div class="row shelf"> </div>
+
+                    <div class="container">
+                        <div class="row featuredAuthor">
+                            <h2>Featured Authors:</h2>
+                            <div class="col">
+                                <div class="container">
+                                    <h3>Jessie</h3>
+                                    <img src="@Url.Content("~/Images/Authors/Jessie.jpg")">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="container">
+                                    <h3>Meowth</h3>
+                                    <img src="@Url.Content("~/Images/Authors/Meowth.jpg")">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="container">
+                                    <h3>James</h3>
+                                    <img src="@Url.Content("~/Images/Authors/James.jpg")">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row shelf"> </div>
+
+                    <h2>Browse Genres:</h2>
+                    <div class="browseGenres">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <ul>
+                                        <li>
+                                            <a class="book-genre">
+                                                <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Nonfiction"
+                                                     style="width:10em;">
+                                                <div class="centered">Nonfiction</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="book-genre">
+                                                <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Fiction"
+                                                     style="width:10em;">
+                                                <div class="centered">Fiction</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul>
+                                        <li>
+                                            <a class="book-genre">
+                                                <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Classics"
+                                                     style="width:10em;">
+                                                <div class="centered">Classics</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="book-genre">
+                                                <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Poems" style="width:10em;">
+                                                <div class="centered">Poems</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul>
+                                        <li>
+                                            <a class="book-genre">
+                                                <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Historical"
+                                                     style="width:10em; height:auto">
+                                                <div class="centered">Historical</div>
+                                            </a>
+                                        <li>
+                                            <a class="book-genre">
+                                                <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Romance"
+                                                     style="width:10em;">
+                                                <div class="centered">Romance</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row shelf"> </div>
                 </div>
-                <div class="row shelf"> </div>
-                @Html.Partial("_AboutPartial")
             </div>
         </div>
-</body>
-@Html.Partial("_Footer")
 
+        @Html.Partial("_AboutPartial")
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+        </script>
+    </body>
+@Html.Partial("_Footer")
 </html>
