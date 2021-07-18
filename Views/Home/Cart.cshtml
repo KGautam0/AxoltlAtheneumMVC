@@ -1,0 +1,82 @@
+﻿<body>
+    @Html.Partial("_MenuBar")
+
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <h2>Your Cart</h2>
+                    <div class="row">
+                        <div class="col-md-6 confirm">
+                            <div class="col-sm-2 order">
+                                <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")" align="left" class="img-thumbnail" alt="gg">
+                            </div>
+                            <div class="col-sm-6 item" style="padding-left: 200px;">
+                                <p>Pride and Prejudice</p>
+                            </div>
+                            <div class="col-sm-6 price" style="padding-left: 200px;">
+                                <p>Price: $17.99</p>
+                            </div>
+                            <div class="col-sm-10 counter" style="padding-left: 200px;">
+                                <p>
+                                    <button type="button" class="btn btn-basic btn-xs">-</button>
+                                    Qty: 1
+                                    <button type="button" class="btn btn-basic btn-xs">+</button>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 total">
+                            <p style="text-align:right">Subtotal:    $17.99</p>
+                            <p style="text-align:right">Tax:    $1.24</p>
+                            <h5 style="text-align:right">Total:    $19.23</h5>
+                            <div style="text-align:right">
+                                <a href="@Url.Action("Checkout", "Home")" class="btn btn-warning">Continue to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <h2>Your Cart</h2>
+                    <div class="row">
+                        <div class="col-md-6 confirm">
+                            <div class="col-sm-2 order">
+                                <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")" align="left" class="img-thumbnail" alt="gg">
+                            </div>
+                            <div class="col-sm-6 item" style="padding-left: 200px;">
+                                <p>Pride and Prejudice</p>
+                            </div>
+                            <div class="col-sm-6 price" style="padding-left: 200px;">
+                                <p>Price: $17.99</p>
+                            </div>
+                            <div class="col-sm-10 counter" style="padding-left: 200px;">
+                                <p>
+                                    <button type="button" class="btn btn-basic btn-xs">-</button>
+                                    Qty: 1
+                                    <button type="button" class="btn btn-basic btn-xs">+</button>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 total">
+                            <p style="text-align:right">Subtotal:    $17.99</p>
+                            <p style="text-align:right">Tax:    $1.24</p>
+                            <h5 style="text-align:right">Total:    $19.23</h5>
+                            <div style="text-align:right">
+                                <a href="@Url.Action("Checkout", "Home")" class="btn btn-warning">Continue to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@Html.Partial("_Footer")

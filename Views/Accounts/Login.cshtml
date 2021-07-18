@@ -1,0 +1,40 @@
+﻿@Html.Partial("_MenuBar")
+
+<div class="container-md">
+    <div class="row shelf"> </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="container">
+                        <h2>Login</h2>
+                        <form action="@Url.Action("Register", "Accounts")" method="post" role="form" class="form-horizontal">
+                            <input type='hidden' name='csrfmiddlewaretoken' value='brGfMU16YyyG2QEcpLqhb3Zh8AvkYkJt' />
+                            <div class="form-group required"><label class="col-md-2 control-label">E-mail</label><div class="col-md-4"><input class="form-control" id="id_email" name="email" placeholder="E-mail" required="required" title="" type="email" /></div></div>
+                            <div class="form-group required"><label class="col-md-2 control-label">Password</label><div class="col-md-4"><input class="form-control" id="id_password1" name="password1" placeholder="Password" required="required" title="" type="password" /></div></div>
+                            <button type="button" class="btn btn-link">Forgot your password?</button>
+                    </div>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Login
+                            </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="container">
+                        <h2>Don't have an account?     
+                        <a href="@Url.Action("Register", "Accounts")" type="button" class="btn btn-warning">    Register Now</a></h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Footer")
