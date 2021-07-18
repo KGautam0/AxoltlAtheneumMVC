@@ -11,6 +11,84 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
-    @RenderBody()
+
 </head>
+
+<header>
+    <!-- NavBar -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid" id="navBar">
+            <div class="row">
+                <div class="col" id="navBar">
+                    <!-- Drop Down -->
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navMenu">
+                            <span>
+                                <img src="@Url.Content("~/Images/Hamburger.png")" alt="Menu" id="hamburger-toggle">
+                            </span>
+                        </button>
+                    </div>
+                    <!-- Collapsed Content -->
+                    <div class="collapse navbar-collapse" id="navMenu">
+                        <ul class="navbar-nav ham-collapse">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Homepage", "Home")">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./Search.html">Browse</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("About", "Home")">About Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <div class="col">
+                    <a href="./Homepage.html" class="navbar-brand text-center">
+                        <img src="@Url.Content("~/Images/Title.png")" id="title" alt="Axolotl Atheneum" style="margin-right: 575px;">
+                    </a>
+                </div>
+
+                <!-- Login -->
+                <div class="col">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#accountMenu">
+                        <span class="login-button">
+                            <img src="@Url.Content("~/Images/BookSpine.png")" alt="Account" style="width:6em;">
+                            <div class="centered login-text">Account</div>
+                        </span>
+                    </button>
+                    <!-- Collapsed Content -->
+                    <div class="collapse navbar-collapse" id="accountMenu">
+                        <ul class="navbar-nav account-collapse">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Login")">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("regPage", "Login")">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ordHisPage", "Login")">Order History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=""@Url.Action("editProfilePage", "Login")">Edit Profile</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cart -->
+                <div class="col ms-auto">
+                    <a href="./Cart.html">
+                        <img src="@Url.Content("~/Images/Cart.png")" alt="Cart" style="width:9em; height:auto;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+@RenderBody()
 </html>

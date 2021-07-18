@@ -4,82 +4,7 @@
 
 
 <body>
-    <header>
-        <!-- NavBar -->
-        <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid" id="navBar">
-                <div class="row">
-                    <div class="col" id="navBar">
-                        <!-- Drop Down -->
-                        <div class="container">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navMenu">
-                                <span>
-                                    <img src="./Images/Hamburger.png" alt="Menu" id="hamburger-toggle">
-                                </span>
-                            </button>
-                        </div>
-                        <!-- Collapsed Content -->
-                        <div class="collapse navbar-collapse" id="navMenu">
-                            <ul class="navbar-nav ham-collapse">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./Homepage.html">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./Search.html">Browse</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./About.html">About Us</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Title -->
-                    <div class="col">
-                        <a href="./Homepage.html" class="navbar-brand text-center">
-                            <img src="~/Images/Title.png" id="title" alt="Axolotl Atheneum" style="margin-right: 575px;">
-                        </a>
-                    </div>
-
-                    <!-- Login -->
-                    <div class="col">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#accountMenu">
-                            <span class="login-button">
-                                <img src="./Images/BookSpine.png" alt="Account" style="width:6em;">
-                                <div class="centered login-text">Account</div>
-                            </span>
-                        </button>
-                        <!-- Collapsed Content -->
-                        <div class="collapse navbar-collapse" id="accountMenu">
-                            <ul class="navbar-nav account-collapse">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./Login.html">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./Registration.html">Register</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./OrderHistory.html">Order History</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./EditProfile.html">Edit Profile</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Cart -->
-                    <div class="col ms-auto">
-                        <a href="./Cart.html">
-                            <img src="./Images/Cart.png" alt="Cart" style="width:9em; height:auto;">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+   
 
     <body>
         <div class="container-md">
@@ -95,7 +20,7 @@
                                 <h2 class=>Featured Books:</h2>
                                 <div class="container">
                                     <a href="Book.html">
-                                        <img src="Images/Books/PrideAndPrejudice.jpg" max-width="30%"
+                                        <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")" max-width="30%"
                                              max-height="auto">
                                     </a>
                                 </div>
@@ -141,7 +66,7 @@
                                             <ul>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineG.png" alt="Nonfiction"
+                                                        <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Nonfiction"
                                                              style="width:10em;">
                                                         <div class="centered">Nonfiction</div>
                                                         </span>
@@ -149,7 +74,7 @@
                                                 </li>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineB.png" alt="Fiction"
+                                                        <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Fiction"
                                                              style="width:10em;">
                                                         <div class="centered">Fiction</div>
                                                         </span>
@@ -157,7 +82,7 @@
                                                 </li>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineP.png" alt="Classics"
+                                                        <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Classics"
                                                              style="width:10em;">
                                                         <div class="centered">Classics</div>
                                                         </span>
@@ -165,7 +90,7 @@
                                                 </li>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineO.png" alt="Poems"
+                                                        <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Poems"
                                                              style="width:10em;">
                                                         <div class="centered">Poems</div>
                                                         </span>
@@ -177,14 +102,14 @@
                                             <ul>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineP.png" alt="Historical"
+                                                        <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Historical"
                                                              style="width:10em; height:auto">
                                                         <div class="centered">Historical</div>
                                                         </span>
                                                     </a>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineO.png" alt="Romance"
+                                                        <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Romance"
                                                              style="width:10em;">
                                                         <div class="centered">Romance</div>
                                                         </span>
@@ -192,7 +117,7 @@
                                                 </li>
                                                 <li>
                                                     <a class="book-genre">
-                                                        <img src="./Images/BookSpineG.png" alt="Thriller"
+                                                        <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Thriller"
                                                              style="width:10em;">
                                                         <div class="centered">Thriller</div>
                                                         </span>
@@ -213,7 +138,7 @@
             <div class="row">
                 <div class="col">
                     <h2>About Us:</h2>
-                    <img src="./Images/AboutUs.png" width="100%" height="auto" id="About">
+                    <img src="@Url.Content("~/Images/AboutUs.png")" width="100%" height="auto" id="About">
                 </div>
                 <div class="col">
                     <p id="definition">
