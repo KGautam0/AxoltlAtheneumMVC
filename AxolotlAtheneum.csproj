@@ -187,6 +187,8 @@
     <Content Include="Views\Login\View.cshtml" />
     <Content Include="Views\Login\regSucc.cshtml" />
     <Content Include="Views\Login\RegistrationFail.cshtml" />
+    <Content Include="Views\Login\verificationFail.cshtml" />
+    <Content Include="Views\Login\LoginFail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

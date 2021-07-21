@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace AxolotlAtheneum.DataAccessLayer
 {
@@ -13,18 +11,20 @@ namespace AxolotlAtheneum.DataAccessLayer
     {
         public bool insertUSER(User x)
         {
-            //Create  SQL Connection
+            //Create  SQL Connection with Connection String
             SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-2K2AU8V;Initial Catalog=AxolotlAtheneum;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
-            //Create SQL Command with passed in stored proceduire name and SQL connection
+            //Create SQL Command with passed in stored proceduire name and SQL connection object
             SqlCommand cmnd = new SqlCommand("Create_User", cnn);
-            //Set Command Type
+            //Set Command Type, should  be stored procedure for this project
             cmnd.CommandType = CommandType.StoredProcedure;
+
+            //Serialize reference type parameter 
             String cardString = JsonConvert.SerializeObject(x.card);
             String addressString = JsonConvert.SerializeObject(x.address);
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
-            cmnd.Parameters.AddWithValue("@userID", x.userID);
+            
             cmnd.Parameters.AddWithValue("@firstName", x.firstName);
             cmnd.Parameters.AddWithValue("@lastName", x.lastName);
             cmnd.Parameters.AddWithValue("@email", x.email);
@@ -48,6 +48,59 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Close Connection
             cnn.Close();
             return true;
+        }
+
+        public System.Collections.Generic.List<User> retrieveUSER(String email, String password)
+        {
+            //Create User list to store records
+
+            List<User> userList = new List<User>();
+
+            //Create  SQL Connection
+            SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-2K2AU8V;Initial Catalog=AxolotlAtheneum;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            //Create SQL Command with passed in stored proceduire name and SQL connection
+            SqlCommand cmnd = new SqlCommand("retrieve_user", cnn);
+            //Set Command Type
+            cmnd.CommandType = CommandType.StoredProcedure;
+
+            //Set Values to be passed into the stored procedure for insertion into User Table.
+            cmnd.Parameters.AddWithValue("@Email", email);
+            cmnd.Parameters.AddWithValue("@Password", password);
+
+            //Open Connection
+            cnn.Open();
+
+            //Execute Reader
+            var reader = cmnd.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                User tempuser = new User();
+                tempuser.userID = (int)reader["userID"];
+                tempuser.firstName = (string)reader["firstname"];
+                tempuser.lastName = (string)reader["lastname"];
+                tempuser.email = (string)reader["email"];
+                tempuser.password = (string)reader["password"];
+                tempuser.status = (int)reader["status"];
+                tempuser.actnum = (int)reader["actnum"];
+                string addressJson = (string)reader["address"];
+                Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
+                tempuser.address = userAddress;
+                string cardJson = (string)reader["card"];
+                PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                tempuser.isAdmin = (bool)reader["isAdmin"];
+                userList.Add(tempuser);
+
+            }
+
+
+            //Close Connection
+            cnn.Close();
+
+            //Return User List
+            return userList;
         }
     }
 }
