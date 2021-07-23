@@ -1,125 +1,126 @@
-html
-{
+html {
     min-height: 100vh;
 }
- 
+
 /* Header */
-nav
-{   
-    
+nav {
     background-image: url(../Images/NavBG.jpg);
     background-repeat: repeat-x;
     background-color: aqua;
     background-size: 36em auto;
 }
 
-#navBar .row
-{
+#navBar .row {
     background: none;
     margin-top: 4.5em;
 }
 
-#title
-{
+#title {
     width: 18em;
     height: auto;
     margin-top: .5em;
 }
 
-.login-button, .book-genre, .admin-link 
-{
+.login-button, .book-genre, .admin-link {
     position: relative;
     text-align: center;
     color: white;
 }
 
-.login-text.centered 
-{
-position: absolute;
-top: 100%;
-left: 40%;
-transform: translate(-50%, -30%);
+.login-text.centered {
+    position: absolute;
+    top: 100%;
+    left: 40%;
+    transform: translate(-50%, -30%);
 }
 
-.centered 
-{
-position: absolute;
-top: 60%;
-left: 40%;
-transform: translate(-50%, -50%);
+.centered {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 
-#hamburger-toggle
-{
+#hamburger-toggle {
     width: 4em;
     height: auto;
 }
 
-.ham-collapse
-{
+.ham-collapse {
     margin-top: 2em;
     margin-left: 2em;
 }
 
-.account-collapse
-{
+.account-collapse {
     margin-top: 2em;
     margin-left: 2em;
 }
 
-.navbar-toggler:focus
-{
+.navbar-toggler:focus {
     border: none;
 }
 
 
-/* Slider */
-.carousel-item
-{
-    background: #777
+.featuredBook img {
+    height: 400px;
+    object-fit: cover;
 }
 
-.col
-{
+.featuredAuthor img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.featuredAuthor h3 {
+    text-align: left;
+    font-size: 50%;
+}
+
+.col {
     padding: 1em;
     color: rgb(255, 255, 255);
 }
 
-.row
-{
+.row {
     background: #AFB9C8;
 }
 
-div.shelf
-{
+div.shelf {
     border-bottom: 50px solid transparent;
     border-image: url(../Images/ImgBorder.JPG) 20% round;
 }
 
-form
-{
+form {
     margin-left: 2em;
 }
 
-label
-{
+label {
     width: 6em;
 }
 
-body
-{
+select {
+    width: 12em;
+}
+
+input[type="radio"] {
+    margin-left: 2em;
+}
+
+.error {
+    font-size: 70%;
+}
+
+body {
     background: url(../Images/WoodBackground.jpg) repeat center center fixed;
 }
 
-.wood-label
-{
-    position:absolute;
+.wood-label {
+    position: absolute;
     background-image: url(../Images/ImgBorder.JPG);
     color: white;
     text-align: center;
 }
 
-.bookpic
-{
+.bookpic {
     float: left;
 }
