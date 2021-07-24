@@ -35,6 +35,11 @@ namespace AxolotlAtheneum.Models
         [MaxLength(30)]
         public String password { get; set; }
 
+        [MaxLength(10)]
+        [MinLength(10)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
+        public String phonenumber { get; set; }
+
         [DisplayName("Status")]
         public int status { get; set; }
 

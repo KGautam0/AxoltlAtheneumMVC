@@ -22,7 +22,7 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public User logUSER(String email, String password)
         {
-            List<User> retrievedUser = new List<User>();
+            List<User> retrievedUser = USERDAL.retrieveUSER(email, password);
             if (retrievedUser.ElementAt(0) != null)
             {
                 return retrievedUser.ElementAt(0);
@@ -31,5 +31,16 @@ namespace AxolotlAtheneum.BusinessLayer
             else return null;
         }
 
+        
+        public User updateUSER(User x)
+        {
+            List<User> retrievedUser = USERDAL.updateUSER(x); ;
+            if (retrievedUser.ElementAt(0) != null)
+            {
+                return retrievedUser.ElementAt(0);
+            }
+
+            else return null;
+        }
     }
 }

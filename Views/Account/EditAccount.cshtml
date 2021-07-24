@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "EditAccount";
+}
+
+<h2>EditAccount</h2>
+
+
+  <div class="container-md">
+    <div class="row shelf"> </div>
+    <div class="row">
+      <div class="col">
+        <!-- Edit Profile -->
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editProfile">
+            <span class="login-button">
+              <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Edit Profile" style="width:10em;">
+              <div class="centered">Edit Profile</div>
+            </span>
+          </button>
+        </div>
+        <!-- Collapsed Content -->
+        <div class="collapse navbar-collapse" id="editProfile">
+            
+                @using (Html.BeginForm("editName", "Account", FormMethod.Post))
+                {
+                    <fieldset class="edit_name">
+
+                        <h3>Change Name</h3>
+                        <p>Please update your Name:</p>
+
+                        <label for="newFName">First Name: </label>
+                        <input type="text" name="newFName" id="newFName" required placeholder="John"><br>
+
+
+                        <label for="newLName">Last Name: </label>
+                        <input type="text" name="newLName" id="newLName" required placeholder="Doe"><br>
+
+
+                    </fieldset>
+                    <button type="submit"  value="Submit">Submit</button>
+                }
+            
+        </div>
+      </div>
+      <div class="col">
+        <!-- Edit Phone -->
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editPhone">
+            <span class="login-button">
+              <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Edit Phone #" style="width:10em;">
+              <div class="centered">Edit Phone #</div>
+            </span>
+          </button>
+        </div>
+        <!-- Collapsed Content -->
+        <div class="collapse navbar-collapse" id="editPhone">
+            @using (Html.BeginForm("editPhone", "Account", FormMethod.Post))
+            {
+               
+                <fieldset class="edit_phone">
+                    <h3>Change Phone Number</h3>
+                    <p>Please change your Phone Number:</p>
+
+                    <label for="newPhone">Phone Number: </label>
+                    <input type="text" name="newPhone" id="newPhone" required placeholder="XXX-XXX-XXXX">
+                    <text for="newPhone" id="newPhoneText"> * </text>
+                </fieldset>
+                <button type="submit"  value="Submit">Submit</button>
+                
+            }
+            </div>
+            
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <!-- Edit Address -->
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editAddress">
+            <span class="login-button">
+              <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Edit Adress" style="width:10em;">
+              <div class="centered">Edit Address</div>
+            </span>
+          </button>
+        </div>
+        <!-- Collapsed Content -->
+        <div class="collapse navbar-collapse" id="editAddress">
+          
+              <fieldset class="edit_address">
+                  <h3>Change Shipping Address</h3>
+                  <p>Please enter your new address information:</p>
+                  @Html.Partial("_editAddress")
+                  </fieldset>
+            
+          
+        </div>
+      </div>
+
+      <div class="col">
+        <!-- Edit Card -->
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editCard">
+            <span class="login-button">
+              <img src="@Url.Content("~/Images/BookSpineP.png")")" alt="Edit Card" style="width:10em;">
+              <div class="centered">Edit Card</div>
+            </span>
+          </button>
+        </div>
+        <!-- Collapsed Content -->
+        <div class="collapse navbar-collapse" id="editCard">
+          <form action="#" id="editCard">
+            <fieldset class="edit_payment">
+              <h3>Change Payment Card</h3>
+              <p>Please enter your card information:</p>
+              <h4>Card Type:</h4>
+
+              <label for="newCardName">Cardholder Name: </label>
+              <input type="text" name="newCardName" id="newCardName" required placeholder="John Doe">
+              <text for="newCardName" id="newCardNameText"> * </text><br>
+
+              <input type="checkbox" id="newCardType1" name="newCardType1" value="MasterCard">
+              <label for="newCardType1">MasterCard</label><br>
+              <input type="checkbox" id="newCardType2" name="newCardType2" value="VISA">
+              <label for="newCardType2"> VISA</label><br>
+              <input type="checkbox" id="newCardType3" name="newCardType3" value="Discover">
+              <label for="newCardType3">Discover</label><br>
+              <input type="checkbox" id="newCardType4" name="newCardType4" value="Other">
+              <label for="newCardType4">Other</label><br>
+
+              <label for="newCardNumber">Card Number: </label>
+              <input type="text" name="newCardNumber" id="newCardNumber" required placeholder="XXXX XXXX XXXX XXXX">
+              <text for="newCardNumber" id="newCardNumberText"> * </text><br>
+
+              <label for="newExpirationDate">Expiration Date: </label>
+              <input type="text" name="newExpirationDate" id="newExpirationDate" required placeholder="XX/XX">
+              <text for="newExpirationDate" id="newExpirationDateText"> * </text><br>
+
+              <label for="newCardZip">Card Zip: </label>
+              <input type="text" name="newCardZip" id="newCardZip" required placeholder="12345">
+              <text for="newCardZip" id="newCardZipText"> * </text><br>
+            </fieldset>
+            <button type="submit" form="editCard" value="Submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

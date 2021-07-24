@@ -17,15 +17,17 @@
                         <div class="container">
                             <h2>Login</h2>
 
-                            <p>Your email or passwork was incorrect, please try again.</p>
+                            <p>Your email or password was not a valid entry, please try again.</p>
                             <div class="form-group">
                                 <form method="POST">
                                     <label for="Email">Email</label>
-                                    <
+                                    
                                     <input type="text" id="email" placeholder="Your email address goes here" name=" email">
+                                    <p>Must contain one &#65312 and a have one . following it.</p>
+
                                     <label for="Email">Password</label>
                                     <input type="text" id="password" placeholder="Your password goes here" name=" password">
-
+                                    Cannot be longer than 30 characters or blank. <br>
                                     <input type="submit" />
                                 </form>
                             </div>
@@ -46,7 +48,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="container">
-                            <h2>Don't have an account?     <a href="@Url.Action("regPage", "Login")" type="button" class="btn btn-warning">    Register Now</a></h2>
+                            <h2>Don't have an account?     <a href="@Url.Action("regPage", "Account")" type="button" class="btn btn-warning">    Register Now</a></h2>
                         </div>
                     </div>
 

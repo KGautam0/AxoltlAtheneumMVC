@@ -133,7 +133,7 @@
     <Compile Include="BusinessLayer\EmailSender.cs" />
     <Compile Include="BusinessLayer\userBO.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="DataAccessLayer\userDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -154,6 +154,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\AboutUs.jpg" />
+    <Content Include="Images\AboutUs.png" />
+    <Content Include="Images\BookSpine.png" />
+    <Content Include="Images\BookSpineB.png" />
+    <Content Include="Images\BookSpineG.png" />
+    <Content Include="Images\BookSpineO.png" />
+    <Content Include="Images\BookSpineP.png" />
+    <Content Include="Images\BookSpineR.png" />
+    <Content Include="Images\Books\Algebra.jpg" />
+    <Content Include="Images\Books\LOTR.jpg" />
+    <Content Include="Images\Books\PrideAndPrejudice.jpg" />
+    <Content Include="Images\Cart.png" />
+    <Content Include="Images\Hamburger.png" />
+    <Content Include="Images\ImgBorder - Copy.JPG" />
+    <Content Include="Images\ImgBorder.JPG" />
+    <Content Include="Images\NavBG.jpg" />
+    <Content Include="Images\Thanks.png" />
+    <Content Include="Images\Title.png" />
+    <Content Include="Images\WoodBackground.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -182,17 +201,19 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\Registration.cshtml" />
-    <Content Include="Views\Login\View.cshtml" />
-    <Content Include="Views\Login\regSucc.cshtml" />
-    <Content Include="Views\Login\RegistrationFail.cshtml" />
-    <Content Include="Views\Login\verificationFail.cshtml" />
-    <Content Include="Views\Login\LoginFail.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\Account\regSucc.cshtml" />
+    <Content Include="Views\Account\RegistrationFail.cshtml" />
+    <Content Include="Views\Account\verificationFail.cshtml" />
+    <Content Include="Views\Account\LoginFail.cshtml" />
+    <Content Include="Views\Account\EditAccount.cshtml" />
+    <Content Include="Views\Account\_editAddress.cshtml" />
+    <Content Include="Views\Account\LoginInv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="Styling\" />
   </ItemGroup>
   <ItemGroup>
