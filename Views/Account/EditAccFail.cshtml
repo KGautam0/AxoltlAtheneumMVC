@@ -3,7 +3,10 @@
     ViewBag.Title = "EditAccount";
 }
 
-<h2>EditAccount</h2>
+<h2>Edit Account</h2>
+<h2>Your entry was invalid, please read each field's rules and try again.</h2>
+
+
 @model AxolotlAtheneum.Models.User
 <div class="container-md">
     <div class="row shelf"> </div>
@@ -23,23 +26,23 @@
 
                 @using (Html.BeginForm("editName", "Account", FormMethod.Post))
                 {
-                <fieldset class="edit_name">
+                    <fieldset class="edit_name">
 
-                    <h3>Change Name</h3>
-                    <p>Please update your Name:</p>
-                    <p>Maximum legnth is 30 characters.</p>
+                        <h3>Change Name</h3>
+                        <p>Please update your Name:</p>
+                        <p>Maximum legnth is 30 characters.</p>
 
-                    <p> Current First Name:   @Html.DisplayFor(m => m.firstName) </p>
+                        <p> Current First Name:   @Html.DisplayFor(m => m.firstName) </p>
                         <label for="newFName">First Name: </label>
                         <input type="text" name="newFName" id="newFName" required placeholder="John"><br>
 
-                     <p> Current Last Name: @Html.DisplayFor(m => m.lastName)</p>
-                            
+                        <p> Current Last Name: @Html.DisplayFor(m => m.lastName)</p>
+
                         <label for="newLName">Last Name: </label>
                         <input type="text" name="newLName" id="newLName" required placeholder="Doe"><br>
 
 
-                </fieldset>
+                    </fieldset>
                     <button type="submit" value="Submit">Submit</button>
                 }
 
@@ -60,21 +63,21 @@
                 @using (Html.BeginForm("editPhone", "Account", FormMethod.Post))
                 {
 
-                <fieldset class="edit_phone">
-                    <h3>Change Phone Number</h3>
+                    <fieldset class="edit_phone">
+                        <h3>Change Phone Number</h3>
 
 
-                    <p>Please change your Phone Number:</p>
+                        <p>Please change your Phone Number:</p>
 
-                    <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
-                    <p>Must be 10 digits only, no hyphens</p>
+                        <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
+                        <p>Must be 10 digits only, no hyphens</p>
 
-                    <label for="newPhone">Phone Number: </label>
-                    <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
-                    <text for="newPhone" id="newPhoneText"> * </text>
-                    <button type="submit" value="Submit">Submit</button>
+                        <label for="newPhone">Phone Number: </label>
+                        <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
+                        <text for="newPhone" id="newPhoneText"> * </text>
+                        <button type="submit" value="Submit">Submit</button>
 
-                </fieldset>
+                    </fieldset>
 
                 }
             </div>

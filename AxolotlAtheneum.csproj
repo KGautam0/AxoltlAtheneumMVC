@@ -211,6 +211,10 @@
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Account\_editAddress.cshtml" />
     <Content Include="Views\Account\LoginInv.cshtml" />
+    <Content Include="Views\Account\_editCard.cshtml" />
+    <Content Include="Views\Account\EditAccFail.cshtml" />
+    <Content Include="Views\Shared\LoginCheck.cshtml" />
+    <Content Include="Views\Home\AdminHomepage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

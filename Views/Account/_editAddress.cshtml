@@ -6,32 +6,40 @@
     
 <div class="form-horizontal">
     <h4>Address</h4>
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
-        </div>
-    </div>
+<div class="form-group">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Street2, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Street2, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Street2, "", new { @class = "text-danger" })
-        </div>
+    @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+    <p> Current Street Address: @Html.DisplayFor(m => m.Street) </p>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
     </div>
+</div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-        </div>
+<div class="form-group">
+
+
+    @Html.LabelFor(model => model.Street2, htmlAttributes: new { @class = "control-label col-md-2" })
+    <p> Current Street Address Specifer: @Html.DisplayFor(m => m.Street2)</p>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Street2, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Street2, "", new { @class = "text-danger" })
     </div>
+</div>
 
+<div class="form-group">
+
+    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+    <p> Current City: @Html.DisplayFor(m => m.City)</p>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+    </div>
+</div>
+    <p> Current State: </p>@Html.DisplayFor(m => m.State)
     @Html.EnumDropDownListFor(
         x => x.State,
         "Select State",
@@ -41,8 +49,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            <p> Current Zip Code: @Html.DisplayFor(m => m.Zip) </p>
             @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Zip, "This must be a 5 digit number.", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Zip, "This must be a 5 digit number.", new { @class = "text-dark" })
         </div>
     </div>
 

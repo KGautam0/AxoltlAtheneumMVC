@@ -15,6 +15,20 @@ namespace AxolotlAtheneum.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        public ActionResult rendereditAddress()
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            return PartialView("_editAddress",loggeduser.address);
+        }
+
+        [ChildActionOnly]
+        public ActionResult rendereditCard()
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            return PartialView("_editCard", loggeduser.card);
+        }
+
         [HttpPost]
         public ActionResult logUser(String email, String password)
         {
@@ -54,20 +68,23 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult EditAccount()
         {
-            return View();
+            User loggeduser = (User)Session["Logged_User"];
+            if (Session["Logged_User"] != null)
+            return View(loggeduser);
+            return View("LoginCheck");
         }
        
         public ActionResult editName(String newFName, String newLName)
         {
             User loggeduser = (User)Session["Logged_User"];
-            if(newFName != null)
+            if (newFName != null)
                 loggeduser.firstName = newFName;
             if(newLName != null)
                 loggeduser.lastName = newLName;
 
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
 
-            return RedirectToAction("EditAccount");
+            return RedirectToAction("EditAccount",loggeduser);
         }
 
 
@@ -75,25 +92,43 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult editAddress(Address newAddress)
         {
             User loggeduser = (User)Session["Logged_User"];
-            if (newAddress != null)
-                loggeduser.address = newAddress;
+            if (!ModelState.IsValid)
+                return View("EditAccFail",loggeduser);
+            loggeduser.address = newAddress;
             
 
             USERBO.updateUSER(loggeduser);
 
-            return RedirectToAction("EditAccount");
+            return RedirectToAction("EditAccount",loggeduser);
+        }
+        [HttpPost]
+        public ActionResult editCard(PaymentCard newCard)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            if (!ModelState.IsValid)
+                return View("EditAccFail", loggeduser);
+            loggeduser.card = newCard;
+
+
+            USERBO.updateUSER(loggeduser);
+
+            return RedirectToAction("EditAccount", loggeduser);
         }
         [HttpPost]
         public ActionResult editPhone(String newPhone)
         {
             User loggeduser = (User)Session["Logged_User"];
-            if (newPhone != null)
-                loggeduser.phonenumber = newPhone;
-           
+            int z;
 
+
+
+            if (!int.TryParse(newPhone, out z) | (newPhone == null))
+                return View("EditAccFail", loggeduser);
+
+            loggeduser.phonenumber = newPhone;
             USERBO.updateUSER(loggeduser);
 
-            return RedirectToAction("EditAccount");
+            return RedirectToAction("EditAccount", loggeduser);
         }
         [HttpPost]
         public ActionResult verUser(int regCode)

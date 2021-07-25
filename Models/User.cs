@@ -15,18 +15,18 @@ namespace AxolotlAtheneum.Models
 
         [DisplayName("First Name")]
         [Required]
-        [MaxLength(30)]
+        [MaxLength(30, ErrorMessage = "Must be less than 30 characters")]
         public String firstName { get; set; }
 
         [DisplayName("Last Name")]
         [Required]
-        [MaxLength(30)]
+        [MaxLength(30, ErrorMessage = "Must be less than 30 characters")]
         public String lastName { get; set; }
 
         [DisplayName("Email")]
         [Required]
-        [MaxLength(50)]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
+        [MaxLength(50, ErrorMessage = "Must be less than 50 characters")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, must contain one @ and a . after.")]
         public String email { get; set; }
 
 
@@ -35,8 +35,9 @@ namespace AxolotlAtheneum.Models
         [MaxLength(30)]
         public String password { get; set; }
 
-        [MaxLength(10)]
-        [MinLength(10)]
+        [MaxLength(10, ErrorMessage = "Phone number must be 10 digits")]
+        [MinLength(10, ErrorMessage = "Phone number must be 10 digits")]
+        [Required]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
         public String phonenumber { get; set; }
 

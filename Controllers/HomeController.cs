@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AxolotlAtheneum.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,14 @@ namespace AxolotlAtheneum.Controllers
     {
         public ActionResult Index()
         {
+            User loggeduser = (User)Session["Logged_User"];
+            if(loggeduser.status==3)
+                    return View("AdminHomepage");
             return View("Homepage");
+        }
+        public ActionResult AdminHomepage()
+        {
+            return View();
         }
         public ActionResult Homepage()
         {
