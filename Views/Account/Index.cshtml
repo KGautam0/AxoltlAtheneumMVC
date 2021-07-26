@@ -13,7 +13,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            @using (Html.BeginForm("logUser", "Account"))
+                            @using (Html.BeginForm("logUser", "Account",FormMethod.Post))
                             {
                                 <div class="container">
                                     <h2>Login by eneting your password with your email or your userID if you're verified.</h2>
@@ -31,7 +31,7 @@
 
                                     </div>
 
-                                    <button type="button" class="btn btn-link"  href="@Html.Action("ResetPassword", "Account")">Forgot your password </button>
+                                    <a href="@Url.Action("ResetPassword", "Account")">Forgot your password </a>
 
                                 </div>
                                 <div class="form-group" style="padding-left: 200px;">

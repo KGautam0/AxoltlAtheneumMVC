@@ -33,11 +33,25 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult logUser(String email, String password, String userID)
         {
             Regex regex = new Regex("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+            if (password == null)
+            {
+                return View("LoginInv");
+                if (email == null)
+                {
+                    return View("LoginInv");
+                    if (userID == null)
+                        return View("LoginInv");
 
-            if (((regex.IsMatch(email))  |( (userID.Length <= 6 ) & (userID.Length <=0))) & ((password.Length <= 30) & (password.Length>0)))
+
+                }
+            }
+            if (((regex.IsMatch(email))  |( (userID.Length <= 6 ) & (userID.Length >=0))) & ((password.Length <= 30) & (password.Length>0)))
             {
                 User logged_user = null;
-                if (email == null)
+                if ((userID != "") & (email !=""))
+                    logged_user = USERBO.EMlogUSER(email, password);
+                logged_user = USERBO.EMlogUSER(email, password);
+                if (email == "")
                 logged_user= USERBO.IDlogUSER(userID, password);
                 if(userID == "")
                 logged_user = USERBO.EMlogUSER(email, password);
@@ -97,6 +111,7 @@ namespace AxolotlAtheneum.Controllers
                 loggeduser.lastName = newLName;
 
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
+            USERBO.sendEditNotice((User)Session["Logged_User"], 1);
 
             return RedirectToAction("EditAccount",loggeduser);
         }
@@ -109,10 +124,11 @@ namespace AxolotlAtheneum.Controllers
             if (!ModelState.IsValid)
                 return View("EditAccFail",loggeduser);
             loggeduser.address = newAddress;
-            
 
-            USERBO.updateUSER(loggeduser);
 
+            Session["Logged_User"]=USERBO.updateUSER(loggeduser);
+            loggeduser = (User)Session["Logged_User"];
+            USERBO.sendEditNotice((User)Session["Logged_User"], 3);
             return RedirectToAction("EditAccount",loggeduser);
         }
         [HttpPost]
@@ -120,13 +136,15 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (!ModelState.IsValid)
+            {
                 return View("EditAccFail", loggeduser);
+            }
             loggeduser.card = newCard;
-
-
-            USERBO.updateUSER(loggeduser);
-
+            Session["Logged_User"] = USERBO.updateUSER(loggeduser);
+            loggeduser = (User)Session["Logged_User"];
+            USERBO.sendEditNotice((User)Session["Logged_User"], 4);
             return RedirectToAction("EditAccount", loggeduser);
+            
         }
         [HttpPost]
         public ActionResult editPhone(String newPhone)
@@ -134,15 +152,18 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             int z;
 
+            Regex regex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
 
-
-            if (!int.TryParse(newPhone, out z) | (newPhone == null))
+            if (!regex.IsMatch(newPhone))
                 return View("EditAccFail", loggeduser);
 
             loggeduser.phonenumber = newPhone;
             USERBO.updateUSER(loggeduser);
-
+            Session["Logged_User"] = USERBO.updateUSER(loggeduser);
+            loggeduser = (User)Session["Logged_User"];
+            USERBO.sendEditNotice((User)Session["Logged_User"], 2);
             return RedirectToAction("EditAccount", loggeduser);
+            
         }
         [HttpPost]
         public ActionResult verUser(Nullable <int> regCode)
@@ -166,16 +187,18 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult ResetPassword()
         {
 
-            return View();
+            return View("ResetPasswordEmail");
 
         }
         public ActionResult sendresetPassEmail(String email)
         {
-            if (!USERBO.checkUSER(email))
+            if (USERBO.checkUSER(email))
             {
                 User loggeduser = (User)Session["Logged_User"];
-                loggeduser.actnum = new Random().Next(1000);
-                USERBO.resetPass(email, loggeduser.actnum);
+                int actnum = new Random().Next(1000);
+                Session["actnum"] = actnum;
+                Session["email"] = email;
+                USERBO.resetPass(email, actnum);
 
                 return View("ResetPasswordSub");
             }
@@ -187,10 +210,11 @@ namespace AxolotlAtheneum.Controllers
         }
         public ActionResult changePassword(int regnum, String pass)
         {
-            User loggeduser = (User)Session["Logged_User"];
-            if ((loggeduser.actnum == regnum) & pass.Length <31)
+            int actnum = (int)Session["actnum"];
+            if ((actnum == regnum) & pass.Length < 31)
             {
-                loggeduser.password = pass;
+                Session["password"] = pass;
+                USERBO.updatePass((String)Session["email"], (String)Session["password"]);
 
                 return View("ResetPasswordSucc");
             }

@@ -24,7 +24,7 @@ namespace AxolotlAtheneum.Models
 
         
         [Required]
-        [RegularExpression(@"^(0[1-9]|1[0-2])$")]
+        [RegularExpression(@"^([1-9]|1[0-2])$")]
         public String expMonth {get; set;}
 
         [Required]

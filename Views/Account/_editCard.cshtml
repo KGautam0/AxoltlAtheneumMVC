@@ -1,6 +1,6 @@
 ﻿@model AxolotlAtheneum.Models.PaymentCard
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("editCard", "Account", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -48,11 +48,13 @@
         @Html.ValidationMessageFor(model => model.cardSecNumber, "Must be a 3 digit number", new { @class = "text-dark" })
     </div>
 </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" value="Submit">Submit</button>
-        </div>
+<div class="form-group" style="padding-left: 200px;">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-warning">
+            <span class="glyphicon glyphicon-star"></span> Login
+        </button>
     </div>
+</div>
 </div>
 }
 

@@ -72,6 +72,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Set Values to be passed into the stored procedure for insertion into User Table.
 
             cmnd.Parameters.AddWithValue("p_firstName", x.firstName);
+            cmnd.Parameters.AddWithValue("p_userID", x.userID);
             cmnd.Parameters.AddWithValue("p_lastName", x.lastName);
             cmnd.Parameters.AddWithValue("p_email", x.email);
             cmnd.Parameters.AddWithValue("p_Password", x.password);
@@ -93,8 +94,9 @@ namespace AxolotlAtheneum.DataAccessLayer
 
 
             //Close Connection
+            List<User> UserList= EMretrieveUSER(x.email, x.password);
             cnn.Close();
-            return EMretrieveUSER(x.email, x.password);
+            return UserList;
         }
 
         public System.Collections.Generic.List<User> EMretrieveUSER(String email, String password)
@@ -141,6 +143,7 @@ namespace AxolotlAtheneum.DataAccessLayer
                 tempuser.address = userAddress;
                 string cardJson = (string)reader["card"];
                 PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                tempuser.card = userCard;
                 tempuser.isAdmin = Convert.ToBoolean(reader["isAdmin"]);
                 userList.Add(tempuser);
 
@@ -265,6 +268,43 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Return User List
             return userList;
         }
+
+        public void updatePassword(String email, String pass )
+        {
+            //Create  SQL Connection with Connection String
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+
+            //Create SQL Command with passed in stored proceduire name and SQL connection object
+            MySqlCommand cmnd = new MySqlCommand("reset_pass", cnn);
+            //Set Command Type, should  be stored procedure for this project
+            cmnd.CommandType = CommandType.StoredProcedure;
+
+            //Serialize reference type parameter 
+            
+
+            //Set Values to be passed into the stored procedure for insertion into User Table.
+
+           
+            cmnd.Parameters.AddWithValue("p_email", email);
+           
+            cmnd.Parameters.AddWithValue("p_Password", pass);
+            
+
+            //Open Connection
+            cnn.Open();
+
+            //Execute Stored Procedure
+            cmnd.ExecuteNonQuery();
+
+
+
+
+
+            //Close Connection
+            cnn.Close();
+            
+        }
+
 
     }
 }

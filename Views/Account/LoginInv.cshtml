@@ -29,7 +29,7 @@
                                     <input type="text" id="UserID" placeholder="Your UserID goes here" name="userID"><br>
 
                                     <label for="Email">Password</label>
-                                    <input type="text" id="password" placeholder="Your password goes here" name=" password">
+                                    <input type="text" id="password" placeholder="Your password goes here" name="password">
                                     Cannot be longer than 30 characters or blank. <br>
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" class="btn btn-warning">
@@ -39,7 +39,7 @@
                                 </form>
                             </div>
 
-                            <button type="button" class="btn btn-link" href="@Html.Action("ResetPassword", "Account")">Forgot your password </button>
+                            <a href="@Url.Action("ResetPassword", "Account")">Forgot your password </a>
 
                         </div>
                         <div class="form-group" style="padding-left: 200px;">

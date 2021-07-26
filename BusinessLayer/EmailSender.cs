@@ -28,7 +28,37 @@ namespace AxolotlAtheneum.BusinessLayer
             SmtpServer.Send(mail);
 
         }
+        public void sendEditNotice(User x, int format)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("axolotl.atheneum@gmail.com");
+            mail.To.Add(x.email);
+            mail.Subject = "Your Account Info has been updated";
+            switch (format)
+                {
+                case 1: mail.Body = "This is a notice that your name linked to your Axolotl Atheneum Account has been changed.";
+                    break;
+                case 2:
+                    mail.Body = "This is a notice that your phone number linked to your Axolotl Atheneum Account has been changed.";
+                    break;
+                case 3:
+                    mail.Body = "This is a notice that your address linked to your Axolotl Atheneum Account has been changed.";
+                    break;
+                case 4:
+                    mail.Body = "This is a notice that your Credit Card linked to your Axolotl Atheneum Account has been changed.";
+                    break;
+            }
+            
 
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("axolotl.atheneum", "MidTermCurve");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+        }
         public void sendUserID(User x)
         {
             MailMessage mail = new MailMessage();

@@ -50,9 +50,9 @@ namespace AxolotlAtheneum.BusinessLayer
 
             else return null;
         }
-        public User IDlogUSER(String userID, String password)
+        public User IDlogUSER(String password, String userID)
         {
-            List<User> retrievedUser = USERDAL.EMretrieveUSER(userID, password);
+            List<User> retrievedUser = USERDAL.IDretrieveUSER(userID, password);
             if (retrievedUser.Count() != 0)
             {
                 return retrievedUser.ElementAt(0);
@@ -72,6 +72,14 @@ namespace AxolotlAtheneum.BusinessLayer
             else return false;
         }
 
+        public void updatePass(String email, String pass)
+        {
+            USERDAL.updatePassword(email, pass);
+        }
+        public void sendEditNotice(User x, int format)
+        {
+            EmailSender messenger = new EmailSender();
+        }
 
         public User updateUSER(User x)
         {
