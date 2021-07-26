@@ -63,7 +63,17 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult regPage()
         {
+            User loggeduser = (User)Session["Logged_User"];
+            if(loggeduser == null)
             return View("Registration");
+            if (loggeduser.status == 1)
+            {
+                return View("regSucc");
+            }
+
+            return View("Registration");
+
+
         }
 
         public ActionResult EditAccount()

@@ -12,9 +12,11 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult Index()
         {
             User loggeduser = (User)Session["Logged_User"];
+            if (loggeduser == null)
+                return View("Homepage", loggeduser);
             if(loggeduser.status==3)
-                    return View("AdminHomepage");
-            return View("Homepage");
+                    return View("AdminHomepage", loggeduser);
+            return View("Homepage", loggeduser);
         }
         public ActionResult AdminHomepage()
         {

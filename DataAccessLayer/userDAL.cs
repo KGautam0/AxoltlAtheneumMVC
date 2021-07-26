@@ -1,4 +1,5 @@
 ﻿using AxolotlAtheneum.Models;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,15 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class userDAL
     {
+        private String connectionstring = "server=localhost;user id=TesterUser;Pwd=Test123!;database=axolotlatheneum;persistsecurityinfo=True";
+
         public bool insertUSER(User x)
         {
             //Create  SQL Connection with Connection String
-            SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-2K2AU8V;Initial Catalog=AxolotlAtheneum;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
 
             //Create SQL Command with passed in stored proceduire name and SQL connection object
-            SqlCommand cmnd = new SqlCommand("Create_User", cnn);
+            MySqlCommand cmnd = new MySqlCommand("Create_User", cnn);
             //Set Command Type, should  be stored procedure for this project
             cmnd.CommandType = CommandType.StoredProcedure;
 
@@ -25,15 +28,16 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
             
-            cmnd.Parameters.AddWithValue("@firstName", x.firstName);
-            cmnd.Parameters.AddWithValue("@lastName", x.lastName);
-            cmnd.Parameters.AddWithValue("@email", x.email);
-            cmnd.Parameters.AddWithValue("@Password", x.password);
-            cmnd.Parameters.AddWithValue("@Status", x.status);
-            cmnd.Parameters.AddWithValue("@Address", addressString);
-            cmnd.Parameters.AddWithValue("@Card", cardString);
-            cmnd.Parameters.AddWithValue("@Actnum", x.actnum);
-            cmnd.Parameters.AddWithValue("@isAdmin", x.isAdmin);
+            cmnd.Parameters.AddWithValue("p_firstName", x.firstName);
+            cmnd.Parameters.AddWithValue("p_lastName", x.lastName);
+            cmnd.Parameters.AddWithValue("p_email", x.email);
+            cmnd.Parameters.AddWithValue("p_phonenumber", x.phonenumber);
+            cmnd.Parameters.AddWithValue("p_Password", x.password);
+            cmnd.Parameters.AddWithValue("p_Status", x.status);
+            cmnd.Parameters.AddWithValue("p_Address", addressString);
+            cmnd.Parameters.AddWithValue("p_Card", cardString);
+            cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
+            cmnd.Parameters.AddWithValue("p_isAdmin", x.isAdmin);
 
             //Open Connection
             cnn.Open();
@@ -54,10 +58,10 @@ namespace AxolotlAtheneum.DataAccessLayer
         public System.Collections.Generic.List<User> updateUSER(User x)
         {
             //Create  SQL Connection with Connection String
-            SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-2K2AU8V;Initial Catalog=AxolotlAtheneum;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
 
             //Create SQL Command with passed in stored proceduire name and SQL connection object
-            SqlCommand cmnd = new SqlCommand("update_user", cnn);
+            MySqlCommand cmnd = new MySqlCommand("update_user", cnn);
             //Set Command Type, should  be stored procedure for this project
             cmnd.CommandType = CommandType.StoredProcedure;
 
@@ -67,15 +71,15 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
 
-            cmnd.Parameters.AddWithValue("@firstName", x.firstName);
-            cmnd.Parameters.AddWithValue("@lastName", x.lastName);
-            cmnd.Parameters.AddWithValue("@email", x.email);
-            cmnd.Parameters.AddWithValue("@Password", x.password);
-            cmnd.Parameters.AddWithValue("@Status", x.status);
-            cmnd.Parameters.AddWithValue("@Address", addressString);
-            cmnd.Parameters.AddWithValue("@Card", cardString);
-            cmnd.Parameters.AddWithValue("@Actnum", x.actnum);
-            cmnd.Parameters.AddWithValue("@isAdmin", x.isAdmin);
+            cmnd.Parameters.AddWithValue("p_firstName", x.firstName);
+            cmnd.Parameters.AddWithValue("p_lastName", x.lastName);
+            cmnd.Parameters.AddWithValue("p_email", x.email);
+            cmnd.Parameters.AddWithValue("p_Password", x.password);
+            cmnd.Parameters.AddWithValue("p_Status", x.status);
+            cmnd.Parameters.AddWithValue("p_Address", addressString);
+            cmnd.Parameters.AddWithValue("p_Card", cardString);
+            cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
+            cmnd.Parameters.AddWithValue("p_isAdmin", x.isAdmin);
 
             //Open Connection
             cnn.Open();
@@ -99,16 +103,16 @@ namespace AxolotlAtheneum.DataAccessLayer
             List<User> userList = new List<User>();
 
             //Create  SQL Connection
-            SqlConnection cnn = new SqlConnection("Data Source=DESKTOP-2K2AU8V;Initial Catalog=AxolotlAtheneum;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
 
             //Create SQL Command with passed in stored proceduire name and SQL connection
-            SqlCommand cmnd = new SqlCommand("retrieve_user", cnn);
+            MySqlCommand cmnd = new MySqlCommand("retrieve_user", cnn);
             //Set Command Type
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
-            cmnd.Parameters.AddWithValue("@Email", email);
-            cmnd.Parameters.AddWithValue("@Password", password);
+            cmnd.Parameters.AddWithValue("p_Email", email);
+            cmnd.Parameters.AddWithValue("p_Password", password);
 
             //Open Connection
             cnn.Open();
@@ -120,7 +124,11 @@ namespace AxolotlAtheneum.DataAccessLayer
             {
 
                 User tempuser = new User();
-                tempuser.userID = (int)reader["userID"];
+                if (!(reader["userID"] is DBNull))
+                {
+                    tempuser.userID = (string)reader["userID"];
+                }
+                tempuser.phonenumber = (String)reader["phonenumber"];
                 tempuser.firstName = (string)reader["firstname"];
                 tempuser.lastName = (string)reader["lastname"];
                 tempuser.email = (string)reader["email"];

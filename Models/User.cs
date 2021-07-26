@@ -9,7 +9,7 @@ namespace AxolotlAtheneum.Models
 {
     public class User
     {
-        public int userID { get; set; }
+        public string userID { get; set; }
 
         public int actnum { get; set; }
 
