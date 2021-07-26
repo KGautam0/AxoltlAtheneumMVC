@@ -28,5 +28,42 @@ namespace AxolotlAtheneum.BusinessLayer
             SmtpServer.Send(mail);
 
         }
+
+        public void sendUserID(User x)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("axolotl.atheneum@gmail.com");
+            mail.To.Add(x.email);
+            mail.Subject = "Account Verification";
+            mail.Body = "Your account has been verified.You have now been assigned a userID that can be used to sign in instead of your email. UserID: " + x.userID;
+
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("axolotl.atheneum", "MidTermCurve");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+        }
+
+        public void resetPass(String email, int actnum)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("axolotl.atheneum@gmail.com");
+            mail.To.Add(email);
+            mail.Subject = "Password Reset";
+            mail.Body = "You requeted a password change, enter this number along with your new password on the change password page to change your password." + actnum;
+
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("axolotl.atheneum", "MidTermCurve");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+        }
+
     }
 }

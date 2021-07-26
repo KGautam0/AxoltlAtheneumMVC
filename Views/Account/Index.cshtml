@@ -16,20 +16,22 @@
                             @using (Html.BeginForm("logUser", "Account"))
                             {
                                 <div class="container">
-                                    <h2>Login</h2>
+                                    <h2>Login by eneting your password with your email or your userID if you're verified.</h2>
 
                                     <div class="form-group">
 
                                         <label for="Email">Email</label>
                                         <input type="text" id="email" placeholder="Your email address goes here" name="email">
-                                        <label for="Email">Password</label>
+                                        <label for="userID">userID</label>
+                                        <input type="text" id="UserID" placeholder="Your UserID goes here" name="userID">
+                                        <label for="password">Password</label>
                                         <input type="text" id="password" placeholder="Your password goes here" name="password">
 
 
 
                                     </div>
 
-                                    <button type="button" class="btn btn-link">Forgot your password?</button>
+                                    <button type="button" class="btn btn-link"  href="@Html.Action("ResetPassword", "Account")">Forgot your password </button>
 
                                 </div>
                                 <div class="form-group" style="padding-left: 200px;">

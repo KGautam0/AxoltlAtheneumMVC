@@ -254,6 +254,11 @@
     <Content Include="Views\Account\EditAccFail.cshtml" />
     <Content Include="Views\Shared\LoginCheck.cshtml" />
     <Content Include="Views\Home\AdminHomepage.cshtml" />
+    <Content Include="Views\Account\RegistrationDupe.cshtml" />
+    <Content Include="Views\Account\ResetPasswordEmail.cshtml" />
+    <Content Include="Views\Account\ResetPasswordSub.cshtml" />
+    <Content Include="Views\Account\ResetPasswordFail.cshtml" />
+    <Content Include="Views\Account\ResetPasswordSucc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

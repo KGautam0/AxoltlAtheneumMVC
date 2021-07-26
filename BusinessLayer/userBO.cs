@@ -20,10 +20,40 @@ namespace AxolotlAtheneum.BusinessLayer
             }
         }
 
-        public User logUSER(String email, String password)
+        public void verUSER(User x)
         {
-            List<User> retrievedUser = USERDAL.retrieveUSER(email, password);
-            if (retrievedUser.ElementAt(0) != null)
+
+            
+                EmailSender messenger = new EmailSender();
+                messenger.sendUserID(x);
+            
+        }
+
+
+        public void resetPass(String email, int actnum)
+        {
+
+
+            EmailSender messenger = new EmailSender();
+            messenger.resetPass(email, actnum);
+
+        }
+
+
+        public User EMlogUSER(String email, String password)
+        {
+            List<User> retrievedUser = USERDAL.EMretrieveUSER(email, password);
+            if (retrievedUser.Count() != 0)
+            {
+                return retrievedUser.ElementAt(0);
+            }
+
+            else return null;
+        }
+        public User IDlogUSER(String userID, String password)
+        {
+            List<User> retrievedUser = USERDAL.EMretrieveUSER(userID, password);
+            if (retrievedUser.Count() != 0)
             {
                 return retrievedUser.ElementAt(0);
             }
@@ -31,7 +61,18 @@ namespace AxolotlAtheneum.BusinessLayer
             else return null;
         }
 
-        
+        public bool checkUSER(String email)
+        {
+            List<User> retrievedUser = USERDAL.checkUSER(email);
+            if (retrievedUser.Count!=0)
+            {
+                return true;
+            }
+
+            else return false;
+        }
+
+
         public User updateUSER(User x)
         {
             List<User> retrievedUser = USERDAL.updateUSER(x); ;

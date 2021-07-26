@@ -17,29 +17,31 @@
                         <div class="container">
                             <h2>Login</h2>
 
-                            <p>Your email or passwork was incorrect, please try again.</p>
+                            <p>Your email/UserID or passwork was incorrect, please try again.</p>
                             <div class="form-group">
                                 <form method="POST">
                                     <label for="Email">Email</label>
-                                    <
+
                                     <input type="text" id="email" placeholder="Your email address goes here" name=" email">
+                                    <label for="userID">userID</label>
+                                    <input type="text" id="UserID" placeholder="Your UserID goes here" name="userID">
                                     <label for="Email">Password</label>
                                     <input type="text" id="password" placeholder="Your password goes here" name=" password">
 
-                                    <input type="submit" />
+                                    <div class="form-group" style="padding-left: 200px;">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-warning">
+                                                <span class="glyphicon glyphicon-star"></span> Login
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
-                           
-                            <button type="button" class="btn btn-link">Forgot your password?</button>
+
+                            <button type="button" class="btn btn-link" href="@Html.Action("ResetPassword", "Account")">Forgot your password </button>
 
                         </div>
-                        <div class="form-group" style="padding-left: 200px;">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-star"></span> Login
-                                </button>
-                            </div>
-                        </div>
+                        
                         </form>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> Your input did not match the rules listed for each box, please reread them and try again. </head>
+<head> Your email is also associated with another account, please login to that account or entering a different email.. </head>
 
 
 @using (Html.BeginForm("regUser", "Account", FormMethod.Post))
@@ -16,7 +16,7 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Register Account</h4>
+    <h4>User</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
