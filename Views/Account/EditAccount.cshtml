@@ -21,7 +21,7 @@
             <!-- Collapsed Content -->
             <div class="collapse navbar-collapse" id="editProfile">
 
-                @using (Html.BeginForm("editName", "Account", FormMethod.Post))
+                @using (Html.BeginForm("editProfile", "Account", FormMethod.Post))
                 {
                 <fieldset class="edit_name">
 
@@ -37,6 +37,14 @@
                             
                         <label for="newLName">Last Name: </label>
                         <input type="text" name="newLName" id="newLName" required placeholder="Doe"><br>
+
+                    <p> Account email: @Html.DisplayFor(m => m.email)</p>
+                    <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
+
+                    <p> Password: </p>
+                        <label for="newPass">Change Password: </label>
+                        <input type="password" name="oldPass" id="oldPass" placeholder="Current Password" />
+                        <input type="password" name="newPass" id="newPass" placeholder="NewPassword" />
 
 
                 </fieldset>

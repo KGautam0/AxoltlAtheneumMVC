@@ -36,7 +36,7 @@
                                 <a class="nav-link" href="@Url.Action("Homepage", "Home")">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./Search.html">Browse</a>
+                                <a class="nav-link" href="@Url.Action("Search", "Shopping")">Browse</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("About", "Home")">About Us</a>
@@ -65,13 +65,20 @@
                     <div class="collapse navbar-collapse" id="accountMenu">
                         <ul class="navbar-nav account-collapse">
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Account")">Login</a>
+                                @if (@HttpContext.Current.Session["Logged_User"] != null)
+                                {
+                                    <a class="nav-link" href="@Url.Action("Logout", "Account")"> Logout </a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="@Url.Action("Index", "Account")"> Login </a>
+                                } 
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("regPage", "Account")">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("ordHisPage", "Account")">Order History</a>
+                                <a class="nav-link" href="@Url.Action("OrderHistory", "Shopping")">Order History</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("EditAccount", "Account")">Edit Profile</a>
@@ -82,7 +89,7 @@
 
                 <!-- Cart -->
                 <div class="col ms-auto">
-                    <a href="./Cart.html">
+                    <a href="@Url.Action("Cart", "Shopping")">
                         <img src="@Url.Content("~/Images/Cart.png")" alt="Cart" style="width:9em; height:auto;">
                     </a>
                 </div>

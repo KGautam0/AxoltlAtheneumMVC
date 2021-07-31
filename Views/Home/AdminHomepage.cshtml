@@ -4,6 +4,17 @@
 }
 @model AxolotlAtheneum.Models.User
 
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+
+}
+
 
 <body>
     <div class="container-md">
@@ -13,42 +24,49 @@
                 <div class="container">
                     <h2 class=wood-label>Admin Homepage</h2>
                     <div class="col">
-
                         <h3 style="margin-top: 50px;">Manage User Status</h3>
-                        <h4>Promote Account to Admin Status</h4>
-                        <form action="#" id="promoteToAdmin">
-                            <fieldset class="promote_to_admin">
-                                <label for="promoteUserStatus">UserName: </label>
-                                <input type="text" name="promoteUserStatus" id="promoteUserStatus" required
-                                       placeholder="xXJohnXx">
-                                <text for="promoteUserStatus" id="promoteUserStatusText">*</text>
-                            </fieldset>
-                            <button type="submit" form="promoteToAdmin" value="Submit">Submit</button>
-                        </form>
+                        @using (Html.BeginForm("promoteAccount", "Account", FormMethod.Post))
+                        {
+                            <h4>Promote Account to Admin Status</h4>
+                            <form action="#" id="promoteToAdmin">
+                                <fieldset class="promote_to_admin">
+                                    <label for="promoteUserStatus">User Email: </label>
+                                    <input type="text" name="promoteUserStatus" id="promoteEmail" required
+                                           placeholder="xXJohnXx">
+                                    <text for="promoteUserStatus" id="promoteUserStatusText">*</text>
+                                </fieldset>
+                                <button type="submit" form="promoteAccount" value="Submit">Submit</button>
+                            </form>
+                        }
 
-                        <h4>Change to Registered User Status</h4>
-                        <form action="#" id="ChangeToRegisteredUser">
-                            <fieldset class="change_to_registered_user">
-                                <label for="registeredUserStatus">Username: </label>
-                                <input type="text" name="registeredUserStatus" id="registeredUserStatus" required
-                                       placeholder="xXJohnXx">
-                                <text for="registeredUserStatus" id="registeredUserStatusText"> * </text>
-                            </fieldset>
-                            <button type="submit" form="ChangeToRegisteredUser" value="Submit">Submit</button>
-                        </form>
+                        @using (Html.BeginForm("demoteAccount", "Account", FormMethod.Post))
+                        {
+                            <h4>Change to Registered User Status</h4>
+                            <form action="#" id="ChangeToRegisteredUser">
+                                <fieldset class="change_to_registered_user">
+                                    <label for="registeredUserStatus">Username: </label>
+                                    <input type="text" name="registeredUserStatus" id="demoteEmail" required
+                                           placeholder="xXJohnXx">
+                                    <text for="registeredUserStatus" id="registeredUserStatusText"> * </text>
+                                </fieldset>
+                                <button type="submit" form="ChangeToRegisteredUser" value="Submit">Submit</button>
+                            </form>
+                        }
 
 
-                        <h4>Suspend Member Account</h4>
-                        <form action="#" id="SuspendUser">
-                            <fieldset class="suspend_account">
-                                <label for="suspendedUserStatus">Username: </label>
-                                <input type="text" name="suspendedUserStatus" id="suspendedUserStatus" required
-                                       placeholder="xXJohnXx">
-                                <text for="suspendedUserStatus" id="suspendedUserStatusText">*</text>
-                            </fieldset>
-                            <button type="submit" form="SuspendUser" value="Submit">Submit</button>
-                        </form>
-
+                        @using (Html.BeginForm("suspendAccount", "Account", FormMethod.Post))
+                        {
+                            <h4>Suspend Member Account</h4>
+                            <form action="#" id="SuspendUser">
+                                <fieldset class="suspend_account">
+                                    <label for="suspendedUserStatus">Username: </label>
+                                    <input type="text" name="suspendedUserStatus" id="suspendEmail" required
+                                           placeholder="xXJohnXx">
+                                    <text for="suspendedUserStatus" id="suspendedUserStatusText">*</text>
+                                </fieldset>
+                                <button type="submit" form="SuspendUser" value="Submit">Submit</button>
+                            </form>
+                        }
 
                     </div>
                     <div class="col">
@@ -58,36 +76,33 @@
                             </span>
                         </a><br>
 
-                        <a href="#" class="admin-link">
-                            <img src="@Url.Content("~/Images/BookSpineG.png")" alt="View User Status" style="width:12em; height: 5em;">
-                            <div class="centered">View User Status</div>
-                            </span>
-                        </a>
-
                     </div>
                 </div>
                 <div class="row shelf"> </div>
                 <div class="row col">
                     <h3>Add Promotions</h3>
                     <h4>Add Promo</h4>
+                    @using (@Html.BeginForm("addPromo", "Shopping", FormMethod.Post)) {
                     <form action="#" id="addPromo">
                         <fieldset class="add_promo">
 
                             <label for="addPromoName">Promotion Name: </label>
-                            <input type="text" name="addPromoName" id="addPromoName" required placeholder="xXJohnXx">
+                            <input type="text" name="addPromoName" id="addPromoName" required placeholder="Discount">
                             <text for="addPromoName" id="addPromoNameText"> * </text><br>
 
                             <label for="addPromoCode">Promotion Code: </label>
-                            <input type="text" name="addPromoCode" id="addPromoCode" required placeholder="xXJohnXx">
+                            <input type="text" name="addPromoCode" id="addPromoCode" required placeholder="50CODE">
                             <text for="addPromoCode" id="addPromoCodeText"> * </text><br>
 
                             <label for="addPromoDiscount">Promotion Discount: </label>
                             <input type="text" name="addPromoDiscount" id="addPromoDiscount" required
-                                   placeholder="xXJohnXx">
+                                   placeholder="50">
                             <text for="addPromoDiscount" id="addPromoDiscountText"> * </text><br>
                         </fieldset>
                         <button type="submit" form="addPromo" value="Submit">Submit</button>
                     </form>
+                    }
+
 
 
 

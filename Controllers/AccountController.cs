@@ -33,17 +33,9 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult logUser(String email, String password, String userID)
         {
             Regex regex = new Regex("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
-            if (password == null)
+            if (password == null || (email == null || userID == null))
             {
-                return View("LoginInv");
-                if (email == null)
-                {
-                    return View("LoginInv");
-                    if (userID == null)
-                        return View("LoginInv");
-
-
-                }
+                return View("LoginFail");
             }
             if (((regex.IsMatch(email))  |( (userID.Length <= 6 ) & (userID.Length >=0))) & ((password.Length <= 30) & (password.Length>0)))
             {
@@ -66,12 +58,18 @@ namespace AxolotlAtheneum.Controllers
             }
 
 
-            return View("LoginInv");
+            return View("LoginFail");
 
         }
         public ActionResult Login()
         {
             return Index();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["Logged_User"] = null;
+            return View("Index");
         }
 
         public ActionResult Registration()
@@ -84,7 +82,7 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             if(loggeduser == null)
             return View("Registration");
-            if (loggeduser.status == 1)
+            if (loggeduser.status.Equals(Status.Inactive)) 
             {
                 return View("regSucc");
             }
@@ -98,17 +96,21 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
-            return View(loggeduser);
+                return View(loggeduser);
             return View("LoginCheck");
         }
        
-        public ActionResult editName(String newFName, String newLName)
+        public ActionResult editProfile(String newFName, String newLName, String oldPass, String newPass)
         {
             User loggeduser = (User)Session["Logged_User"];
             if (newFName != null)
                 loggeduser.firstName = newFName;
             if(newLName != null)
                 loggeduser.lastName = newLName;
+            if(oldPass != null && newPass != null && newPass.Length < 31 && USERBO.confirmPass(loggeduser.email, oldPass))
+            {
+                loggeduser.password = newPass;
+            }
 
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             USERBO.sendEditNotice((User)Session["Logged_User"], 1);
@@ -150,7 +152,6 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult editPhone(String newPhone)
         {
             User loggeduser = (User)Session["Logged_User"];
-            int z;
 
             Regex regex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
 
@@ -173,7 +174,7 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             if (loggeduser.actnum == regCode)
             {
-                loggeduser.status = 2;
+                loggeduser.status = Status.Active;
                 
                 loggeduser.userID = new Random().Next(5000).ToString();
                 USERBO.verUSER(loggeduser);
@@ -228,7 +229,7 @@ namespace AxolotlAtheneum.Controllers
 
                 if (USERBO.checkUSER(x.email))
                 { return View("RegistrationDupe"); }
-                x.status = 1;
+                x.status = Status.Inactive;
                 x.actnum = new Random().Next(1000);
                 USERBO.regUSER(x);
 
@@ -242,5 +243,57 @@ namespace AxolotlAtheneum.Controllers
 
             return View("RegistrationFail");
         }
+
+        public ActionResult promoteAccount(String promoteEmail)
+        {
+            if (promoteEmail != null && USERBO.checkUSER(promoteEmail))
+            {
+                User x = USERBO.getUser(promoteEmail);
+                x.status = Status.Admin;
+                USERBO.updateUSER(x);
+                ViewBag.Message = "Sucessfully updated user " + promoteEmail + " to Admin Status.";
+                return RedirectToAction("AdminHomepage", "Home");
+            }
+            else
+            {
+                ViewBag.Message = "An error occurred. User status change unsuccessful.";
+                return RedirectToAction("AdminHomepage", "Home");
+            }
+        }
+
+        public ActionResult demoteAccount(String demoteEmail)
+        {
+            if (demoteEmail != null && USERBO.checkUSER(demoteEmail))
+            {
+                User x = USERBO.getUser(demoteEmail);
+                x.status = Status.Active;
+                USERBO.updateUSER(x);
+                ViewBag.Message = "Sucessfully updated user " + demoteEmail + " to Active Status.";
+                return RedirectToAction("AdminHomepage", "Home");
+            }
+            else
+            {
+                ViewBag.Message = "An error occurred. User status change unsuccessful.";
+                return RedirectToAction("AdminHomepage", "Home");
+            }
+        }
+
+        public ActionResult suspendAccount(String suspendEmail)
+        {
+            if (suspendEmail != null && USERBO.checkUSER(suspendEmail))
+            {
+                User x = USERBO.getUser(suspendEmail);
+                x.status = Status.Suspended;
+                USERBO.updateUSER(x);
+                ViewBag.Message = "Sucessfully updated user " + suspendEmail + " to Suspended Status.";
+                return RedirectToAction("AdminHomepage", "Home");
+            }
+            else
+            {
+                ViewBag.Message = "An error occurred. User status change unsuccessful.";
+                return RedirectToAction("AdminHomepage", "Home");
+            }
+        }
+
     }
 }

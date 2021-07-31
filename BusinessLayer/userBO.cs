@@ -76,6 +76,12 @@ namespace AxolotlAtheneum.BusinessLayer
         {
             USERDAL.updatePassword(email, pass);
         }
+
+        public bool confirmPass(String email, String pass)
+        {
+            return USERDAL.EMretrieveUSER(email, pass).Count != 0;
+        }
+
         public void sendEditNotice(User x, int format)
         {
             EmailSender messenger = new EmailSender();
@@ -90,6 +96,17 @@ namespace AxolotlAtheneum.BusinessLayer
             }
 
             else return null;
+        }
+
+        public User getUser(String email)
+        {
+            List<User> users = USERDAL.checkUSER(email);
+            User user = null;
+            if (users != null)
+            {
+                user = users[0];
+            }
+            return user;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             if (loggeduser == null)
                 return View("Homepage", loggeduser);
-            if(loggeduser.status==3)
+            if(loggeduser.status.Equals(Status.Admin))
                     return View("AdminHomepage", loggeduser);
             return View("Homepage", loggeduser);
         }
@@ -24,8 +24,6 @@ namespace AxolotlAtheneum.Controllers
         }
         public ActionResult Homepage()
         {
-            
-
             return Index();
         }
         public ActionResult About()

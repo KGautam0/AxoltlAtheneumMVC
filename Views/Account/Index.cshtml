@@ -13,25 +13,28 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            @using (Html.BeginForm("logUser", "Account",FormMethod.Post))
+                            @using (Html.BeginForm("logUser", "Account", FormMethod.Post))
                             {
                                 <div class="container">
-                                    <h2>Login by eneting your password with your email or your userID if you're verified.</h2>
+                                    <h2>Login here</h2>
+                                    <h6>If you don't know your userID, then email works, too!</h6>
+                                    <br /><br />
 
                                     <div class="form-group">
 
-                                        <label for="Email">Email</label>
-                                        <input type="text" id="email" placeholder="Your email address goes here" name="email">
                                         <label for="userID">userID</label>
                                         <input type="text" id="UserID" placeholder="Your UserID goes here" name="userID">
-                                        <label for="password">Password</label>
-                                        <input type="text" id="password" placeholder="Your password goes here" name="password">
 
+                                        <label for="Email">Email</label>
+                                        <input type="text" id="email" placeholder="Your email address goes here" name="email">
 
+                                        <br /><br />
 
+                                        <label for="Email">Password</label>
+                                        <input type="password" id="password" placeholder="Your password goes here" name="password">
                                     </div>
 
-                                    <a href="@Url.Action("ResetPassword", "Account")">Forgot your password </a>
+                                    <button type="button" class="btn btn-link">Forgot your password?</button>
 
                                 </div>
                                 <div class="form-group" style="padding-left: 200px;">
@@ -42,7 +45,7 @@
                                     </div>
                                 </div>
                             }
-                            
+
                         </div>
                     </div>
                     <div class="row">

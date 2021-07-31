@@ -10,7 +10,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class userDAL
     {
-        private String connectionstring = "server=localhost;user id=TesterUser;Pwd=Test123!;database=axolotlatheneum;persistsecurityinfo=True";
+        private String connectionstring = "server=localhost;user id=root;database=bookstore;pwd=password";
 
         public bool insertUSER(User x)
         {
@@ -44,10 +44,6 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Execute Stored Procedure
             cmnd.ExecuteNonQuery();
-
-
-
-
 
             //Close Connection
             cnn.Close();
@@ -136,15 +132,23 @@ namespace AxolotlAtheneum.DataAccessLayer
                 tempuser.lastName = (string)reader["lastname"];
                 tempuser.email = (string)reader["email"];
                 tempuser.password = (string)reader["password"];
-                tempuser.status = (int)reader["status"];
+                tempuser.status = (Status)((int)reader["status"]);
                 tempuser.actnum = Convert.ToInt32(reader["actnum"]);
-                string addressJson = (string)reader["address"];
-                Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
-                tempuser.address = userAddress;
-                string cardJson = (string)reader["card"];
-                PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
-                tempuser.card = userCard;
-                tempuser.isAdmin = Convert.ToBoolean(reader["isAdmin"]);
+
+                //optional values
+                string addressJson = reader["address"] as string;
+                if (addressJson != null)
+                {
+                    Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
+                    tempuser.address = userAddress;
+                }
+                string cardJson = reader["card"] as string;
+                if (cardJson != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                    tempuser.card = userCard;
+                }
+                
                 userList.Add(tempuser);
 
             }
@@ -193,14 +197,21 @@ namespace AxolotlAtheneum.DataAccessLayer
                 tempuser.lastName = (string)reader["lastname"];
                 tempuser.email = (string)reader["email"];
                 tempuser.password = (string)reader["password"];
-                tempuser.status = (int)reader["status"];
+                tempuser.status = (Status)((int)reader["status"]);
                 tempuser.actnum = Convert.ToInt32(reader["actnum"]);
-                string addressJson = (string)reader["address"];
-                Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
-                tempuser.address = userAddress;
-                string cardJson = (string)reader["card"];
-                PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
-                tempuser.isAdmin = Convert.ToBoolean(reader["isAdmin"]);
+                //optional values
+                string addressJson = reader["address"] as string;
+                if (addressJson != null)
+                {
+                    Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
+                    tempuser.address = userAddress;
+                }
+                string cardJson = reader["card"] as string;
+                if (cardJson != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                    tempuser.card = userCard;
+                }
                 userList.Add(tempuser);
 
             }
@@ -249,14 +260,21 @@ namespace AxolotlAtheneum.DataAccessLayer
                 tempuser.lastName = (string)reader["lastname"];
                 tempuser.email = (string)reader["email"];
                 tempuser.password = (string)reader["password"];
-                tempuser.status = (int)reader["status"];
+                tempuser.status = (Status)((int)reader["status"]);
                 tempuser.actnum = Convert.ToInt32(reader["actnum"]);
-                string addressJson = (string)reader["address"];
-                Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
-                tempuser.address = userAddress;
-                string cardJson = (string)reader["card"];
-                PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
-                tempuser.isAdmin = Convert.ToBoolean(reader["isAdmin"]);
+                //optional values
+                string addressJson = reader["address"] as string;
+                if (addressJson != null)
+                {
+                    Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
+                    tempuser.address = userAddress;
+                }
+                string cardJson = reader["card"] as string;
+                if (cardJson != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                    tempuser.card = userCard;
+                }
                 userList.Add(tempuser);
 
             }
@@ -303,6 +321,26 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Close Connection
             cnn.Close();
             
+        }
+
+        public List<Book> getBooks()
+        {
+            //Create  SQL Connection with Connection String
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+
+            //get all the books for no search params
+            List<Book> books = new List<Book>();
+            return books;
+        }
+
+        public List<Book> getBooks(String query, String category)
+        {
+            //Create  SQL Connection with Connection String
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+
+            //get all the books for no search params
+            List<Book> books = new List<Book>();
+            return books;
         }
 
 

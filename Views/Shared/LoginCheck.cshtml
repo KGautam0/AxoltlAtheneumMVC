@@ -15,27 +15,29 @@
                         <div class="col">
                             @using (Html.BeginForm("logUser", "Account"))
                             {
-                                <div class="container">
-                                    <h2>You need to be logged in for that, Login here</h2>
+                            <div class="container">
+                                <h2>Login here</h2>
+                                <h4>Oops, you need to log in to do that.</h4>
+                                <h6>If you don't know your userID, then email works, too!</h6>
+                                <br /><br />
 
-                                    <div class="form-group">
+                                <div class="form-group">
 
-                                        <label for="Email">Email</label>
-                                        <input type="text" id="email" placeholder="Your email address goes here" name="email">
+                                    <label for="userID">userID</label>
+                                    <input type="text" id="UserID" placeholder="Your UserID goes here" name="userID">
 
-                                        <label for="userID">userID</label>
-                                        <input type="text" id="UserID" placeholder="Your UserID goes here" name="userID">
+                                    <label for="Email">Email</label>
+                                    <input type="text" id="email" placeholder="Your email address goes here" name="email">
 
-                                        <label for="Email">Password</label>
-                                        <input type="text" id="password" placeholder="Your password goes here" name="password">
+                                    <br /><br />
 
-
-
-                                    </div>
-
-                                    <button type="button" class="btn btn-link">Forgot your password?</button>
-
+                                    <label for="Email">Password</label>
+                                    <input type="password" id="password" placeholder="Your password goes here" name="password">
                                 </div>
+
+                                <button type="button" class="btn btn-link">Forgot your password?</button>
+
+                            </div>
                                 <div class="form-group" style="padding-left: 200px;">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" class="btn btn-warning">

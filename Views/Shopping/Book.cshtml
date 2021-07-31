@@ -1,0 +1,22 @@
+﻿@model AxolotlAtheneum.Models.Book
+
+<div class="container-md">
+    <div class="row shelf"> </div>
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <h2>@Model.Title</h2> <p>$@Model.SellingPrice</p>
+                <div class="col">
+                    <a href="#">
+                        <img src="@Url.Content(Model.CoverPictureURL)" width="15%" align="left">
+                    </a>
+                </div>
+                <div class="col" style="padding-left:275px">
+                    <h5>@Model.Title by @Model.Author</h5>
+                    <p> @Model.Description</p>
+                    <a href="@Url.Action("Cart", "Home")" class="btn btn-default" role="button">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
