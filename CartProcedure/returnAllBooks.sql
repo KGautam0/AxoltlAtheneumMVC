@@ -1,0 +1,4 @@
+CREATE PROCEDURE returnAllBooks
+AS 
+SELECT * FROM books
+GO;
