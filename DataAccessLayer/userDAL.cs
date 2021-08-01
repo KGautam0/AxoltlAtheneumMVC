@@ -73,7 +73,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_email", x.email);
             cmnd.Parameters.AddWithValue("p_Password", x.password);
             cmnd.Parameters.AddWithValue("p_Phonenumber", x.phonenumber);
-            cmnd.Parameters.AddWithValue("p_Status", x.status);
+            cmnd.Parameters.AddWithValue("p_Status", ((int)x.status));
             cmnd.Parameters.AddWithValue("p_Address", addressString);
             cmnd.Parameters.AddWithValue("p_Card", cardString);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
