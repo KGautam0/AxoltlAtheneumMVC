@@ -308,6 +308,13 @@
     <Content Include="Images\Hamburger.png" />
     <Content Include="Images\ImgBorder - Copy.JPG" />
     <Content Include="Images\ImgBorder.JPG" />
+    <Content Include="Images\Library\1.jpeg" />
+    <Content Include="Images\Library\2.jpg" />
+    <Content Include="Images\Library\3.jpg" />
+    <Content Include="Images\Library\4.jpg" />
+    <Content Include="Images\Library\5.jpg" />
+    <Content Include="Images\Library\6.jpg" />
+    <Content Include="Images\Library\Info.txt" />
     <Content Include="Images\NavBG.jpg" />
     <Content Include="Images\Thanks.png" />
     <Content Include="Images\Title.png" />

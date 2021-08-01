@@ -1,0 +1,78 @@
+1. 
+	ISBN: 0439708184
+	Category: Fiction
+	Author: J.K. Rowling
+	Title: Harry Potter and the Sorcerer's Stone
+	Edition: 2nd
+	Publisher: Bloomsbury Publishing
+	Publication Year: 1997
+	Quantity-In-Stock: 30
+	Minimum Threshold: 10
+	Buying Price: $6.98
+	Selling Price: $10.99
+
+2. 
+	ISBN: 
+	Category: Classics, Fiction
+	Author: Jane Austen
+	Title: Pride and Prejudice
+	Edition: 3rd
+	Publisher: Digi Publishing
+	Publication Year: 2018
+	Quantity-In-Stock: 4
+	Minimum Threshold: 3
+	Buying Price: $9.99
+	Selling Price: $12.99
+
+3. 
+	ISBN: 9780547647036
+	Category: Nonfiction
+	Author: Holt McDougal
+	Title: Algebra 1
+	Edition: 1st
+	Publisher: Holt McDougal
+	Publication Year: 2012
+	Quantity-In-Stock: 50
+	Minimum Threshold: 30
+	Buying Price: $20.97
+	Selling Price: $49.84
+
+4. 
+	ISBN: 9780547952017
+	Category: Fiction
+	Author: J. R. R. Tolkien
+	Title: The Fellowship of the Rings
+	Edition: 2nd
+	Publisher: Houghton Mifflin Harcourt
+	Publication Year: 2019
+	Quantity-In-Stock: 17
+	Minimum Threshold: 5
+	Buying Price: $9.98
+	Selling Price: $12.49
+
+5. 
+	ISBN: 1857151089
+	Category: Classics, Historical
+	Author: Murasaki Shikibu
+	Title: The Tale of Genji
+	Edition: 3rd
+	Publisher: Gardners Books
+	Publication Year: 1992
+	Quantity-In-Stock: 5
+	Minimum Threshold: 2
+	Buying Price: $12.39
+	Selling Price: $19.49
+
+6. 
+	ISBN: 978721052927
+	Category: Fiction
+	Author: Bram Stoker
+	Title: Dracula
+	Edition: 1st
+	Publisher: Robinson
+	Publication Year: 2020
+	Quantity-In-Stock: 6
+	Minimum Threshold: 5
+	Buying Price: $8.39
+	Selling Price: $12.99
+
