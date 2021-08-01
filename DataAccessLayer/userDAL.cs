@@ -10,7 +10,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class userDAL
     {
-        private String connectionstring = "server=localhost;user id=root;database=bookstore;pwd=Twix!1721mnj";
+        private String connectionstring = "server=localhost;user id=root; Pwd=2020CoffeeXD!; database=axolotlatheneum";
 
         public bool insertUSER(User x)
         {
