@@ -1,4 +1,4 @@
-CREATE PROCEDURE searchBookCategory @Category varchar(45)
-AS
-SELECT * FROM books WHERE Category = @Category
-GO;
+CREATE PROCEDURE searchBookCategory ( p_Category varchar(45))
+BEGIN
+SELECT * FROM books WHERE Category = p_Category;
+END;

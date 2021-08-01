@@ -1,4 +1,4 @@
-CREATE PROCEDURE searchBookAuthor @Author varchar(45)
-AS
-SELECT * FROM books WHERE Author_Name = @Author
-GO;
+CREATE PROCEDURE searchBookAuthor ( p_Author varchar(45))
+BEGIN
+SELECT * FROM books WHERE Author_Name = p_Author;
+END;
