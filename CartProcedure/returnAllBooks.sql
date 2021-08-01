@@ -1,4 +1,4 @@
-CREATE PROCEDURE returnAllBooks
-AS 
-SELECT * FROM books
-GO;
+CREATE PROCEDURE returnAllBooks()
+BEGIN 
+SELECT * FROM books;
+END;
