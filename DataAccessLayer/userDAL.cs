@@ -10,7 +10,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class userDAL
     {
-        private String connectionstring = "server=localhost;user id=root;database=bookstore;pwd=password";
+        private String connectionstring = "server=localhost;user id=root;database=bookstore;pwd=Twix!1721mnj";
 
         public bool insertUSER(User x)
         {
@@ -37,7 +37,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_Address", addressString);
             cmnd.Parameters.AddWithValue("p_Card", cardString);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
-            cmnd.Parameters.AddWithValue("p_isAdmin", x.isAdmin);
+            cmnd.Parameters.AddWithValue("p_isAdmin", (x.status.Equals(Status.Admin)) ? 1 : 0);
 
             //Open Connection
             cnn.Open();
@@ -77,7 +77,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_Address", addressString);
             cmnd.Parameters.AddWithValue("p_Card", cardString);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
-            cmnd.Parameters.AddWithValue("p_isAdmin", x.isAdmin);
+            cmnd.Parameters.AddWithValue("p_isAdmin", (x.status.Equals(Status.Admin)) ? 1 : 0);
 
             //Open Connection
             cnn.Open();
@@ -341,6 +341,46 @@ namespace AxolotlAtheneum.DataAccessLayer
             //get all the books for no search params
             List<Book> books = new List<Book>();
             return books;
+        }
+
+        public void addBookToCart(User user, int isbn, string promo, int quantity, int price)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            
+        }
+
+        public void insertBook(Book x)
+        {
+            //Create  SQL Connection with Connection String
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+
+            //Create SQL Command with passed in stored proceduire name and SQL connection object
+            MySqlCommand cmnd = new MySqlCommand("addBook", cnn);
+            //Set Command Type, should  be stored procedure for this project
+            cmnd.CommandType = CommandType.StoredProcedure;
+
+            //Set Values to be passed into the stored procedure for insertion into Book Table.
+            cmnd.Parameters.AddWithValue("p_ISBN", x.ISBN);
+            cmnd.Parameters.AddWithValue("p_Category", x.Category);
+            cmnd.Parameters.AddWithValue("p_Author_Name", x.Author);
+            cmnd.Parameters.AddWithValue("p_Title", x.Title);
+            cmnd.Parameters.AddWithValue("p_Cover_Picture", x.CoverPictureURL);
+            cmnd.Parameters.AddWithValue("p_Edition", x.Edition);
+            cmnd.Parameters.AddWithValue("p_Publisher", x.Publisher);
+            cmnd.Parameters.AddWithValue("p_Publication_Year", x.PublicationYear);
+            cmnd.Parameters.AddWithValue("p_Quantity", x.QuantityInStock);
+            cmnd.Parameters.AddWithValue("p_MinThresh", x.MinimumThreshold);
+            cmnd.Parameters.AddWithValue("p_BuyPrice", x.BuyingPrice);
+            cmnd.Parameters.AddWithValue("p_SellPrice", x.SellingPrice);
+
+            //Open Connection
+            cnn.Open();
+
+            //Execute Stored Procedure
+            cmnd.ExecuteNonQuery();
+
+            //Close Connection
+            cnn.Close();
         }
 
 

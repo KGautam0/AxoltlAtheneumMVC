@@ -1,19 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "AdminHomepage";
-}
-@model AxolotlAtheneum.Models.User
-
-@if (ViewBag.Message != null)
-{
-    <script type="text/javascript">
-
-            window.onload = function () {
-                alert("@ViewBag.Message");
-            };
-    </script>
-
-}
+﻿@model AxolotlAtheneum.Models.User 
 
 
 <body>
@@ -31,11 +16,10 @@
                             <form action="#" id="promoteToAdmin">
                                 <fieldset class="promote_to_admin">
                                     <label for="promoteUserStatus">User Email: </label>
-                                    <input type="text" name="promoteUserStatus" id="promoteEmail" required
-                                           placeholder="xXJohnXx">
+                                    @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
                                     <text for="promoteUserStatus" id="promoteUserStatusText">*</text>
                                 </fieldset>
-                                <button type="submit" form="promoteAccount" value="Submit">Submit</button>
+                                <input type="submit" form="promoteAccount" value="Submit" />
                             </form>
                         }
 
@@ -45,11 +29,10 @@
                             <form action="#" id="ChangeToRegisteredUser">
                                 <fieldset class="change_to_registered_user">
                                     <label for="registeredUserStatus">Username: </label>
-                                    <input type="text" name="registeredUserStatus" id="demoteEmail" required
-                                           placeholder="xXJohnXx">
+                                    @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
                                     <text for="registeredUserStatus" id="registeredUserStatusText"> * </text>
                                 </fieldset>
-                                <button type="submit" form="ChangeToRegisteredUser" value="Submit">Submit</button>
+                                <input type="submit" form="promoteAccount" value="Submit" />
                             </form>
                         }
 
@@ -60,20 +43,18 @@
                             <form action="#" id="SuspendUser">
                                 <fieldset class="suspend_account">
                                     <label for="suspendedUserStatus">Username: </label>
-                                    <input type="text" name="suspendedUserStatus" id="suspendEmail" required
-                                           placeholder="xXJohnXx">
+                                    @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })                                    
                                     <text for="suspendedUserStatus" id="suspendedUserStatusText">*</text>
                                 </fieldset>
-                                <button type="submit" form="SuspendUser" value="Submit">Submit</button>
+                                <input type="submit" form="promoteAccount" value="Submit" />
                             </form>
                         }
 
                     </div>
                     <div class="col">
-                        <a href="./ManageBookView.html" class="admin-link">
+                        <a href="@Url.Action("ManageBooks", "Shopping")" class="admin-link">
                             <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Manage Books" style="width:12em;">
                             <div class="centered">Manage Books</div>
-                            </span>
                         </a><br>
 
                     </div>
@@ -87,19 +68,18 @@
                         <fieldset class="add_promo">
 
                             <label for="addPromoName">Promotion Name: </label>
-                            <input type="text" name="addPromoName" id="addPromoName" required placeholder="Discount">
+                            @Html.TextBox("promoName", null, new { @placeholder = "Promotional Discount Name", required = "required" })
                             <text for="addPromoName" id="addPromoNameText"> * </text><br>
 
                             <label for="addPromoCode">Promotion Code: </label>
-                            <input type="text" name="addPromoCode" id="addPromoCode" required placeholder="50CODE">
+                            @Html.TextBox("promoCode", null, new { @placeholder = "Promotional Code", required = "required" })
                             <text for="addPromoCode" id="addPromoCodeText"> * </text><br>
 
                             <label for="addPromoDiscount">Promotion Discount: </label>
-                            <input type="text" name="addPromoDiscount" id="addPromoDiscount" required
-                                   placeholder="50">
+                            @Html.TextBox("discount", null, new { @placeholder = "Promotional Discount as a Number", required = "required" })
                             <text for="addPromoDiscount" id="addPromoDiscountText"> * </text><br>
                         </fieldset>
-                        <button type="submit" form="addPromo" value="Submit">Submit</button>
+                        <input type="submit" form="promoteAccount" value="Submit" />
                     </form>
                     }
 
@@ -111,129 +91,3 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row shelf"> </div>
-        <div class="row">
-
-            <div class="col" id="col">
-
-                <h2 class=wood-label>Welcome to Axolotl Atheneum @Html.DisplayFor(Model => Model.firstName) @Html.DisplayFor(Model => Model.lastName) !</h2>
-                <!-- Carousel -->
-                <div class="container" style="margin-top: 50px;">
-                    <div class="row featuredBook">
-                        <h2>Featured Books:</h2>
-                        <div class="col">
-                            <div class="container">
-                                <a href="Book.html">
-                                    <img src="@Url.Content("~/Images/Books/PrideAndPrejudice.jpg")">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="container">
-                                <a href="Book.html">
-                                    <img src="@Url.Content("~/Images/Books/LOTR.jpg")">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="container">
-                                <a href="Book.html">
-                                    <img src="@Url.Content("~/Images/Books/Algebra.jpg")">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row shelf"> </div>
-
-                <div class="container">
-                    <div class="row featuredAuthor">
-                        <h2>Featured Authors:</h2>
-                        <div class="col">
-                            <div class="container">
-                                <h3>Jessie</h3>
-                                <img src="@Url.Content("~/Images/Authors/Jessie.jpg")">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="container">
-                                <h3>Meowth</h3>
-                                <img src="@Url.Content("~/Images/Authors/Meowth.jpg")">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="container">
-                                <h3>James</h3>
-                                <img src="@Url.Content("~/Images/Authors/James.jpg")">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row shelf"> </div>
-
-                <h2>Browse Genres:</h2>
-                <div class="browseGenres">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <ul>
-                                    <li>
-                                        <a class="book-genre">
-                                            <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Nonfiction"
-                                                 style="width:10em;">
-                                            <div class="centered">Nonfiction</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="book-genre">
-                                            <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Fiction"
-                                                 style="width:10em;">
-                                            <div class="centered">Fiction</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <ul>
-                                    <li>
-                                        <a class="book-genre">
-                                            <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Classics"
-                                                 style="width:10em;">
-                                            <div class="centered">Classics</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="book-genre">
-                                            <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Poems" style="width:10em;">
-                                            <div class="centered">Poems</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <ul>
-                                    <li>
-                                        <a class="book-genre">
-                                            <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Historical"
-                                                 style="width:10em; height:auto">
-                                            <div class="centered">Historical</div>
-                                        </a>
-                                    <li>
-                                        <a class="book-genre">
-                                            <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Romance"
-                                                 style="width:10em;">
-                                            <div class="centered">Romance</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>

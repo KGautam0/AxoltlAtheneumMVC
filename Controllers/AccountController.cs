@@ -96,7 +96,7 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
-                return View(loggeduser);
+                return View();
             return View("LoginCheck");
         }
        

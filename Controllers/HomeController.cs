@@ -20,7 +20,10 @@ namespace AxolotlAtheneum.Controllers
         }
         public ActionResult AdminHomepage()
         {
-            return View();
+            User loggeduser = (User)Session["Logged_User"];
+            if (Session["Logged_User"] != null)
+                return View();
+            return View("LoginCheck");
         }
         public ActionResult Homepage()
         {
