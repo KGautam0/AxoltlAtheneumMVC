@@ -23,38 +23,51 @@
 
                 @using (Html.BeginForm("editProfile", "Account", FormMethod.Post))
                 {
-                <fieldset class="edit_name">
+                    <fieldset class="edit_name">
 
-                    <h3>Change Name</h3>
-                    <p>Please update your Name:</p>
-                    <p>Maximum legnth is 30 characters.</p>
+                        <h3>Change Name</h3>
+                        <p>Please update your Name:</p>
+                        <p>Maximum length is 30 characters.</p>
 
-                    <p> Current First Name:   @Html.DisplayFor(m => m.firstName) </p>
+                        <p> Current First Name:   @Html.DisplayFor(m => m.firstName) </p>
                         <label for="newFName">First Name: </label>
                         <input type="text" name="newFName" id="newFName" required placeholder="John"><br>
 
-                     <p> Current Last Name: @Html.DisplayFor(m => m.lastName)</p>
-                            
+                        <p> Current Last Name: @Html.DisplayFor(m => m.lastName)</p>
+
                         <label for="newLName">Last Name: </label>
                         <input type="text" name="newLName" id="newLName" required placeholder="Doe"><br>
 
-                    <p> Account email: @Html.DisplayFor(m => m.email)</p>
-                    <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
-
-                    <p> Password: </p>
-                        <label for="newPass">Change Password: </label>
-                        <input type="password" name="oldPass" id="oldPass" placeholder="Current Password" />
-                        <input type="password" name="newPass" id="newPass" placeholder="NewPassword" />
-
-
-                </fieldset>
-                <div class="form-group" style="padding-left: 200px;">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-star"></span> Login
-                        </button>
+                    </fieldset>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Submit
+                            </button>
+                        </div>
                     </div>
-                </div>
+                }
+
+                @using (Html.BeginForm("editPassword", "Account", FormMethod.Post))
+                {
+            <fieldset class="edit_name">
+
+                <p> Account email: @Html.DisplayFor(m => m.email)</p>
+                <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
+
+                <p> Password: </p>
+                <label for="newPass">Change Password: </label>
+                <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
+                <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
+
+            </fieldset>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Submit
+                            </button>
+                        </div>
+                    </div>
                 }
 
             </div>
@@ -119,7 +132,7 @@
                     <h3>Change Shipping Address</h3>
                     <p>Please enter your new address information:</p>
                     <p>Each Entry must be less than 100 characters</p>
-                    @{Html.RenderAction("rendereditAddress", "Account");}
+                    @{Html.RenderAction("rendereditAddress", "Account", Model.address);}
                 </fieldset>
 
 
@@ -142,7 +155,7 @@
                 <fieldset class="edit_payment">
                     <h3>Change Payment Card</h3>
                     <p>Please enter your card information:</p>
-                    @{Html.RenderAction("rendereditCard", "Account");}
+                    @{Html.RenderAction("rendereditCard", "Account", Model.card);}
                 </fieldset>
 
 

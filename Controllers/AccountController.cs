@@ -81,7 +81,7 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if(loggeduser == null)
-            return View("Registration");
+                return View("Registration");
             if (loggeduser.status.Equals(Status.Inactive)) 
             {
                 return View("regSucc");
@@ -96,18 +96,28 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
-                return View();
+                return View(loggeduser);
             return View("LoginCheck");
         }
        
-        public ActionResult editProfile(String newFName, String newLName, String oldPass, String newPass)
+        public ActionResult editProfile(String newFName, String newLName)
         {
             User loggeduser = (User)Session["Logged_User"];
             if (newFName != null)
                 loggeduser.firstName = newFName;
             if(newLName != null)
                 loggeduser.lastName = newLName;
-            if(oldPass != null && newPass != null && newPass.Length < 31 && USERBO.confirmPass(loggeduser.email, oldPass))
+            
+            Session["Logged_User"] = USERBO.updateUSER(loggeduser);
+            USERBO.sendEditNotice((User)Session["Logged_User"], 1);
+
+            return RedirectToAction("EditAccount",loggeduser);
+        }
+
+        public ActionResult editPassword(String oldPass, String newPass)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            if (oldPass != null && newPass != null && newPass.Length < 31 && USERBO.confirmPass(loggeduser.email, oldPass))
             {
                 loggeduser.password = newPass;
             }
@@ -115,9 +125,8 @@ namespace AxolotlAtheneum.Controllers
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             USERBO.sendEditNotice((User)Session["Logged_User"], 1);
 
-            return RedirectToAction("EditAccount",loggeduser);
+            return RedirectToAction("EditAccount", loggeduser);
         }
-
 
         [HttpPost]
         public ActionResult editAddress(Address newAddress)

@@ -96,5 +96,19 @@ namespace AxolotlAtheneum.Controllers
             }
             return View("LoginCheck");
         }
+
+        public ActionResult RemoveFromCart(Book book)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.removeFromCart(loggeduser, book);
+            return View("Cart");
+        }
+
+        public ActionResult DeleteFromCart(Book book)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.removeAllFromCart(loggeduser, book);
+            return View("Cart");
+        }
     }
 }

@@ -21,8 +21,10 @@ else {
                             </a>
                         </div>
                         <div class="col" style="padding-left:275px">
-                            <h6>@item.Key.Title by @item.Key.Author: You currently have @item.Value copies in your shopping cart. </h6>
-                            <a href="@Url.Action("Cart", "Home")" class="btn btn-default" role="button">Add to Cart</a>
+                            <h4>@item.Key.Title by @item.Key.Author: </h4>
+                            <h6> You currently have @item.Value copies in your shopping cart. </h6>
+                            <a href="@Url.Action("RemoveFromCart", "Home")" class="btn btn-default" role="button">Remove 1 copy from Cart</a>
+                            <a href="@Url.Action("DeleteFromCart", "Home")" class="btn btn-default" role="button">Delete all copies from Cart</a>
                         </div>
                     </div>
                 </div>
