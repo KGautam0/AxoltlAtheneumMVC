@@ -7,7 +7,7 @@ namespace AxolotlAtheneum.Models
 {
     public class ShoppingCart
     {
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public Dictionary<Book, int> Items { get; set; } 
         public double Total { get; set; }
 

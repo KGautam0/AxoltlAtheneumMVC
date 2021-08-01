@@ -41,21 +41,21 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult ManageBooks()
         {
-            //User loggeduser = (User)Session["Logged_User"];
-            //if (Session["Logged_User"] != null && loggeduser.status.Equals(Status.Admin))
+            User loggeduser = (User)Session["Logged_User"];
+            if (Session["Logged_User"] != null && loggeduser.status.Equals(Status.Admin))
                 return View();
-            //return View("LoginCheck");
+            return View("LoginCheck");
         }
 
-        public ActionResult Query(String searchParam, RadioButton title, RadioButton author, RadioButton isbn, RadioButton publisher, RadioButton year)
+        public ActionResult Query(String searchParam, RadioButton title, RadioButton author, RadioButton isbn, RadioButton publisher, RadioButton category)
         { 
-            QueryCategory category;
-            if (year.Checked) category = QueryCategory.Year;
-            else if (author.Checked) category = QueryCategory.Author;
-            else if (isbn.Checked) category = QueryCategory.ISBN;
-            else if (publisher.Checked) category = QueryCategory.Publisher;
-            else category = QueryCategory.Title;
-            List<Book> books = bo.getFilteredBooks(searchParam, category);
+            QueryCategory qCategory;
+            if (category.Checked) qCategory = QueryCategory.Category;
+            else if (author.Checked) qCategory = QueryCategory.Author;
+            else if (isbn.Checked) qCategory = QueryCategory.ISBN;
+            else if (publisher.Checked) qCategory = QueryCategory.Publisher;
+            else qCategory = QueryCategory.Title;
+            List<Book> books = bo.getFilteredBooks(searchParam, qCategory);
             
             return View("Search", books);
                 
@@ -76,7 +76,7 @@ namespace AxolotlAtheneum.Controllers
             return View("Book", book);
         }
 
-        public ActionResult DeeletBook(string isbn)
+        public ActionResult DeleteBook(string isbn)
         {
             return View("AdminHomepage");
         }

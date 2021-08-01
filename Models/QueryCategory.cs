@@ -11,6 +11,6 @@ namespace AxolotlAtheneum.Models
         Author,
         ISBN, 
         Publisher, 
-        Year
+        Category
     }
 }
