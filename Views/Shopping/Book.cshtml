@@ -13,8 +13,9 @@
                 </div>
                 <div class="col" style="padding-left:275px">
                     <h5>@Model.Title by @Model.Author</h5>
-                    <p> @Model.Description</p>
-                    <a href="@Url.Action("Cart", "Home")" class="btn btn-default" role="button">Add to Cart</a>
+                    <h6>Published in @Model.PublicationYear by @Model.Publisher, @Model.Title by @Model.Author is an amazing @Model.Category book that you and your family will love!</h6>
+
+                    <a href="@Url.Action("AddToCart", "Shopping", Model)" class="btn btn-default" role="button">Add to Cart</a>
                 </div>
             </div>
         </div>

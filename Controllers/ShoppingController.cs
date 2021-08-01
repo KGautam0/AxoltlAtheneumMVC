@@ -27,13 +27,15 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
-                return View(this);
-            return View("LoginCheck", loggeduser);
+            {
+                return View(bo.getCart(loggeduser));
+            }
+            return View("LoginCheck");
         }
 
         public ActionResult Search()
         {
-            List<Book> books = ShoppingBO.getAllBooks();
+            List<Book> books = bo.getAllBooks();
             return View(books);
         }
 
@@ -47,13 +49,13 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult Query(String searchParam, RadioButton title, RadioButton author, RadioButton isbn, RadioButton publisher, RadioButton year)
         { 
-            string category;
-            if (year.Checked) category = year.ID;
-            else if (author.Checked) category = author.ID;
-            else if (isbn.Checked) category = isbn.ID;
-            else if (publisher.Checked) category = publisher.ID;
-            else category = title.ID;
-            List<Book> books = ShoppingBO.getFilteredBooks(searchParam, category);
+            QueryCategory category;
+            if (year.Checked) category = QueryCategory.Year;
+            else if (author.Checked) category = QueryCategory.Author;
+            else if (isbn.Checked) category = QueryCategory.ISBN;
+            else if (publisher.Checked) category = QueryCategory.Publisher;
+            else category = QueryCategory.Title;
+            List<Book> books = bo.getFilteredBooks(searchParam, category);
             
             return View("Search", books);
                 
@@ -77,6 +79,22 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult DeeletBook(string isbn)
         {
             return View("AdminHomepage");
+        }
+
+        public ActionResult Book(Book book)
+        {
+            return View("Book", book);
+        }
+
+        public ActionResult AddToCart(Book book)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            if (Session["Logged_User"] != null)
+            {
+                bo.addBookToCart(loggeduser, book);
+                return View("Cart");
+            }
+            return View("LoginCheck");
         }
     }
 }
