@@ -1,7 +1,7 @@
 ﻿@model AxolotlAtheneum.Models.Book
 
 <div class="result" style="width: 15%; margin: 2%; float: left;">
-    <a href="@Url.Action("Book", Model)" style="color: white;">
+    <a href="@Url.Action("Book", "Shopping", Model)" style="color: white;">
         <img src="@Url.Content(Model.CoverPictureURL)" class="img-thumbnail" alt="gg">
         <h6>@Model.Title by @Model.Author</h6>
     </a>

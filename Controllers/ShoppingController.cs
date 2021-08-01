@@ -27,33 +27,35 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
-                return View(this);
-            return View("LoginCheck", loggeduser);
+            {
+                return View(bo.getCart(loggeduser));
+            }
+            return View("LoginCheck");
         }
 
         public ActionResult Search()
         {
-            List<Book> books = ShoppingBO.getAllBooks();
+            List<Book> books = bo.getAllBooks();
             return View(books);
         }
 
         public ActionResult ManageBooks()
         {
-            //User loggeduser = (User)Session["Logged_User"];
-            //if (Session["Logged_User"] != null && loggeduser.status.Equals(Status.Admin))
+            User loggeduser = (User)Session["Logged_User"];
+            if (Session["Logged_User"] != null && loggeduser.status.Equals(Status.Admin))
                 return View();
-            //return View("LoginCheck");
+            return View("LoginCheck");
         }
 
-        public ActionResult Query(String searchParam, RadioButton title, RadioButton author, RadioButton isbn, RadioButton publisher, RadioButton year)
+        public ActionResult Query(String searchParam, RadioButton title, RadioButton author, RadioButton isbn, RadioButton publisher, RadioButton category)
         { 
-            string category;
-            if (year.Checked) category = year.ID;
-            else if (author.Checked) category = author.ID;
-            else if (isbn.Checked) category = isbn.ID;
-            else if (publisher.Checked) category = publisher.ID;
-            else category = title.ID;
-            List<Book> books = ShoppingBO.getFilteredBooks(searchParam, category);
+            QueryCategory qCategory;
+            if (category.Checked) qCategory = QueryCategory.Category;
+            else if (author.Checked) qCategory = QueryCategory.Author;
+            else if (isbn.Checked) qCategory = QueryCategory.ISBN;
+            else if (publisher.Checked) qCategory = QueryCategory.Publisher;
+            else qCategory = QueryCategory.Title;
+            List<Book> books = bo.getFilteredBooks(searchParam, qCategory);
             
             return View("Search", books);
                 
@@ -74,9 +76,25 @@ namespace AxolotlAtheneum.Controllers
             return View("Book", book);
         }
 
-        public ActionResult DeeletBook(string isbn)
+        public ActionResult DeleteBook(string isbn)
         {
             return View("AdminHomepage");
+        }
+
+        public ActionResult Book(Book book)
+        {
+            return View("Book", book);
+        }
+
+        public ActionResult AddToCart(Book book)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            if (Session["Logged_User"] != null)
+            {
+                bo.addBookToCart(loggeduser, book);
+                return View("Cart");
+            }
+            return View("LoginCheck");
         }
     }
 }

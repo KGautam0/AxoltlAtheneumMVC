@@ -323,30 +323,20 @@ namespace AxolotlAtheneum.DataAccessLayer
             
         }
 
-        public List<Book> getBooks()
-        {
-            //Create  SQL Connection with Connection String
-            MySqlConnection cnn = new MySqlConnection(connectionstring);
-
-            //get all the books for no search params
-            List<Book> books = new List<Book>();
-            return books;
-        }
-
-        public List<Book> getBooks(String query, String category)
-        {
-            //Create  SQL Connection with Connection String
-            MySqlConnection cnn = new MySqlConnection(connectionstring);
-
-            //get all the books for no search params
-            List<Book> books = new List<Book>();
-            return books;
-        }
-
-        public void addBookToCart(User user, int isbn, string promo, int quantity, int price)
+        public void addBookToCart(User user, int isbn, int quantity, double price)
         {
             MySqlConnection cnn = new MySqlConnection(connectionstring);
-            
+
+            MySqlCommand cmnd = new MySqlCommand("addBookToCart", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_UserID", user.userID);
+            cmnd.Parameters.AddWithValue("p_ISBN", isbn);
+            cmnd.Parameters.AddWithValue("p_Quantity", quantity);
+            cmnd.Parameters.AddWithValue("p_Price", price);
+
+            cnn.Open();
+            cmnd.ExecuteNonQuery();
+            cnn.Close();
         }
 
         public void insertBook(Book x)
@@ -381,6 +371,135 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Close Connection
             cnn.Close();
+        }
+
+        public List<Book> getAllBooks()
+        {
+            //Create  SQL Connection with Connection String
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+
+            //Create SQL Command with passed in stored proceduire name and SQL connection object
+            MySqlCommand cmnd = new MySqlCommand("returnAllBooks", cnn);
+            //Set Command Type, should  be stored procedure for this project
+            cmnd.CommandType = CommandType.StoredProcedure;
+
+            cnn.Open();
+
+            //Execute Reader
+            var reader = cmnd.ExecuteReader();
+            List<Book> books = new List<Book>();
+
+            while (reader.Read())
+            {
+
+                Book b = new Book();
+                if (!(reader["ISBN"] is DBNull))
+                {
+                    b.ISBN = (int)reader["ISBN"];
+                }
+                b.Category = (string)reader["Category"];
+                b.Author = (string)reader["Author_Name"];
+                b.Title = (string)reader["Title"];
+                b.CoverPictureURL = (string)reader["Cover_Picture"];
+                b.Edition = (int)reader["Edition"];
+                b.Publisher = (string)reader["Publisher"];
+                b.PublicationYear = (int)reader["Publication_Year"];
+                b.QuantityInStock = (int)reader["Quantity"];
+                b.MinimumThreshold = (int)reader["Minimum_Thresh"];
+                b.BuyingPrice = (double)reader["Buying_Price"];
+                b.SellingPrice = (double)reader["Selling_Price"];
+
+                books.Add(b);
+
+            }
+
+            cnn.Close();
+
+            return books;
+        }
+
+        public ShoppingCart getCart(User user)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("viewCustomerCart", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_UserID", user.userID);
+
+            cnn.Open();
+
+            //Execute Reader
+            var reader = cmnd.ExecuteReader();
+            ShoppingCart cart = new ShoppingCart();
+            cart.Items = new Dictionary<Book, int>();
+            Dictionary<int, int> items = new Dictionary<int, int>(); //isbn, int
+
+            while (reader.Read())
+            {
+                if (!(reader["Book_ISBN"] is DBNull) && !(reader["Book_Quantity"] is DBNull)) {
+                    if (!items.ContainsKey((int)reader["Book_ISBN"]))
+                        items.Add((int)reader["Book_ISBN"], (int)reader["Book_Quantity"]);
+                    else
+                        items[(int)reader["Book_ISBN"]] += (int)reader["Book_Quantity"];
+                }
+                
+            }
+            cnn.Close();
+
+            cart.UserID = user.userID;
+            foreach(var item in items)
+            {
+                //find book based on isbn
+                Book book = filterBooks(item.Key.ToString(), QueryCategory.ISBN.ToString())[0];
+                if (book != null)
+                {
+                    //add book and its quantity to cart, and change cart total $
+                    
+                    cart.Items.Add(book, item.Value);
+                    cart.Total += book.SellingPrice;
+                }
+            }
+
+            return cart;
+        }
+
+        public List<Book> filterBooks(string query, string searchCommand)
+        {
+            string procedure = "searchBook" + searchCommand;
+            string parameter = "p_" + searchCommand;
+            if (searchCommand.Equals("Author"))
+                parameter += "_Name";
+            List<Book> results = new List<Book>();
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand(procedure, cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue(parameter, query);
+
+            cnn.Open();
+            var reader = cmnd.ExecuteReader();
+            while (reader.Read())
+            {
+                Book b = new Book();
+                if (!(reader["ISBN"] is DBNull))
+                {
+                    b.ISBN = (int)reader["ISBN"];
+                    b.Category = (string)reader["Category"];
+                    b.Author = (string)reader["Author_Name"];
+                    b.Title = (string)reader["Title"];
+                    b.CoverPictureURL = (string)reader["Cover_Picture"];
+                    b.Edition = (int)reader["Edition"];
+                    b.Publisher = (string)reader["Publisher"];
+                    b.PublicationYear = (int)reader["Publication_Year"];
+                    b.QuantityInStock = (int)reader["Quantity"];
+                    b.MinimumThreshold = (int)reader["Minimum_Thresh"];
+                    b.BuyingPrice = (double)reader["Buying_Price"];
+                    b.SellingPrice = (double)reader["Selling_Price"];
+
+                    results.Add(b);
+                }
+                
+            }
+            cnn.Close();
+            return results;
         }
 
 
