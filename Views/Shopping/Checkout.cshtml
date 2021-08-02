@@ -1,0 +1,73 @@
+﻿<main>
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <fieldset class="leftside">
+                        <table id="items_table">
+                            <?php foreach ($orders as $order) : ?>
+                            <tr>
+                                <td><?php echo $order['productName']; ?></td>
+                                <td><?php echo $order['listPrice']; ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </fieldset>
+
+                    <script src="../js/payment-JS.js"></script>
+
+                    <form>
+                        <fieldset class="rightside">
+                            <fieldset class="address_box">
+                                <h2>Shipping Address</h2>
+                                <label for="address">Address Line </label>
+                                <input type="text" name="address" id="address" required placeholder="Street number, Street, City">
+                                <text for="address" id="addressText"> * </text><br>
+
+                                <label for="state">State </label>
+                                <input type="text" name="state" id="state" required>
+                                <text for="state" id="stateText"> * </text><br>
+
+                                <label for="zip">Zip Code </label>
+                                <input type="text" name="zip" id="zip" required placeholder="XXXXX">
+                                <text for="zip" id="zipText"> * </text><br>
+
+                                <br>
+                            </fieldset>
+
+                            <fieldset class="payment_box">
+                                <h2>Payment Information</h2>
+                                <label for="cNum">Card Number </label>
+                                <input type="text" name="cNum" id="cNum" required placeholder="XXXX-XXXX-XXXX-XXXX">
+                                <text for="cNum" id="cNumText"> * </text><br>
+
+                                <label for="expDate">Expiration Date </label>
+                                <input type="text" name="expDate" id="expDate" required placeholder="XX-XX">
+                                <text for="expDate" id="expDateText"> * </text><br>
+
+                                <label for="vCode">Verification Code </label>
+                                <input type="password" name="vCode" id="vCode" required placeholder="XXX">
+                                <text for="vCode" id="vCodeText"> * </text><br>
+
+                                <label for="cName">Name on Card </label>
+                                <input type="text" name="cName" id="cName" required placeholder="First, Last">
+                                <text for="cName" id="cNameText"> * </text><br>
+                            </fieldset>
+
+                            <fieldset class="promotion_box">
+                                <h2>Promotion</h2>
+                                <input type="text" name="promotionText" id="promotionText" placeholder="Enter Promo Code">
+                            </fieldset>
+
+                    </form>
+
+                    <a href="OrderConfirmation.html" type="button" class="btn btn-warning">Checkout</a>
+                    </fieldset>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

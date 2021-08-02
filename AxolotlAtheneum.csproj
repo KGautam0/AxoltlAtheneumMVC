@@ -642,6 +642,7 @@
     <Content Include="Views\Shopping\Search.cshtml" />
     <Content Include="Views\Shopping\_BookItem.cshtml" />
     <Content Include="Views\Shopping\ManageBooks.cshtml" />
+    <Content Include="Views\Shopping\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AxololtlAtheneumMVC6\v16\" />

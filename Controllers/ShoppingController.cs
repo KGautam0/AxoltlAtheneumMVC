@@ -108,6 +108,21 @@ namespace AxolotlAtheneum.Controllers
             return Book(book);
         }
 
+        public ActionResult Author1()
+        {
+            return Query("McDougal, Holt", null, "on", null, null, null);
+        }
+
+        public ActionResult Author2()
+        {
+            return Query("Shikibu, Murasaki", null, "on", null, null, null);
+        }
+
+        public ActionResult Author3()
+        {
+            return Query("Stoker, Bram", null, "on", null, null, null);
+        }
+
         public ActionResult addPromo(string promoName, string promoCode, string discount)
         {
             if (promoName != null && promoCode != null && discount != null)
@@ -149,6 +164,11 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             ShoppingCart cart = bo.removeFromCart(loggeduser, book);
             return View("Cart", cart);
+        }
+
+        public ActionResult Checkout(ShoppingCart cart)
+        {
+            return View("Checkout");
         }
 
    
