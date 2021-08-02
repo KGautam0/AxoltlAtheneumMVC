@@ -61,6 +61,53 @@ namespace AxolotlAtheneum.Controllers
                 
         }
 
+        public ActionResult Nonfiction()
+        {
+            return Query("Nonfiction", null, null, null, null, "on");
+        }
+
+        public ActionResult Fiction()
+        {
+            return Query("Fiction", null, null, null, null, "on");
+        }
+
+        public ActionResult Classics()
+        {
+            return Query("Classics", null, null, null, null, "on");
+        }
+
+        public ActionResult Poems()
+        {
+            return Query("Poems", null, null, null, null, "on");
+        }
+        
+        public ActionResult Historical()
+        {
+            return Query("Historical", null, null, null, null, "on");
+        }
+        public ActionResult Romance()
+        {
+            return Query("Romance", null, null, null, null, "on");
+        }
+
+        public ActionResult Feature1()
+        {
+            Book book = bo.getFilteredBooks("12346", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
+        public ActionResult Feature2()
+        {
+            Book book = bo.getFilteredBooks("18571", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
+        public ActionResult Feature3()
+        {
+            Book book = bo.getFilteredBooks("439708184", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
         public ActionResult addPromo(string promoName, string promoCode, string discount)
         {
             if (promoName != null && promoCode != null && discount != null)
