@@ -98,13 +98,29 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult Feature2()
         {
-            Book book = bo.getFilteredBooks("18571", QueryCategory.ISBN)[0];
+            Book book = bo.getFilteredBooks("97805", QueryCategory.ISBN)[0];
             return Book(book);
         }
 
         public ActionResult Feature3()
         {
             Book book = bo.getFilteredBooks("439708184", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
+        public ActionResult Top1()
+        {
+            Book book = bo.getFilteredBooks("18571", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+        public ActionResult Top2()
+        {
+            Book book = bo.getFilteredBooks("97872", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+        public ActionResult Top3()
+        {
+            Book book = bo.getFilteredBooks("818404397", QueryCategory.ISBN)[0];
             return Book(book);
         }
 
@@ -171,7 +187,7 @@ namespace AxolotlAtheneum.Controllers
             return View("Checkout");
         }
 
-        public ActionResult Confirm(ShoppingCart cart)
+        public ActionResult ConfirmOrder(ShoppingCart cart)
         {
             return View("OrderConfirmation");
         }
