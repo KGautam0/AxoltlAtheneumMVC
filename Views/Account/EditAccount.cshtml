@@ -27,7 +27,7 @@
 
                         <h3>Change Name</h3>
                         <p>Please update your Name:</p>
-                        <p>Maximum legnth is 30 characters.</p>
+                        <p>Maximum length is 30 characters.</p>
 
                         <p> Current First Name:   @Html.DisplayFor(m => m.firstName) </p>
                         <label for="newFName">First Name: </label>
@@ -38,20 +38,33 @@
                         <label for="newLName">Last Name: </label>
                         <input type="text" name="newLName" id="newLName" required placeholder="Doe"><br>
 
-                        <p> Account email: @Html.DisplayFor(m => m.email)</p>
-                        <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
-
-                        <p> Password: </p>
-                        <label for="newPass">Change Password: </label>
-                        <input type="password" name="oldPass" id="oldPass" placeholder="Current Password" />
-                        <input type="password" name="newPass" id="newPass" placeholder="NewPassword" />
-
-
                     </fieldset>
                     <div class="form-group" style="padding-left: 200px;">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-star"></span> Login
+                                <span class="glyphicon glyphicon-star"></span> Submit
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                @using (Html.BeginForm("editPassword", "Account", FormMethod.Post))
+                {
+            <fieldset class="edit_name">
+
+                <p> Account email: @Html.DisplayFor(m => m.email)</p>
+                <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
+
+                <p> Password: </p>
+                <label for="newPass">Change Password: </label>
+                <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
+                <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
+
+            </fieldset>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Submit
                             </button>
                         </div>
                     </div>
@@ -74,27 +87,27 @@
                 @using (Html.BeginForm("editPhone", "Account", FormMethod.Post))
                 {
 
-                    <fieldset class="edit_phone">
-                        <h3>Change Phone Number</h3>
+                <fieldset class="edit_phone">
+                    <h3>Change Phone Number</h3>
 
 
-                        <p>Please change your Phone Number:</p>
+                    <p>Please change your Phone Number:</p>
 
-                        <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
-                        <p>Must be 10 digits only, no hyphens</p>
+                    <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
+                    <p>Must be 10 digits only, no hyphens</p>
 
-                        <label for="newPhone">Phone Number: </label>
-                        <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
-                        <text for="newPhone" id="newPhoneText"> * </text>
-                        <div class="form-group" style="padding-left: 200px;">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-star"></span> Login
-                                </button>
-                            </div>
+                    <label for="newPhone">Phone Number: </label>
+                    <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
+                    <text for="newPhone" id="newPhoneText"> * </text>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Login
+                            </button>
                         </div>
+                    </div>
 
-                    </fieldset>
+                </fieldset>
 
                 }
             </div>
@@ -119,7 +132,7 @@
                     <h3>Change Shipping Address</h3>
                     <p>Please enter your new address information:</p>
                     <p>Each Entry must be less than 100 characters</p>
-                    @{Html.RenderAction("rendereditAddress", "Account");}
+                    @{Html.RenderAction("rendereditAddress", "Account", Model.address);}
                 </fieldset>
 
 
@@ -142,21 +155,11 @@
                 <fieldset class="edit_payment">
                     <h3>Change Payment Card</h3>
                     <p>Please enter your card information:</p>
-                    @{Html.RenderAction("rendereditCard", "Account");}
+                    @{Html.RenderAction("rendereditCard", "Account", Model.card);}
                 </fieldset>
 
 
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <!-- Promotional Emails -->
-            <fieldset class="edit_promo_emails">
-                <h3>Receive Promotional Emails?</h3>
-                @{Html.RenderAction("rendereditPromoEmail", "Account");}
-            </fieldset>
         </div>
     </div>
 </div>

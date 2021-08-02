@@ -47,16 +47,16 @@ namespace AxolotlAtheneum.Controllers
             return View("LoginCheck");
         }
 
-        public ActionResult Query(String searchParam, RadioButton title, RadioButton author, RadioButton isbn, RadioButton publisher, RadioButton category)
-        { 
+        public ActionResult Query(String searchParam, string title, string author, string isbn, string publisher, string category)
+        {
             QueryCategory qCategory;
-            if (category.Checked) qCategory = QueryCategory.Category;
-            else if (author.Checked) qCategory = QueryCategory.Author;
-            else if (isbn.Checked) qCategory = QueryCategory.ISBN;
-            else if (publisher.Checked) qCategory = QueryCategory.Publisher;
+            if (category != null && category.Equals("on")) qCategory = QueryCategory.Category;
+            else if (author != null && author.Equals("on")) qCategory = QueryCategory.Author;
+            else if (isbn != null && isbn.Equals("on")) qCategory = QueryCategory.ISBN;
+            else if (publisher != null && publisher.Equals("on")) qCategory = QueryCategory.Publisher;
             else qCategory = QueryCategory.Title;
             List<Book> books = bo.getFilteredBooks(searchParam, qCategory);
-            
+
             return View("Search", books);
                 
         }
@@ -95,6 +95,20 @@ namespace AxolotlAtheneum.Controllers
                 return View("Cart");
             }
             return View("LoginCheck");
+        }
+
+        public ActionResult RemoveFromCart(Book book)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.removeFromCart(loggeduser, book);
+            return View("Cart");
+        }
+
+        public ActionResult DeleteFromCart(Book book)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.removeAllFromCart(loggeduser, book);
+            return View("Cart");
         }
     }
 }

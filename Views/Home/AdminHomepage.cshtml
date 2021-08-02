@@ -10,44 +10,56 @@
                     <h2 class=wood-label>Admin Homepage</h2>
                     <div class="col">
                         <h3 style="margin-top: 50px;">Manage User Status</h3>
+
                         @using (Html.BeginForm("promoteAccount", "Account", FormMethod.Post))
                         {
-                            <h4>Promote Account to Admin Status</h4>
-                            <form action="#" id="promoteToAdmin">
-                                <fieldset class="promote_to_admin">
-                                    <label for="promoteUserStatus">User Email: </label>
-                                    @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
-                                    <text for="promoteUserStatus" id="promoteUserStatusText">*</text>
-                                </fieldset>
-                                <input type="submit" form="promoteAccount" value="Submit" />
-                            </form>
+                            <fieldset class="edit_name">
+                                <h4>Promote Account to Admin Status</h4>
+                                <label for="promoteUserStatus">User Email: </label>
+                                @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
+                                <text for="promoteUserStatus" id="promoteUserStatusText">*</text>
+                            </fieldset>
+                            <div class="form-group" style="padding-left: 200px;">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Submit
+                                    </button>
+                                </div>
+                            </div>
                         }
 
                         @using (Html.BeginForm("demoteAccount", "Account", FormMethod.Post))
                         {
-                            <h4>Change to Registered User Status</h4>
-                            <form action="#" id="ChangeToRegisteredUser">
-                                <fieldset class="change_to_registered_user">
-                                    <label for="registeredUserStatus">Username: </label>
-                                    @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
-                                    <text for="registeredUserStatus" id="registeredUserStatusText"> * </text>
-                                </fieldset>
-                                <input type="submit" form="promoteAccount" value="Submit" />
-                            </form>
+                            <fieldset class="edit_name">
+                                <h4>Change to Active Status</h4>
+                                <label for="demoteUserStatus">User Email: </label>
+                                @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
+                                <text for="demoteUserStatus" id="deomoteUserStatusText">*</text>
+                            </fieldset>
+                            <div class="form-group" style="padding-left: 200px;">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Submit
+                                    </button>
+                                </div>
+                            </div>
                         }
-
 
                         @using (Html.BeginForm("suspendAccount", "Account", FormMethod.Post))
                         {
-                            <h4>Suspend Member Account</h4>
-                            <form action="#" id="SuspendUser">
-                                <fieldset class="suspend_account">
-                                    <label for="suspendedUserStatus">Username: </label>
-                                    @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })                                    
-                                    <text for="suspendedUserStatus" id="suspendedUserStatusText">*</text>
-                                </fieldset>
-                                <input type="submit" form="promoteAccount" value="Submit" />
-                            </form>
+                            <fieldset class="edit_name">
+                                <h4>Change to Suspended Status</h4>
+                                <label for="suspendUserStatus">User Email: </label>
+                                @Html.TextBox("customerEmail", null, new { @placeholder = "Enter user's email", required = "required" })
+                                <text for="suspendUserStatus" id="suspendUserStatusText">*</text>
+                            </fieldset>
+                            <div class="form-group" style="padding-left: 200px;">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Submit
+                                    </button>
+                                </div>
+                            </div>
                         }
 
                     </div>

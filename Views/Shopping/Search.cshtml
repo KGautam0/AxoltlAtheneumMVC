@@ -8,48 +8,39 @@
                 <div class="container">
                     <h2>Advanced Search</h2>
                     <hr>
-
-
                     @using (Html.BeginForm("Query", "Shopping", FormMethod.Get))
                     {
-                        <form action="/action_page.php">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for books" name="search" id="searchParam">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
+                        <fieldset class="search">
 
-                        <p> </p>
-                        <p>Filter by:</p>
-                        <form>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" id="title" checked>Title</label>
+                            <input type="text" name="searchParam" id="searchParam" required placeholder="Search for something here...."><br>
+
+                            <input type="radio" name="title" id="title" checked>Title
+                            <input type="radio" name="author" id="author">Author
+                            <input type="radio" name="isbn" id="isbn">ISBN
+                            <input type="radio" name="publisher" id="publisher">Publisher
+                            <input type="radio" name="category" id="category">Category
+                        </fieldset>
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-star"></span> Submit
+                                </button>
                             </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" id="author">Author</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" id="isbn">ISBN</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" id="publisher">Publisher</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" id="category">Category</label>
-                            </div>
-                        </form>
+                        </div>
                     }
 
-                    @foreach (var item in Model)
-            {
-                @Html.Partial("~/Views/Shopping/_BookItem.cshtml", item);
-            }
+                    @if (Model != null)
+                    {
+                        foreach (var item in @Model)
+                        {
+                            @Html.Partial("~/Views/Shopping/_BookItem.cshtml", item);
+                        }
+                    }
 
 
-                    
-                    </div>
+
+
+                </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
                         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">

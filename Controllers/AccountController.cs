@@ -81,7 +81,7 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if(loggeduser == null)
-            return View("Registration");
+                return View("Registration");
             if (loggeduser.status.Equals(Status.Inactive)) 
             {
                 return View("regSucc");
@@ -96,18 +96,28 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
-                return View();
+                return View(loggeduser);
             return View("LoginCheck");
         }
        
-        public ActionResult editProfile(String newFName, String newLName, String oldPass, String newPass)
+        public ActionResult editProfile(String newFName, String newLName)
         {
             User loggeduser = (User)Session["Logged_User"];
             if (newFName != null)
                 loggeduser.firstName = newFName;
             if(newLName != null)
                 loggeduser.lastName = newLName;
-            if(oldPass != null && newPass != null && newPass.Length < 31 && USERBO.confirmPass(loggeduser.email, oldPass))
+            
+            Session["Logged_User"] = USERBO.updateUSER(loggeduser);
+            USERBO.sendEditNotice((User)Session["Logged_User"], 1);
+
+            return RedirectToAction("EditAccount",loggeduser);
+        }
+
+        public ActionResult editPassword(String oldPass, String newPass)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            if (oldPass != null && newPass != null && newPass.Length < 31 && USERBO.confirmPass(loggeduser.email, oldPass))
             {
                 loggeduser.password = newPass;
             }
@@ -115,9 +125,8 @@ namespace AxolotlAtheneum.Controllers
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             USERBO.sendEditNotice((User)Session["Logged_User"], 1);
 
-            return RedirectToAction("EditAccount",loggeduser);
+            return RedirectToAction("EditAccount", loggeduser);
         }
-
 
         [HttpPost]
         public ActionResult editAddress(Address newAddress)
@@ -244,14 +253,14 @@ namespace AxolotlAtheneum.Controllers
             return View("RegistrationFail");
         }
 
-        public ActionResult promoteAccount(String promoteEmail)
+        public ActionResult promoteAccount(String customerEmail)
         {
-            if (promoteEmail != null && USERBO.checkUSER(promoteEmail))
+            if (customerEmail != null && USERBO.checkUSER(customerEmail))
             {
-                User x = USERBO.getUser(promoteEmail);
+                User x = USERBO.getUser(customerEmail);
                 x.status = Status.Admin;
                 USERBO.updateUSER(x);
-                ViewBag.Message = "Sucessfully updated user " + promoteEmail + " to Admin Status.";
+                ViewBag.Message = "Sucessfully updated user " + customerEmail + " to Admin Status.";
                 return RedirectToAction("AdminHomepage", "Home");
             }
             else
@@ -261,14 +270,14 @@ namespace AxolotlAtheneum.Controllers
             }
         }
 
-        public ActionResult demoteAccount(String demoteEmail)
+        public ActionResult demoteAccount(String customerEmail)
         {
-            if (demoteEmail != null && USERBO.checkUSER(demoteEmail))
+            if (customerEmail != null && USERBO.checkUSER(customerEmail))
             {
-                User x = USERBO.getUser(demoteEmail);
+                User x = USERBO.getUser(customerEmail);
                 x.status = Status.Active;
                 USERBO.updateUSER(x);
-                ViewBag.Message = "Sucessfully updated user " + demoteEmail + " to Active Status.";
+                ViewBag.Message = "Sucessfully updated user " + customerEmail + " to Active Status.";
                 return RedirectToAction("AdminHomepage", "Home");
             }
             else
@@ -278,14 +287,14 @@ namespace AxolotlAtheneum.Controllers
             }
         }
 
-        public ActionResult suspendAccount(String suspendEmail)
+        public ActionResult suspendAccount(String customerEmail)
         {
-            if (suspendEmail != null && USERBO.checkUSER(suspendEmail))
+            if (customerEmail != null && USERBO.checkUSER(customerEmail))
             {
-                User x = USERBO.getUser(suspendEmail);
+                User x = USERBO.getUser(customerEmail);
                 x.status = Status.Suspended;
                 USERBO.updateUSER(x);
-                ViewBag.Message = "Sucessfully updated user " + suspendEmail + " to Suspended Status.";
+                ViewBag.Message = "Sucessfully updated user " + customerEmail + " to Suspended Status.";
                 return RedirectToAction("AdminHomepage", "Home");
             }
             else

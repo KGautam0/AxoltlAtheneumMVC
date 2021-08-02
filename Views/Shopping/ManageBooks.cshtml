@@ -6,75 +6,77 @@
         <div class="col">
             <div class="container">
                 <aside id="sideBarA">
-                    @using (Html.BeginForm("DeleteBook", "Shopping", FormMethod.Post)) {
-                    <fieldset class="delete_book">
-                        <h2>Delete Book</h2>
-                        <p> Enter ISBN of book you wish to delete</p>
-                        @Html.TextBox("isbn", null, new { @placeholder = "ISBN", required = "required" })
-                        <input type="submit" id="deleteISBN_button" value="DELETE" />
-                    </fieldset>
+                    @using (Html.BeginForm("DeleteBook", "Shopping", FormMethod.Post))
+                    {
+                        <fieldset class="delete_book">
+                            <h2>Delete Book</h2>
+                            <p> Enter ISBN of book you wish to delete</p>
+                            @Html.TextBox("isbn", null, new { @placeholder = "ISBN", required = "required" })
+                            <input type="submit" id="deleteISBN_button" value="DELETE" />
+                        </fieldset>
                     }
 
                 </aside>
                 <aside id="sideBarB">
                     @using (Html.BeginForm("AddBook", "Shopping", FormMethod.Post))
                     {
-                    <fieldset class="add_book">
-                        <h2>Add Book</h2>
-                        <label for="newISBN">ISBN </label>
-                        @Html.TextBox("isbn", null, new { @placeholder = "ISBN", required = "required" })
-                        <text for="newISBN" id="newISBNText"> * </text><br>
+                        <fieldset class="add_book">
+                            <h2>Add Book</h2>
+                            <label for="newISBN">ISBN </label>
+                            @Html.TextBox("isbn", null, new { @placeholder = "ISBN", required = "required" })
+                            <text for="newISBN" id="newISBNText"> * </text><br>
 
-                        <label for="newCategory">Category </label>
-                        @Html.TextBox("Category", null, new { @placeholder = "Category", required = "required" })
-                        <text for="newCategory" id="newCategoryText"> * </text><br>
+                            <label for="newCategory">Category </label>
+                            @Html.TextBox("Category", null, new { @placeholder = "Category", required = "required" })
+                            <text for="newCategory" id="newCategoryText"> * </text><br>
 
-                        <label for="newAuthor">Author's Name </label>
-                        @Html.TextBox("Author", null, new { @placeholder = "Last, First", required = "required" })
-                        <text for="newAuthor" id="newAuthorText"> * </text><br>
+                            <label for="newAuthor">Author's Name </label>
+                            @Html.TextBox("Author", null, new { @placeholder = "Last, First", required = "required" })
+                            <text for="newAuthor" id="newAuthorText"> * </text><br>
 
-                        <label for="newTitle">Book Title </label>
-                        @Html.TextBox("Title", null, new { @placeholder = "Title", required = "required" })
-                        <text for="newTitle" id="newTitleText"> * </text><br>
+                            <label for="newTitle">Book Title </label>
+                            @Html.TextBox("Title", null, new { @placeholder = "Title", required = "required" })
+                            <text for="newTitle" id="newTitleText"> * </text><br>
 
-                        <label for="newEdition">Edition </label>
-                        @Html.TextBox("Edition", null, new { @placeholder = "Edition", required = "required" })
-                        <text for="newEdition" id="newEditionText"> * </text><br>
+                            <label for="newEdition">Edition </label>
+                            @Html.TextBox("Edition", null, new { @placeholder = "Edition", required = "required" })
+                            <text for="newEdition" id="newEditionText"> * </text><br>
 
-                        <label for="newPub">Publisher </label>
-                        @Html.TextBox("publisher", null, new { @placeholder = "Publisher", required = "required" })
-                        <text for="newPub" id="newPubText"> * </text><br>
+                            <label for="newPub">Publisher </label>
+                            @Html.TextBox("publisher", null, new { @placeholder = "Publisher", required = "required" })
+                            <text for="newPub" id="newPubText"> * </text><br>
 
-                        <label for="newPubYear">Publication Year </label>
-                        @Html.TextBox("year", null, new { @placeholder = "Publication Year", required = "required" })
-                        <text for="newPubYear" id="newPubYearText"> * </text><br>
+                            <label for="newPubYear">Publication Year </label>
+                            @Html.TextBox("year", null, new { @placeholder = "Publication Year", required = "required" })
+                            <text for="newPubYear" id="newPubYearText"> * </text><br>
 
-                        <label for="newQuantity">Quantity in stock </label>
-                        @Html.TextBox("Quantity", null, new { @placeholder = "Quantity in stock", required = "required" })
-                        <text for="newQuantity" id="newQuantityText"> * </text><br>
+                            <label for="newQuantity">Quantity in stock </label>
+                            @Html.TextBox("Quantity", null, new { @placeholder = "Quantity in stock", required = "required" })
+                            <text for="newQuantity" id="newQuantityText"> * </text><br>
 
-                        <label for="newThresh">Minimum Threshold </label>
-                        @Html.TextBox("threshold", null, new { @placeholder = "Minimum Threshold", required = "required" })
-                        <text for="newThresh" id="newThreshText"> * </text><br>
+                            <label for="newThresh">Minimum Threshold </label>
+                            @Html.TextBox("threshold", null, new { @placeholder = "Minimum Threshold", required = "required" })
+                            <text for="newThresh" id="newThreshText"> * </text><br>
 
-                        <label for="newBuying">Buying Price </label>
-                        @Html.TextBox("BuyingPrice", null, new { @placeholder = "Buying price in dollars", required = "required" })
-                        <text for="newBuying" id="newBuyingText"> * </text><br>
+                            <label for="newBuying">Buying Price </label>
+                            @Html.TextBox("BuyingPrice", null, new { @placeholder = "Buying price in dollars", required = "required" })
+                            <text for="newBuying" id="newBuyingText"> * </text><br>
 
-                        <label for="newSelling">Selling Price </label>
-                        @Html.TextBox("SellingPrice", null, new { @placeholder = "Selling price in dollars", required = "required" })
-                        <text for="newSelling" id="newSellingText"> * </text><br>
+                            <label for="newSelling">Selling Price </label>
+                            @Html.TextBox("SellingPrice", null, new { @placeholder = "Selling price in dollars", required = "required" })
+                            <text for="newSelling" id="newSellingText"> * </text><br>
 
-                        <label for="newTitle">Cover Picture </label>
-                        @Html.TextBox("CoverPicture", null, new { @placeholder = "Cover Picture URL" })
-                        <br>
+                            <label for="newTitle">Cover Picture </label>
+                            @Html.TextBox("CoverPicture", null, new { @placeholder = "Cover Picture URL" })
+                            <br>
 
-                        <input type="submit" id="addbook_button" value="Add Book" />
-                    </fieldset>
+                            <input type="submit" id="addbook_button" value="Add Book" />
+                        </fieldset>
                     }
 
 
                 </aside>
+                
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
                         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
                 </script>
