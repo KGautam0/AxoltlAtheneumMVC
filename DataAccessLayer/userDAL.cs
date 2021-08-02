@@ -352,7 +352,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Set Values to be passed into the stored procedure for insertion into Book Table.
             cmnd.Parameters.AddWithValue("p_ISBN", x.ISBN);
             cmnd.Parameters.AddWithValue("p_Category", x.Category);
-            cmnd.Parameters.AddWithValue("p_Author_Name", x.Author);
+            cmnd.Parameters.AddWithValue("p_Author", x.Author);
             cmnd.Parameters.AddWithValue("p_Title", x.Title);
             cmnd.Parameters.AddWithValue("p_Cover_Picture", x.CoverPictureURL);
             cmnd.Parameters.AddWithValue("p_Edition", x.Edition);
@@ -398,7 +398,7 @@ namespace AxolotlAtheneum.DataAccessLayer
                     b.ISBN = (int)reader["ISBN"];
                 }
                 b.Category = (string)reader["Category"];
-                b.Author = (string)reader["Author_Name"];
+                b.Author = (string)reader["Author"];
                 b.Title = (string)reader["Title"];
                 b.CoverPictureURL = (string)reader["Cover_Picture"];
                 b.Edition = (int)reader["Edition"];
@@ -466,8 +466,6 @@ namespace AxolotlAtheneum.DataAccessLayer
         {
             string procedure = "searchBook" + searchCommand;
             string parameter = "p_" + searchCommand;
-            if (searchCommand.Equals("Author"))
-                parameter += "_Name";
             List<Book> results = new List<Book>();
             MySqlConnection cnn = new MySqlConnection(connectionstring);
             MySqlCommand cmnd = new MySqlCommand(procedure, cnn);
@@ -483,7 +481,7 @@ namespace AxolotlAtheneum.DataAccessLayer
                 {
                     b.ISBN = (int)reader["ISBN"];
                     b.Category = (string)reader["Category"];
-                    b.Author = (string)reader["Author_Name"];
+                    b.Author = (string)reader["Author"];
                     b.Title = (string)reader["Title"];
                     b.CoverPictureURL = (string)reader["Cover_Picture"];
                     b.Edition = (int)reader["Edition"];
