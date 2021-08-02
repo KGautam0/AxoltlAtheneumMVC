@@ -323,7 +323,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             
         }
 
-        public void addBookToCart(User user, int isbn, int quantity, double price)
+        public ShoppingCart addBookToCart(User user, int isbn, int quantity, double price)
         {
             MySqlConnection cnn = new MySqlConnection(connectionstring);
 
@@ -337,6 +337,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cnn.Open();
             cmnd.ExecuteNonQuery();
             cnn.Close();
+            return getCart(user);
         }
 
         public void insertBook(Book x)

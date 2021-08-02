@@ -98,7 +98,7 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult Feature2()
         {
-            Book book = bo.getFilteredBooks("18571", QueryCategory.ISBN)[0];
+            Book book = bo.getFilteredBooks("97805", QueryCategory.ISBN)[0];
             return Book(book);
         }
 
@@ -153,8 +153,8 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
             {
-                bo.addBookToCart(loggeduser, book);
-                return View("Cart");
+                ShoppingCart cart = bo.addBookToCart(loggeduser, book);
+                return View("Cart", cart);
             }
             return View("LoginCheck");
         }
