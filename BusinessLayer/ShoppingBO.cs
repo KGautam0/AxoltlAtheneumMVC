@@ -50,9 +50,9 @@ namespace AxolotlAtheneum.BusinessLayer
             return books;
         }
 
-        public void addBookToCart(User user, Book book)
+        public ShoppingCart addBookToCart(User user, Book book)
         {
-            USERDAL.addBookToCart(user, book.ISBN, 1, book.SellingPrice);
+            return USERDAL.addBookToCart(user, book.ISBN, 1, book.SellingPrice);
         }
 
         public ShoppingCart getCart(User user)

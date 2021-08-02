@@ -6,17 +6,18 @@
     
 <div class="form-horizontal">
     <h4>PaymentCard</h4>
+    <h2> Card 1:</h2>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-dark" })
-<div class="form-group">
+    <div class="form-group">
 
-    <p> Enter Card Number Here</p>
-    <p> Current Card Number: @Html.DisplayFor(m => m.cardNumber) </p>
-    <div class="col-md-10">
-        @Html.EditorFor(model => model.cardNumber, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.cardNumber, "Must be a 16 digit number", new { @class = "text-dark" })
+        <p> Enter Card Number Here</p>
+        <p> Current Card Number: @Html.DisplayFor(m => m.cardNumber) </p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cardNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cardNumber, "Must be a 16 digit number", new { @class = "text-dark" })
+        </div>
     </div>
-</div>
 
     <div class="form-group">
         <p> Current Card Expiration Month: @Html.DisplayFor(m => m.expMonth)</p>
@@ -39,22 +40,73 @@
     "Select Card Type",
         new { @class = "form-control" })
 
-<div class="form-group">
+    <div class="form-group">
 
-    <p> Enter Card CVV Here</p>
-    <p> Current Card CVV: @Html.DisplayFor(m => m.cardSecNumber)</p>
-    <div class="col-md-10">
-        @Html.EditorFor(model => model.cardSecNumber, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.cardSecNumber, "Must be a 3 digit number", new { @class = "text-dark" })
+        <p> Enter Card CVV Here</p>
+        <p> Current Card CVV: @Html.DisplayFor(m => m.cardSecNumber)</p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cardSecNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cardSecNumber, "Must be a 3 digit number", new { @class = "text-dark" })
+        </div>
     </div>
-</div>
-<div class="form-group" style="padding-left: 200px;">
-    <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-warning">
-            <span class="glyphicon glyphicon-star"></span> Login
-        </button>
+    <div class="form-group" style="padding-left: 200px;">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-warning">
+                <span class="glyphicon glyphicon-star"></span> Login
+            </button>
+        </div>
     </div>
-</div>
+    <!-- ~~ -->
+    <h2> Card 2:</h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-dark" })
+    <div class="form-group">
+
+        <p> Enter Card Number Here</p>
+        <p> Current Card Number: @Html.DisplayFor(m => m.cardNumber) </p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cardNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cardNumber, "Must be a 16 digit number", new { @class = "text-dark" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <p> Current Card Expiration Month: @Html.DisplayFor(m => m.expMonth)</p>
+        @Html.DropDownListFor(
+        x => x.expMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+        @Html.ValidationMessageFor(model => model.expMonth, "Enter a non expired month/year date.", new { @class = "text-dark" })
+    </div>
+
+    <div class="form-group">
+        <p> Current Card Expiration Year: @Html.DisplayFor(m => m.expYear)</p>
+        @Html.DropDownListFor(
+        x => x.expYear, Enumerable.Range(2021, 2099).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+        @Html.ValidationMessageFor(model => model.expYear, "Enter a non expired month/year date.", new { @class = "text-dark" })
+
+    </div>
+
+    <p> Current Card Type: @Html.DisplayFor(m => m.cardType)</p>
+    @Html.EnumDropDownListFor(
+    x => x.cardType,
+    "Select Card Type",
+        new { @class = "form-control" })
+
+    <div class="form-group">
+
+        <p> Enter Card CVV Here</p>
+        <p> Current Card CVV: @Html.DisplayFor(m => m.cardSecNumber)</p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cardSecNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cardSecNumber, "Must be a 3 digit number", new { @class = "text-dark" })
+        </div>
+    </div>
+    <div class="form-group" style="padding-left: 200px;">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-warning">
+                <span class="glyphicon glyphicon-star"></span> Login
+            </button>
+        </div>
+    </div>
 </div>
 }
 

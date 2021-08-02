@@ -10,7 +10,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class userDAL
     {
-        private String connectionstring = "server=localhost;user id=root;database=bookstore;pwd=password";
+        private String connectionstring = "server=localhost;user id=root; Pwd=2020CoffeeXD!; database=axolotlatheneum";
 
         public bool insertUSER(User x)
         {
@@ -73,7 +73,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_email", x.email);
             cmnd.Parameters.AddWithValue("p_Password", x.password);
             cmnd.Parameters.AddWithValue("p_Phonenumber", x.phonenumber);
-            cmnd.Parameters.AddWithValue("p_Status", ((int)x.status));
+            cmnd.Parameters.AddWithValue("p_Status", x.status);
             cmnd.Parameters.AddWithValue("p_Address", addressString);
             cmnd.Parameters.AddWithValue("p_Card", cardString);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
@@ -323,7 +323,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             
         }
 
-        public void addBookToCart(User user, int isbn, int quantity, double price)
+        public ShoppingCart addBookToCart(User user, int isbn, int quantity, double price)
         {
             MySqlConnection cnn = new MySqlConnection(connectionstring);
 
@@ -337,6 +337,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cnn.Open();
             cmnd.ExecuteNonQuery();
             cnn.Close();
+            return getCart(user);
         }
 
         public void insertBook(Book x)
@@ -466,6 +467,8 @@ namespace AxolotlAtheneum.DataAccessLayer
         {
             string procedure = "searchBook" + searchCommand;
             string parameter = "p_" + searchCommand;
+            if (searchCommand.Equals("Author"))
+                parameter += "_Name";
             List<Book> results = new List<Book>();
             MySqlConnection cnn = new MySqlConnection(connectionstring);
             MySqlCommand cmnd = new MySqlCommand(procedure, cnn);

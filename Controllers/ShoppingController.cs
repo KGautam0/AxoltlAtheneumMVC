@@ -169,8 +169,8 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             if (Session["Logged_User"] != null)
             {
-                bo.addBookToCart(loggeduser, book);
-                return View("Cart");
+                ShoppingCart cart = bo.addBookToCart(loggeduser, book);
+                return View("Cart", cart);
             }
             return View("LoginCheck");
         }
