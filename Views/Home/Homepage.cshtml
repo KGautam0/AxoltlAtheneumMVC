@@ -26,22 +26,22 @@
                         <h2><br>Featured Books:</h2>
                         <div class="col">
                             <div class="container">
-                                <a href="Book.html">
-                                    <img src="@Url.Content("~/Images/Library/2.jpg")">
+                                <a href="@Url.Action("Feature1", "Shopping")">
+                                    <img src="https://th.bing.com/th/id/R.806fe09d8570529b9f9fdf24f0905893?rik=a4jVscA9ADVM9w&riu=http%3a%2f%2fecx.images-amazon.com%2fimages%2fI%2f51acqoEf5FL._SX258_BO1%2c204%2c203%2c200_.jpg&ehk=iEytyTCWO%2f9v1NDs1vpcygUOrP67lu0VGsYZcWdI%2f0w%3d&risl=&pid=ImgRaw&r=0">
                                 </a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="container">
-                                <a href="Book.html">
-                                    <img src="@Url.Content("~/Images/Library/6.jpg")">
+                                <a href="@Url.Action("Feature2", "Shopping")">
+                                    <img src="https://i.ebayimg.com/images/g/x~8AAOSwj~hf~dFV/s-l500.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="container">
-                                <a href="Book.html">
-                                    <img src="@Url.Content("~/Images/Library/3.jpg")">
+                                <a href="@Url.Action("Feature3", "Shopping")">
+                                    <img src="https://th.bing.com/th/id/OIP.KgB2yLIbyqZGPVPrIzTeNwHaJ4?pid=ImgDet&rs=1">
                                 </a>
                             </div>
                         </div>
@@ -55,20 +55,24 @@
                         <h2>Featured Authors:</h2>
                         <div class="col">
                             <div class="container">
-                                <h3>Jessie</h3>
-                                <img src="@Url.Content("~/Images/Authors/Jessie.jpg")">
+                                <a href="@Url.Action("Author1","Shopping")">
+                                    <img src="@Url.Content("~/Images/Authors/Jessie.jpg")">
+                                </a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="container">
-                                <h3>Meowth</h3>
-                                <img src="@Url.Content("~/Images/Authors/Meowth.jpg")">
+                                <a href="@Url.Action("Author2","Shopping")">
+                                    <img src="@Url.Content("~/Images/Authors/Meowth.jpg")">
+                                </a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="container">
-                                <h3>James</h3>
-                                <img src="@Url.Content("~/Images/Authors/James.jpg")">
+                                <a href="@Url.Action("Author3","Shopping")">
+                                    <img src="@Url.Content("~/Images/Authors/James.jpg")">
+                                </a>
+                                
                             </div>
                         </div>
                     </div>
@@ -83,14 +87,14 @@
                             <div class="col">
                                 <ul>
                                     <li>
-                                        <a class="book-genre">
+                                        <a class="book-genre" href="@Url.Action("Nonfiction", "Shopping")">
                                             <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Nonfiction"
                                                  style="width:10em;">
                                             <div class="centered">Nonfiction</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="book-genre">
+                                        <a class="book-genre" href="@Url.Action("Fiction", "Shopping")">
                                             <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Fiction"
                                                  style="width:10em;">
                                             <div class="centered">Fiction</div>
@@ -101,14 +105,14 @@
                             <div class="col">
                                 <ul>
                                     <li>
-                                        <a class="book-genre">
+                                        <a class="book-genre" href="@Url.Action("Classics", "Shopping")">
                                             <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Classics"
                                                  style="width:10em;">
                                             <div class="centered">Classics</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="book-genre">
+                                        <a class="book-genre" href="@Url.Action("Poems", "Shopping")">
                                             <img src="@Url.Content("~/Images/BookSpineO.png")" alt="Poems" style="width:10em;">
                                             <div class="centered">Poems</div>
                                         </a>
@@ -118,13 +122,13 @@
                             <div class="col">
                                 <ul>
                                     <li>
-                                        <a class="book-genre">
+                                        <a class="book-genre" href="@Url.Action("Historical", "Shopping")">
                                             <img src="@Url.Content("~/Images/BookSpineB.png")" alt="Historical"
                                                  style="width:10em; height:auto">
                                             <div class="centered">Historical</div>
                                         </a>
                                     <li>
-                                        <a class="book-genre">
+                                        <a class="book-genre" href="@Url.Action("Romance", "Shopping")">
                                             <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Romance"
                                                  style="width:10em;">
                                             <div class="centered">Romance</div>

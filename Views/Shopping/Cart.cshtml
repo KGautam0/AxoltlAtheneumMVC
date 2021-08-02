@@ -1,35 +1,42 @@
 ﻿@model AxolotlAtheneum.Models.ShoppingCart
 
 @if (Model == null || Model.Items == null || Model.Items.Count == 0)
-            {
-                <p> Your cart is currently empty. </p>
-            }
+{
+    <p> Your cart is currently empty. </p>
+}
 
-else { 
+else
+{
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
 
-    foreach (var item in Model.Items)
-    {
-        <div class="container-md">
-            <div class="row shelf"> </div>
-            <div class="row">
-                <div class="col">
+                @foreach (var item in Model.Items)
+                {
+
                     <div class="container">
                         <h2></h2> <p>$ @item.Key.SellingPrice</p>
                         <div class="col">
-                            <a href="@Url.Action("Book", "Shopping", item)">
+                            <a href="@Url.Action("Book", "Shopping", item.Key)">
                                 <img src="@Url.Content(item.Key.CoverPictureURL)" width="15%" align="left">
                             </a>
                         </div>
                         <div class="col" style="padding-left:275px">
                             <h4>@item.Key.Title by @item.Key.Author: </h4>
                             <h6> You currently have @item.Value copies in your shopping cart. </h6>
-                            <a href="@Url.Action("RemoveFromCart", "Home")" class="btn btn-default" role="button">Remove 1 copy from Cart</a>
-                            <a href="@Url.Action("DeleteFromCart", "Home")" class="btn btn-default" role="button">Delete all copies from Cart</a>
+                            <a href="@Url.Action("RemoveFromCart", "Shopping", item.Key)" class="btn btn-default" role="button">Remove from Cart</a>
                         </div>
                     </div>
-                </div>
+
+                }
+
+                <h3>Shopping Cart Total: $@Model.Total</h3>
+                <br></br>
+                <a href="@Url.Action("Checkout", Model)">Checkout</a>
             </div>
         </div>
-    }
+    </div>
+    
 
 }

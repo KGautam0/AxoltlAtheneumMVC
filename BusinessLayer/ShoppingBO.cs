@@ -60,14 +60,10 @@ namespace AxolotlAtheneum.BusinessLayer
             return USERDAL.getCart(user);
         }
 
-        public void removeFromCart(User user, Book book)
+        public ShoppingCart removeFromCart(User user, Book book)
         {
-            
+            return USERDAL.removeFromCart(user, book);
         }
 
-        public void removeAllFromCart(User user, Book book)
-        {
-
-        }
     }
 }

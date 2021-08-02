@@ -29,14 +29,17 @@
                         </div>
                     }
 
-                    @if (Model != null)
+                    @if (Model != null || Model.Count > 0)
                     {
                         foreach (var item in @Model)
                         {
                             @Html.Partial("~/Views/Shopping/_BookItem.cshtml", item);
                         }
                     }
-
+                    else
+            {
+                <p> No results. Click <a href="@Url.Action("Search")"> here </a>to return to all results.</p>
+            }
 
 
 
