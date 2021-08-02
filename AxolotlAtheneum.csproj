@@ -273,6 +273,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="CartProcedure\createOrderTable.sql" />
     <Content Include="CartProcedure\addBooktoCart.sql" />
     <Content Include="CartProcedure\addPromotion.sql" />
     <Content Include="CartProcedure\addToOrders.sql" />

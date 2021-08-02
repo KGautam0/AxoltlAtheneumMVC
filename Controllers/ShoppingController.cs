@@ -129,12 +129,12 @@ namespace AxolotlAtheneum.Controllers
             return Query("McDougal, Holt", null, "on", null, null, null);
         }
 
-        public ActionResult Author2()
+        public ActionResult Author3()
         {
             return Query("Shikibu, Murasaki", null, "on", null, null, null);
         }
 
-        public ActionResult Author3()
+        public ActionResult Author2()
         {
             return Query("Stoker, Bram", null, "on", null, null, null);
         }
