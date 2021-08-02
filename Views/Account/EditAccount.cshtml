@@ -3,7 +3,7 @@
     ViewBag.Title = "EditAccount";
 }
 
-<h2>EditAccount</h2>
+<h1 style="text-align:center">Edit Account</h1>
 @model AxolotlAtheneum.Models.User
 <div class="container-md">
     <div class="row shelf"> </div>
@@ -50,17 +50,17 @@
 
                 @using (Html.BeginForm("editPassword", "Account", FormMethod.Post))
                 {
-            <fieldset class="edit_name">
+                    <fieldset class="edit_name">
 
-                <p> Account email: @Html.DisplayFor(m => m.email)</p>
-                <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
+                        <p> Account email: @Html.DisplayFor(m => m.email)</p>
+                        <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
 
-                <p> Password: </p>
-                <label for="newPass">Change Password: </label>
-                <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
-                <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
+                        <p> Password: </p>
+                        <label for="newPass">Change Password: </label>
+                        <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
+                        <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
 
-            </fieldset>
+                    </fieldset>
                     <div class="form-group" style="padding-left: 200px;">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-warning">
@@ -87,27 +87,27 @@
                 @using (Html.BeginForm("editPhone", "Account", FormMethod.Post))
                 {
 
-                <fieldset class="edit_phone">
-                    <h3>Change Phone Number</h3>
+                    <fieldset class="edit_phone">
+                        <h3>Change Phone Number</h3>
 
 
-                    <p>Please change your Phone Number:</p>
+                        <p>Please change your Phone Number:</p>
 
-                    <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
-                    <p>Must be 10 digits only, no hyphens</p>
+                        <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
+                        <p>Must be 10 digits only, no hyphens</p>
 
-                    <label for="newPhone">Phone Number: </label>
-                    <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
-                    <text for="newPhone" id="newPhoneText"> * </text>
-                    <div class="form-group" style="padding-left: 200px;">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-star"></span> Login
-                            </button>
+                        <label for="newPhone">Phone Number: </label>
+                        <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
+                        <text for="newPhone" id="newPhoneText"> * </text>
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-star"></span> Login
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                </fieldset>
+                    </fieldset>
 
                 }
             </div>
@@ -157,9 +157,16 @@
                     <p>Please enter your card information:</p>
                     @{Html.RenderAction("rendereditCard", "Account", Model.card);}
                 </fieldset>
-
-
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <!-- Footer -->
+        <footer class="p-2 position-relative container-md wood-label">
+            <p>Axolotl Atheneum &copy; 2021 </p>
+        </footer>
     </div>
 </div>
