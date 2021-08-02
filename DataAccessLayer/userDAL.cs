@@ -455,7 +455,7 @@ namespace AxolotlAtheneum.DataAccessLayer
                     //add book and its quantity to cart, and change cart total $
                     
                     cart.Items.Add(book, item.Value);
-                    cart.Total += book.SellingPrice;
+                    cart.Total += (book.SellingPrice * item.Value);
                 }
             }
 
@@ -499,6 +499,22 @@ namespace AxolotlAtheneum.DataAccessLayer
             cnn.Close();
             return results;
         }
+
+        public ShoppingCart removeFromCart(User user, Book book)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("deleteAllBookSC", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_UserID", user.userID);
+            cmnd.Parameters.AddWithValue("p_BookISBN", book.ISBN);
+
+            cnn.Open();
+            cmnd.ExecuteNonQuery();
+            cnn.Close();
+
+            return getCart(user);
+        }
+
 
 
     }

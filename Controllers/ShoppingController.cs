@@ -100,15 +100,10 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult RemoveFromCart(Book book)
         {
             User loggeduser = (User)Session["Logged_User"];
-            bo.removeFromCart(loggeduser, book);
-            return View("Cart");
+            ShoppingCart cart = bo.removeFromCart(loggeduser, book);
+            return View("Cart", cart);
         }
 
-        public ActionResult DeleteFromCart(Book book)
-        {
-            User loggeduser = (User)Session["Logged_User"];
-            bo.removeAllFromCart(loggeduser, book);
-            return View("Cart");
-        }
+   
     }
 }
