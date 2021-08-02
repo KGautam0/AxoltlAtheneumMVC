@@ -171,6 +171,10 @@ namespace AxolotlAtheneum.Controllers
             return View("Checkout");
         }
 
-   
+        public ActionResult Confirm(ShoppingCart cart)
+        {
+            return View("OrderConfirmation");
+        }
+
     }
 }

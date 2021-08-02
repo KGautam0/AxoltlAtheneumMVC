@@ -1,0 +1,124 @@
+﻿
+<body>
+
+    <header>
+        <!-- NavBar -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid" id="navBar">
+                <div class="row">
+                    <div class="col" id="navBar">
+                        <!-- Drop Down -->
+                        <div class="container">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navMenu">
+                                <span>
+                                    <img src="./Images/Hamburger.png" alt="Menu" id="hamburger-toggle">
+                                </span>
+                            </button>
+                        </div>
+                        <!-- Collapsed Content -->
+                        <div class="collapse navbar-collapse" id="navMenu">
+                            <ul class="navbar-nav ham-collapse">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Homepage.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Search.html">Browse</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./About.html">About Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="col">
+                        <a href="./Homepage.html" class="navbar-brand text-center">
+                            <img src="./Images/Title.png" id="title" alt="Axolotl Atheneum" style="margin-right: 200px;">
+                        </a>
+                    </div>
+
+                    <!-- Login -->
+                    <div class="col">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accountMenu">
+                            <span class="login-button">
+                                <img src="./Images/BookSpine.png" alt="Account" style="width:6em;">
+                                <div class="centered login-text">Account</div>
+                            </span>
+                        </button>
+                        <!-- Collapsed Content -->
+                        <div class="collapse navbar-collapse" id="accountMenu">
+                            <ul class="navbar-nav account-collapse">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Login.html">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./Registration.html">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./OrderHistory.html">Order History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./EditProfile.html">Edit Profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Cart -->
+                    <div class="col ms-auto">
+                        <a href="./Cart.html">
+                            <img src="./Images/Cart.png" alt="Cart" style="width:9em; height:auto;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-md">
+        <div class="row shelf"> </div>
+        <div class="row">
+            <div class="col">
+                <h2 style="padding-left: 425px;">Your order has been received!</h2>
+                <h4></h4>
+                <img src="./Images/Thanks.png" style="padding-left:350px;" width="65%" height="auto" id="thanks">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <h6 style="padding-left: 350px;">Your Order</h6>
+                    <div class="col">
+                        <div class="container" style="padding-left: 350px;">
+                            <div class="col-md-6 confirm">
+                                <div class="col-sm-2 order">
+                                    <img src="Images/Books/PrideAndPrejudice.jpg" align="left" class="img-thumbnail" alt="gg">
+                                </div>
+                                <div class="col-sm-6 item" style="padding-left: 115px;">
+                                    <p>Pride and Prejudice</p>
+                                </div>
+                                <div class="col-sm-6 price" style="padding-left: 115px;">
+                                    <p>Price: $17.99</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 total" style="padding-right: 350px;">
+                                <p style="text-align:right">Subtotal:    $17.99</p>
+                                <p style="text-align:right">Tax:    $1.24</p>
+                                <h5 style="text-align:right">Total:    $19.23</h5>
+                                <div style="text-align:right">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+            </script>
+
+</body>
+<!-- Footer -->
+<footer class="p-2 position-relative container-md wood-label">
+    <p>Axolotl Atheneum &copy; 2021 </p>
+</footer>

@@ -200,7 +200,6 @@
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\PaymentCard.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
-    <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -496,7 +495,6 @@
     <Content Include="obj\Debug\AxolotlAtheneum.csproj.CopyComplete" />
     <Content Include="obj\Debug\AxolotlAtheneum.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Release\AxolotlAtheneum.csproj.AssemblyReference.cache" />
     <Content Include="packages\Antlr.3.5.0.2\.signature.p7s" />
     <Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />
     <Content Include="packages\AWSSDK.Core.3.7.0.44\.signature.p7s" />
@@ -643,6 +641,7 @@
     <Content Include="Views\Shopping\_BookItem.cshtml" />
     <Content Include="Views\Shopping\ManageBooks.cshtml" />
     <Content Include="Views\Shopping\Checkout.cshtml" />
+    <Content Include="Views\Shopping\OrderConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AxololtlAtheneumMVC6\v16\" />

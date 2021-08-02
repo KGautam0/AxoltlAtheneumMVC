@@ -7,7 +7,6 @@
 
 else
 {
-
     <div class="container-md">
         <div class="row shelf"> </div>
         <div class="row">
@@ -28,19 +27,16 @@ else
                             <h6> You currently have @item.Value copies in your shopping cart. </h6>
                             <a href="@Url.Action("RemoveFromCart", "Shopping", item.Key)" class="btn btn-default" role="button">Remove from Cart</a>
                         </div>
-                        <div>
-                        </div>
                     </div>
 
                 }
 
                 <h3>Shopping Cart Total: $@Model.Total</h3>
-                </br>
+                <br></br>
                 <a href="@Url.Action("Checkout", Model)">Checkout</a>
             </div>
         </div>
     </div>
-
     
 
 }
