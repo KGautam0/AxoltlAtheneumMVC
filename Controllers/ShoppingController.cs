@@ -189,7 +189,7 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             
-            loggeduser
+            ShoppingBO.
 
              
             return View("Checkout", order);

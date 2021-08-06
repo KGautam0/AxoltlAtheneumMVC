@@ -78,10 +78,13 @@ namespace AxolotlAtheneum.BusinessLayer
         }
 
 
-        public void confORDER(User x)
+        public void confORDER(User x, Order y)
         {
 
             EmailSender messenger = (EmailSender)new theFactory().factory(8);
+
+            USERDAL.addToOrder(y);
+
             messenger.sendCartConfirmation(x);
 
         }
