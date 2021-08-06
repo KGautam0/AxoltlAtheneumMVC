@@ -18,7 +18,6 @@ namespace AxolotlAtheneum.Models
         public String cardSecNumber { get; set; }
 
         [Required]
-        
         public CardType cardType { get; set; }
 
 

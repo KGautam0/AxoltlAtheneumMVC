@@ -1,68 +1,81 @@
-﻿@model AxolotlAtheneum.Models.ShoppingCart
-<main>
-    
+﻿@model AxolotlAtheneum.Models.Order
 
-    <div class="container-md">
-        <div class="row shelf"> </div>
-        <div class="row">
-            <div class="col">
-                <div class="container">
-                    <fieldset class="leftside">
-                    </fieldset>
+@{
+    ViewBag.Title = "View";
+}
 
-                    <script src="../js/payment-JS.js"></script>
+<h2 text-align:>CONFIRM CHEKCOUT</h2>
 
-                    <form>
-                        <fieldset class="rightside">
-                            <fieldset class="address_box">
-                                <h2>Shipping Address</h2>
-                                <label for="address">Address Line </label>
-                                <input type="text" name="address" id="address" required placeholder="Street number, Street, City">
-                                <text for="address" id="addressText"> * </text><br>
 
-                                <label for="state">State </label>
-                                <input type="text" name="state" id="state" required>
-                                <text for="state" id="stateText"> * </text><br>
+@if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
 
-                                <label for="zip">Zip Code </label>
-                                <input type="text" name="zip" id="zip" required placeholder="XXXXX">
-                                <text for="zip" id="zipText"> * </text><br>
+{
 
-                                <br>
-                            </fieldset>
+    <p> You do not have a valid shipping address or credit card, please add one <a href="@Url.Action("EditAccount", "Account")">here. </a></p>
 
-                            <fieldset class="payment_box">
-                                <h2>Payment Information</h2>
-                                <label for="cNum">Card Number </label>
-                                <input type="text" name="cNum" id="cNum" required placeholder="XXXX-XXXX-XXXX-XXXX">
-                                <text for="cNum" id="cNumText"> * </text><br>
+}
 
-                                <label for="expDate">Expiration Date </label>
-                                <input type="text" name="expDate" id="expDate" required placeholder="XX-XX">
-                                <text for="expDate" id="expDateText"> * </text><br>
+@if ((Model.ShippingAddress != null) | (Model.PaymentMethod != null))
+{
 
-                                <label for="vCode">Verification Code </label>
-                                <input type="password" name="vCode" id="vCode" required placeholder="XXX">
-                                <text for="vCode" id="vCodeText"> * </text><br>
+    <div id="div1" style="height:288px; overflow:auto;">
+        <table class="table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Cover
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Individual Price
+                </th>
+                <th></th>
+            </tr>
 
-                                <label for="cName">Name on Card </label>
-                                <input type="text" name="cName" id="cName" required placeholder="First, Last">
-                                <text for="cName" id="cNameText"> * </text><br>
-                            </fieldset>
 
-                            <fieldset class="promotion_box">
-                                <h2>Promotion</h2>
-                                <input type="text" name="promotionText" id="promotionText" placeholder="Enter Promo Code">
-                            </fieldset>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.Key.Title
+                    </td>
+                    <td>
+                        <img src="@Url.Content(@item.Key.CoverPictureURL)" width="10%" length="10%">
 
-                    </form>
 
-                    <a href="@Url.Action("OrderConfirmation", Model)" type="button" class="btn btn-warning">Checkout</a>
-                    </fieldset>
+                    </td>
 
-                    </form>
-                </div>
-            </div>
-        </div>
+
+                    <td>
+                        @item.Key.Author
+                    </td>
+
+
+                    <td>
+                        @item.Key.SellingPrice
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
     </div>
-</main>
+    <p>Address : @Model.ShippingAddress.Street , @Model.ShippingAddress.City , @Model.ShippingAddress.State , @Model.ShippingAddress.Zip  </p>
+    <p>Card Selected : @Model.PaymentMethod.cardNumber , @Model.PaymentMethod.cardSecNumber</p>
+    <div style="text-align: center">
+        <a class="book-genre" href="@Url.Action("Checkout", Model)">
+            <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
+                 style="width:10em;">
+            <div class="centered">Checkout</div>
+        </a>
+    </div>
+}
+
+
+
+

@@ -185,21 +185,14 @@ namespace AxolotlAtheneum.Controllers
             return View("Cart", cart);
         }
 
-        public ActionResult Checkout(ShoppingCart cart)
+        public ActionResult CheckConfirm(Order x)
         {
             User loggeduser = (User)Session["Logged_User"];
-            cart = bo.getCart(loggeduser);
-            Order order = (Order) new theFactory().factory(14);
-            if(loggeduser.address !=null)
-            order.ShippingAddress = loggeduser.address;
-            if(loggeduser.cards.Count != 0)
-            order.PaymentMethod = loggeduser.cards[0];
-            order.price = cart.Total;
-            order.Items = cart.Items;
-
+            
+            loggeduser
 
              
-            return View("checkTest", order);
+            return View("Checkout", order);
         }
 
         public ActionResult Confirm(ShoppingCart cart)

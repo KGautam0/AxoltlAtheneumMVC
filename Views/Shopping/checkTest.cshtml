@@ -65,7 +65,8 @@
 
         </table>
     </div>
-
+    <p>Address : @Model.ShippingAddress.Street , @Model.ShippingAddress.City , @Model.ShippingAddress.State , @Model.ShippingAddress.Zip  </p>
+    <p>Card Selected : @Model.PaymentMethod.cardNumber , @Model.PaymentMethod.cardSecNumber</p>
     <div style="text-align: center">
         <a class="book-genre" href="@Url.Action("Checkout", Model)">
             <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"

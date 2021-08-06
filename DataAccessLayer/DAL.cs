@@ -742,6 +742,79 @@ namespace AxolotlAtheneum.DataAccessLayer
                 return null;
         }
 
+        public void addToOrder(Order x)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("addToOrder", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_OrderID", x.OrderID);
+            cmnd.Parameters.AddWithValue("p_CustomerID", x.userID);
+            cmnd.Parameters.AddWithValue("p_OrderPrice", x.price);
+            cmnd.Parameters.AddWithValue("p_OrderAdress", JsonConvert.SerializeObject(x.ShippingAddress));
+            cmnd.Parameters.AddWithValue("p_OrderAdress", JsonConvert.SerializeObject(x.PaymentMethod));
+            cmnd.Parameters.AddWithValue("p_OrderAdress", JsonConvert.SerializeObject(x.Items));
+            cnn.Open();
+            cmnd.ExecuteNonQuery();
+            
+            cnn.Close();
+
+            
+        }
+        /*
+        public void addPromo(Promotion x)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("addToOrder", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_PromoID", x.PromoName);
+            cmnd.Parameters.AddWithValue("p_PromoCode", x.PromoCode);
+            cmnd.Parameters.AddWithValue("p_PromoStart", x.StartDate);
+            cmnd.Parameters.AddWithValue("p_PromoEnd", x.EndDate);
+            cmnd.Parameters.AddWithValue("p_PromoDiscount", x.ValueOff);
+ 
+            cnn.Open();
+            cmnd.ExecuteNonQuery();
+
+            cnn.Close();
+
+
+        }
+        */
+
+        public List<Order> getOrders(User x)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("getOrders", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_UserIDe", x.userID);
+
+            cnn.Open();
+            List<Order> orderList = new List<Order>();
+            var reader = cmnd.ExecuteReader();
+            while (reader.Read())
+            {
+                Order order = (Order)new theFactory().factory(14);
+                
+                order.OrderID = (int)reader["Order_ID"];
+                order.userID = (int)reader["User_ID"];
+                order.DateOrdered = (DateTime)reader["Order_Time"];
+                order.price = (int)reader["Order_Price"];
+
+                order.OrderStatus = (OrderStatus)reader["Order_Status"];
+
+                order.ShippingAddress = JsonConvert.DeserializeObject<Address>((String)reader["Order_Address"]);
+                order.PaymentMethod = JsonConvert.DeserializeObject<PaymentCard>((String)reader["Order_Payment"]);
+                order.Items = JsonConvert.DeserializeObject<Dictionary<Book, int>>((String)reader["Order_Payment"]);
+
+                orderList.Add(order);
+            }
+            cnn.Close();
+
+           
+                return orderList;
+
+
+        }
 
     }
 }
