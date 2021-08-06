@@ -46,11 +46,15 @@ namespace AxolotlAtheneum.Models
         [DisplayName("Status")]
         public Status status { get; set; }
 
+        [DisplayName("Subscription Status")]
+        public int isSubscribed { get; set; }
+
         [DisplayName("Address")]
         public Address address { get; set; }
 
-        [DisplayName("Payment Card")]
-        public PaymentCard card { get; set; }
+        [DisplayName("Payment Cards")]
+        public List<PaymentCard> cards { get; set; }
+
 
     }
 }

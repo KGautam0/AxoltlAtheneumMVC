@@ -78,7 +78,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editPhone">
                     <span class="login-button">
                         <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Edit Phone #" style="width:10em;">
-                        <div class="centered">Edit Phone #</div>
+                        <div class="centered">Edit Contact</div>
                     </span>
                 </button>
             </div>
@@ -87,30 +87,66 @@
                 @using (Html.BeginForm("editPhone", "Account", FormMethod.Post))
                 {
 
-                <fieldset class="edit_phone">
-                    <h3>Change Phone Number</h3>
+                    <fieldset class="edit_phone">
+                        <h3>Change Phone Number</h3>
+                        <p>Please change your Phone Number:</p>
 
+                        <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
+                        <p>Must be 10 digits only, no hyphens</p>
 
-                    <p>Please change your Phone Number:</p>
-
-                    <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
-                    <p>Must be 10 digits only, no hyphens</p>
-
-                    <label for="newPhone">Phone Number: </label>
-                    <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
-                    <text for="newPhone" id="newPhoneText"> * </text>
-                    <div class="form-group" style="padding-left: 200px;">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-star"></span> Login
-                            </button>
+                        <label for="newPhone">Phone Number: </label>
+                        <input type="text" name="newPhone" id="newPhone" required placeholder="Enter phone number here">
+                        <text for="newPhone" id="newPhoneText"> * </text>
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-star"></span> Submit
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                </fieldset>
+                    </fieldset>
 
                 }
+
+                @using (Html.BeginForm("changeSubscription", "Account", FormMethod.Post))
+                {
+
+                    <fieldset class="edit_phone">
+                        <h3>Change Subscription Status</h3>
+
+                        @if (Model.isSubscribed == 1)
+                        {
+                            <p> You are currently Subscribed to receive promotional emails.</p>
+                        }
+                        else
+                        {
+                            <p> You are currently Not Subscribed to receive promotional emails.</p>
+                        }
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                @if (Model.isSubscribed == 1)
+                                {
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Unsubscribe
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Subscribe
+                                    </button>
+                                }
+
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                }
+
             </div>
+
 
         </div>
     </div>
@@ -152,11 +188,24 @@
             <!-- Collapsed Content -->
             <div class="collapse navbar-collapse" id="editCard">
 
+                @foreach (var card in @Model.cards)
+            {
                 <fieldset class="edit_payment">
-                    <h3>Change Payment Card</h3>
+                    <h3>Edit Payment Card</h3>
                     <p>Please enter your card information:</p>
-                    @{Html.RenderAction("rendereditCard", "Account", Model.card);}
+                    @{Html.RenderAction("rendereditCard", "Account", card);}
                 </fieldset>
+            }
+                @if (Model.cards.Count < 3)
+            {
+            <fieldset class="edit_payment">
+                <h3>Enter New Payment Card</h3>
+                <p>Please enter your card information:</p>
+                @{Html.RenderAction("rendernewCard", "Account");}
+            </fieldset>
+            }
+                
+
 
 
             </div>

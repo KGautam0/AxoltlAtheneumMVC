@@ -13,7 +13,7 @@ namespace AxolotlAtheneum.BusinessLayer
         public void regUSER(User x)
         {
            
-            if (USERDAL.insertUSER(x))
+            if (USERDAL.insertUSER(x, "Create_User").Count != 0)
             {
                 EmailSender messenger = new EmailSender();
                 messenger.sendACTNUM(x);
@@ -23,7 +23,6 @@ namespace AxolotlAtheneum.BusinessLayer
         public void verUSER(User x)
         {
 
-            
                 EmailSender messenger = new EmailSender();
                 messenger.sendUserID(x);
             
@@ -33,7 +32,6 @@ namespace AxolotlAtheneum.BusinessLayer
         public void resetPass(String email, int actnum)
         {
 
-
             EmailSender messenger = new EmailSender();
             messenger.resetPass(email, actnum);
 
@@ -42,7 +40,7 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public User EMlogUSER(String email, String password)
         {
-            List<User> retrievedUser = USERDAL.EMretrieveUSER(email, password);
+            List<User> retrievedUser = USERDAL.retrieveUSER(email, null, password, "EMretrieve_user");
             if (retrievedUser.Count() != 0)
             {
                 return retrievedUser.ElementAt(0);
@@ -52,7 +50,7 @@ namespace AxolotlAtheneum.BusinessLayer
         }
         public User IDlogUSER(String password, String userID)
         {
-            List<User> retrievedUser = USERDAL.IDretrieveUSER(userID, password);
+            List<User> retrievedUser = USERDAL.retrieveUSER(null, userID, password, "IDretrieve_user");
             if (retrievedUser.Count() != 0)
             {
                 return retrievedUser.ElementAt(0);
@@ -63,7 +61,7 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public bool checkUSER(String email)
         {
-            List<User> retrievedUser = USERDAL.checkUSER(email);
+            List<User> retrievedUser = USERDAL.retrieveUSER(email, null, null, "check_user");
             if (retrievedUser.Count!=0)
             {
                 return true;
@@ -79,7 +77,7 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public bool confirmPass(String email, String pass)
         {
-            return USERDAL.EMretrieveUSER(email, pass).Count != 0;
+            return USERDAL.retrieveUSER(email, null, pass, "EMretrieve_user" ).Count != 0;
         }
 
         public void sendEditNotice(User x, int format)
@@ -89,7 +87,7 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public User updateUSER(User x)
         {
-            List<User> retrievedUser = USERDAL.updateUSER(x); ;
+            List<User> retrievedUser = USERDAL.insertUSER(x, "update_user"); ;
             if (retrievedUser.ElementAt(0) != null)
             {
                 return retrievedUser.ElementAt(0);
@@ -100,7 +98,7 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public User getUser(String email)
         {
-            List<User> users = USERDAL.checkUSER(email);
+            List<User> users = USERDAL.retrieveUSER(email, null, null, "check_user");
             User user = null;
             if (users != null)
             {

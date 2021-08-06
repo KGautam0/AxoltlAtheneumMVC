@@ -640,8 +640,10 @@
     <Content Include="Views\Shopping\Search.cshtml" />
     <Content Include="Views\Shopping\_BookItem.cshtml" />
     <Content Include="Views\Shopping\ManageBooks.cshtml" />
-    <Content Include="Views\Shopping\Checkout.cshtml" />
+    <Content Include="Views\Shopping\_CheckoutItems.cshtml" />
     <Content Include="Views\Shopping\OrderConfirmation.cshtml" />
+    <Content Include="Views\Shopping\Checkout.cshtml" />
+    <Content Include="Views\Account\_newCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AxololtlAtheneumMVC6\v16\" />

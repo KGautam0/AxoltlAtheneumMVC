@@ -166,14 +166,21 @@ namespace AxolotlAtheneum.Controllers
             return View("Cart", cart);
         }
 
-        public ActionResult Checkout(ShoppingCart cart)
+        public ActionResult Checkout()
         {
-            return View("Checkout");
+            User loggeduser = (User)Session["Logged_User"];
+            return View("Checkout", loggeduser);
         }
 
         public ActionResult Confirm(ShoppingCart cart)
         {
             return View("OrderConfirmation");
+        }
+
+        public ActionResult CheckoutItems()
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            return PartialView("_CheckoutItems", bo.getCart(loggeduser));
         }
 
     }

@@ -30,5 +30,7 @@ namespace AxolotlAtheneum.Models
         [Required]
         [RegularExpression(@"^20[0-9]{2}$")]
         public String expYear { get; set; }
+
+        public int index { get; set; }
     }
 }

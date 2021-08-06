@@ -23,10 +23,15 @@ namespace AxolotlAtheneum.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult rendereditCard()
+        public ActionResult rendereditCard(PaymentCard card)
         {
-            User loggeduser = (User)Session["Logged_User"];
-            return PartialView("_editCard", loggeduser.card);
+            return PartialView("_editCard", card);
+        }
+
+        [ChildActionOnly]
+        public ActionResult rendernewCard()
+        {
+            return PartialView("_newCard", new PaymentCard());
         }
 
         [HttpPost]
@@ -142,6 +147,7 @@ namespace AxolotlAtheneum.Controllers
             USERBO.sendEditNotice((User)Session["Logged_User"], 3);
             return RedirectToAction("EditAccount",loggeduser);
         }
+
         [HttpPost]
         public ActionResult editCard(PaymentCard newCard)
         {
@@ -150,13 +156,32 @@ namespace AxolotlAtheneum.Controllers
             {
                 return View("EditAccFail", loggeduser);
             }
-            loggeduser.card = newCard;
+            loggeduser.cards[newCard.index] = newCard;
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             loggeduser = (User)Session["Logged_User"];
             USERBO.sendEditNotice((User)Session["Logged_User"], 4);
             return RedirectToAction("EditAccount", loggeduser);
             
         }
+
+        [HttpPost]
+        public ActionResult newCard(PaymentCard newCard)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            if (!ModelState.IsValid)
+            {
+                return View("EditAccFail", loggeduser);
+            }
+            newCard.index = loggeduser.cards.Count;
+            loggeduser.cards.Add(newCard);
+            
+            Session["Logged_User"] = USERBO.updateUSER(loggeduser);
+            loggeduser = (User)Session["Logged_User"];
+            USERBO.sendEditNotice((User)Session["Logged_User"], 4);
+            return RedirectToAction("EditAccount", loggeduser);
+
+        }
+
         [HttpPost]
         public ActionResult editPhone(String newPhone)
         {
@@ -302,6 +327,14 @@ namespace AxolotlAtheneum.Controllers
                 ViewBag.Message = "An error occurred. User status change unsuccessful.";
                 return RedirectToAction("AdminHomepage", "Home");
             }
+        }
+
+        public ActionResult changeSubscription()
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            loggeduser.isSubscribed = (loggeduser.isSubscribed == 1) ? 0 : 1;
+            USERBO.updateUSER(loggeduser);
+            return RedirectToAction("EditAccount", loggeduser);
         }
 
     }
