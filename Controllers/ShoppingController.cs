@@ -142,11 +142,11 @@ namespace AxolotlAtheneum.Controllers
             return Query("Stoker, Bram", null, "on", null, null, null);
         }
 
-        public ActionResult addPromo(string addPromoName, string addPromoCode, string addPromoDiscount)
+        public ActionResult addPromo(string addPromoName, string addPromoCode, double addPromoDiscount, DateTime addStart, DateTime addEnd)
         {
-            if (addPromoName != null && addPromoCode != null && addPromoDiscount != null)
+            if (addPromoName != null && addPromoCode != null && addPromoDiscount != null && addStart != null && addEnd != null)
             {
-                bo.addPromo(addPromoName, addPromoCode, addPromoDiscount);
+                bo.addPromo(addPromoName, addPromoCode, addPromoDiscount, addStart, addEnd);
             }
             return View("Homepage", "Account");
         }
@@ -201,6 +201,8 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult Confirm(ShoppingCart cart)
         {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.confORDER(loggeduser);
             return View("OrderConfirmation");
         }
 

@@ -1,20 +1,20 @@
 ﻿@model AxolotlAtheneum.Models.Order
 
 
+<h2 text-align:>Checkout</h2>
 
 
 @if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
 
 {
 
-    <p> You do not have a valid shipping address or credit card, please add one </p> <a href="@Url.Action("EditAccount", "Account")">here. </a>
+    <p> You do not have a valid shipping address or credit card, please add one <a href="@Url.Action("EditAccount", "Account")">here. </a></p>
 
 }
 
 @if ((Model.ShippingAddress != null) | (Model.PaymentMethod != null))
 {
 
-    <h2>Checkout</h2>
     <div id="div1" style="height:288px; overflow:auto;">
         <table class="table">
             <tr>
@@ -60,20 +60,16 @@
                 </tr>
             }
 
-
-
-
-
         </table>
-
-
-
-
-
     </div>
 
-
-
+    <div style="text-align: center">
+        <a class="book-genre" href="@Url.Action("Checkout", Model)">
+            <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
+                 style="width:10em;">
+            <div class="centered">Checkout</div>
+        </a>
+    </div>
 }
 
 

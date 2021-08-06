@@ -189,29 +189,29 @@
             <div class="collapse navbar-collapse" id="editCard">
 
                 @foreach (var card in @Model.cards)
-            {
-                <fieldset class="edit_payment">
-                    <h3>Edit Payment Card</h3>
-                    <p>Please enter your card information:</p>
-                    @{Html.RenderAction("rendereditCard", "Account", card);}
-                </fieldset>
-            }
+                {
+                    <fieldset class="edit_payment">
+                        <h3>Edit Payment Card</h3>
+                        <p>Please enter your card information:</p>
+                        @{Html.RenderAction("rendereditCard", "Account", card);}
+                    </fieldset>
+                }
                 @if (Model.cards.Count < 3)
-            {
-            <fieldset class="edit_payment">
-                <h3>Enter New Payment Card</h3>
-                <p>Please enter your card information:</p>
-                @{Html.RenderAction("rendernewCard", "Account");}
-            </fieldset>
-            }
-                
+                {
+                    <fieldset class="edit_payment">
+                        <h3>Enter New Payment Card</h3>
+                        <p>Please enter your card information:</p>
+                        @{Html.RenderAction("rendernewCard", "Account");}
+                    </fieldset>
+                }
 
 
 
-        </div>
-        <!-- Footer -->
+            </div>
+
+
+        </div><!-- Footer -->
         <footer class="p-2 position-relative container-md wood-label">
             <p>Axolotl Atheneum &copy; 2021 </p>
         </footer>
     </div>
-</div>

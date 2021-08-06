@@ -19,12 +19,20 @@ namespace AxolotlAtheneum.BusinessLayer
             return books;
         }
 
-        public void addPromo(string name, string code, string amt)
+        public void addPromo(string name, string code, double amt, DateTime start, DateTime end)
         {
             EmailSender messenger = new EmailSender();
             List<User> subscribers = USERDAL.getSubscribedUsers();
             foreach (User user in subscribers)
-                messenger.sendPromo(user.email, code, amt);
+                messenger.sendPromo(user.email, code, amt.ToString(), start, end);
+            Promotion promo = (Promotion)new theFactory().factory(15);
+            promo.PromoName = name;
+            promo.PromoCode = code;
+            promo.ValueOff = amt;
+            promo.StartDate = start;
+            promo.EndDate = end;
+            USERDAL.insertPromo(promo);
+
         }
 
         public Book addBook(string isbn, string category, string author, string title, string edition, string publisher, string year, string quantity, string threshold,
@@ -77,6 +85,14 @@ namespace AxolotlAtheneum.BusinessLayer
             return USERDAL.getPromo(promoCode);
         }
 
+
+        public void confORDER(User x)
+        {
+
+            EmailSender messenger = (EmailSender)new theFactory().factory(8);
+            messenger.sendCartConfirmation(x);
+
+        }
 
     }
 }

@@ -34,42 +34,33 @@ else
                     <div class="row shelf"> </div>
 
                 }
-
-                <br />
-                @using (Html.BeginForm("userAddPromo", "Shopping", FormMethod.Post))
-                {
-                    
-            <div class="form-group" style="padding-left: 200px;">
-                <label for="newFName">Promo Code: </label>
-                <input type="text" name="promoCode" id="promoCode" required placeholder="DISCOUNT"><br>
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-star"></span> Submit
-                    </button>
-                </div>
-            </div>
-                }
-
-                <br />
-                <br />
-
-                
-                <div class="form-group" style="padding-left: 200px;">
-                    <center>
-                        <h4>Shopping Cart Subtotal: $@Model.Total</h4>
-                        @if (Model.Discount != 0)
-                        {
-                            <h4>Promotional Discount: -$@Model.Discount</h4>
-                        }
-                        <br />
-                        <div style="text-align: center">
-                            <a class="book-genre" href="@Url.Action("Checkout", Model)">
-                                <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
-                                        style="width:10em;">
-                                <div class="centered">Checkout</div>
-                            </a>
+                <div style="text-align: center">
+                    @using (Html.BeginForm("userAddPromo", "Shopping", FormMethod.Post))
+                    {
+                        <label for="newFName">Promo Code: </label>
+                        <input type="text" name="promoCode" id="promoCode" required placeholder="DISCOUNT">
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-star"></span> Add
+                                </button>
+                            </div>
                         </div>
-                    </center>
+                    }
+
+
+                    <h4>Shopping Cart Subtotal: $@Model.Total</h4>
+                    @if (Model.Discount != 0)
+                    {
+                        <h4>Promotional Discount: -$@Model.Discount</h4>
+                    }
+                    <br>
+
+                    <a class="book-genre" href="@Url.Action("Checkout", Model)">
+                        <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
+                             style="width:10em;">
+                        <div class="centered">Checkout</div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.IO;
 using System.Net.Mail;
 using System.Web;
 using Dnp.Net;
@@ -95,14 +96,14 @@ namespace AxolotlAtheneum.BusinessLayer
 
         }
 
-        public void sendPromo(string email, string discountCode, string discount)
+        public void sendPromo(string email, string discountCode, string discount, DateTime start, DateTime end)
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("axolotl.atheneum@gmail.com");
             mail.To.Add(email);
             mail.Subject = "New Promotional Discount from Axolotl Atheneum";
-            mail.Body = "Cool new promotion! Enter the discount code: " + discountCode + " for a discount of " + discount;
+            mail.Body = "Cool new promotion! Enter the discount code: " + discountCode + " for a discount of " + discount + " starting on " + start + " and ending on " + end;
 
             SmtpServer.Port = 587;
             SmtpServer.UseDefaultCredentials = false;
@@ -111,6 +112,23 @@ namespace AxolotlAtheneum.BusinessLayer
 
             SmtpServer.Send(mail);
 
+        }
+
+        public void sendCartConfirmation(User x)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("axolotl.atheneum@gmail.com");
+            mail.To.Add(x.email);
+            mail.Subject = "Order Confirmation from Axolotl Atheneum";
+            mail.Body = "Thank you for Shopping at Axolotl Atheneum. " +
+                "Check your Order History for more information!";
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("axolotl.atheneum", "MidTermCurve");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
         }
 
     }

@@ -646,6 +646,7 @@
     <Content Include="Views\Shopping\checkTest.cshtml" />
     <Content Include="Views\Shopping\_CheckoutItems.cshtml" />
     <Content Include="Views\Home\suspendedPage.cshtml" />
+    <Content Include="Views\Shopping\OrderHistoryThis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AxololtlAtheneumMVC6\v16\" />
