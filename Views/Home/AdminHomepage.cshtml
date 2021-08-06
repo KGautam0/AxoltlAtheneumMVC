@@ -90,8 +90,16 @@
                             <label for="addPromoDiscount">Promotion Discount: </label>
                             @Html.TextBox("discount", null, new { @placeholder = "Promotional Discount as a Number", required = "required" })
                             <text for="addPromoDiscount" id="addPromoDiscount"> * </text><br>
+
+                            <label for="addPromoStart">Promotion Start Date: </label>
+                            @Html.TextBox("discount", null, new { @placeholder = "YYYY, MM, DD", required = "required" })
+                            <text for="addPromoStart" id="addPromoStart"> * </text><br>
+
+                            <label for="addPromoEnd">Promotion End Date: </label>
+                            @Html.TextBox("discount", null, new { @placeholder = "YYYY, MM, DD", required = "required" })
+                            <text for="addPromoEnd" id="addPromoEnd"> * </text><br>
                         </fieldset>
-                        <input type="submit" form="promoteAccount" value="Submit" />
+                        <input type="submit" form="addPromo" value="Submit" />
                     </form>
                     }
 

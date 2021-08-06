@@ -14,7 +14,6 @@ namespace AxolotlAtheneum.Models
         public PaymentCard PaymentMethod { get; set; }
         public double price { get; set; }
         public int userID { get; set; }
-        public Dictionary<Book, int> Items { get; set; }
 
     }
 }
