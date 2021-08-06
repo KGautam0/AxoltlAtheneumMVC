@@ -587,6 +587,72 @@ namespace AxolotlAtheneum.DataAccessLayer
         }
 
 
+        public List<User> getSubscribedUsers()
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("returnSubbedUsers", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+
+            cnn.Open();
+            List<User> users = new List<User>();
+            var reader = cmnd.ExecuteReader();
+            while (reader.Read())
+            {
+
+                User tempuser = new User();
+                if (!(reader["userID"] is DBNull))
+                {
+                    tempuser.userID = (string)reader["userID"];
+                }
+                tempuser.phonenumber = (String)reader["phonenumber"];
+                tempuser.firstName = (string)reader["firstname"];
+                tempuser.lastName = (string)reader["lastname"];
+                tempuser.email = (string)reader["email"];
+                tempuser.password = (string)reader["password"];
+                tempuser.status = (Status)((int)reader["status"]);
+                tempuser.actnum = Convert.ToInt32(reader["actnum"]);
+                if (!(reader["isSubscribed"] is DBNull))
+                    tempuser.isSubscribed = Convert.ToInt32(reader["isSubscribed"]);
+                else
+                    tempuser.isSubscribed = 0;
+
+                //optional values
+                string addressJson = reader["address"] as string;
+                if (addressJson != null)
+                {
+                    Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
+                    tempuser.address = userAddress;
+                }
+                tempuser.cards = new List<PaymentCard>();
+                string cardJson = reader["card0"] as string;
+                if (cardJson != "" && cardJson != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                    tempuser.cards.Add(userCard);
+                    tempuser.cards[0].index = 0;
+                }
+                cardJson = reader["card1"] as string;
+                if (cardJson != "" && cardJson != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                    tempuser.cards.Add(userCard);
+                    tempuser.cards[1].index = 1;
+                }
+                cardJson = reader["card2"] as string;
+                if (cardJson != "" && cardJson != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
+                    tempuser.cards.Add(userCard);
+                    tempuser.cards[2].index = 2;
+                }
+
+                users.Add(tempuser);
+
+            }
+
+            return users;
+        }
+
 
     }
 }

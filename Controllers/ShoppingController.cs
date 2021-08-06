@@ -142,11 +142,11 @@ namespace AxolotlAtheneum.Controllers
             return Query("Stoker, Bram", null, "on", null, null, null);
         }
 
-        public ActionResult addPromo(string promoName, string promoCode, string discount)
+        public ActionResult addPromo(string addPromoName, string addPromoCode, string addPromoDiscount)
         {
-            if (promoName != null && promoCode != null && discount != null)
+            if (addPromoName != null && addPromoCode != null && addPromoDiscount != null)
             {
-                bo.addPromo(promoName, promoCode, discount);
+                bo.addPromo(addPromoName, addPromoCode, addPromoDiscount);
             }
             return View("Homepage", "Account");
         }
