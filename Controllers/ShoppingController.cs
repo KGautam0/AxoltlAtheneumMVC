@@ -196,10 +196,7 @@ namespace AxolotlAtheneum.Controllers
             order.PaymentMethod = loggeduser.cards[0];
             order.price = cart.Total;
             order.Items = cart.Items;
-
-
-             
-            return View("checkTest", order);
+            return View("Checkout", order);
         }
 
         public ActionResult Confirm(ShoppingCart cart)

@@ -1,12 +1,79 @@
-﻿@model AxolotlAtheneum.Models.ShoppingCart
+﻿@model AxolotlAtheneum.Models.Order
+
+@if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
+
+{
+
+    <p> You do not have a valid shipping address or credit card, please add one </p> <a href="@Url.Action("EditAccount", "Account")">here. </a>
+
+} else
+            {
+
 <main>
-    
+
 
     <div class="container-md">
         <div class="row shelf"> </div>
         <div class="row">
             <div class="col">
                 <div class="container">
+
+                    <h2>Checkout</h2>
+                    <div id="div1" style="height:288px; overflow:auto;">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Cover
+                                </th>
+                                <th>
+                                    Author
+                                </th>
+                                <th>
+                                    Individual Price
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Key.Title
+                                    </td>
+                                    <td>
+                                        <img src="@Url.Content(@item.Key.CoverPictureURL)" width="10%" length="10%">
+
+
+                                    </td>
+
+
+                                    <td>
+                                        @item.Key.Author
+                                    </td>
+
+
+                                    <td>
+                                        @item.Key.SellingPrice
+                                    </td>
+
+
+                                </tr>
+                            }
+
+
+                        </table>
+
+
+
+
+
+                    </div>
+
+
+
                     <fieldset class="leftside">
                     </fieldset>
 
@@ -50,19 +117,19 @@
                                 <text for="cName" id="cNameText"> * </text><br>
                             </fieldset>
 
-                            <fieldset class="promotion_box">
-                                <h2>Promotion</h2>
-                                <input type="text" name="promotionText" id="promotionText" placeholder="Enter Promo Code">
-                            </fieldset>
-
                     </form>
 
-                    <a href="@Url.Action("OrderConfirmation", Model)" type="button" class="btn btn-warning">Checkout</a>
-                    </fieldset>
-
-                    </form>
+                    <div style="text-align: center">
+                        <a class="book-genre" href="@Url.Action("OrderConfirmation", Model)">
+                            <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
+                                 style="width:10em;">
+                            <div class="centered">Confirm Order</div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
+}
