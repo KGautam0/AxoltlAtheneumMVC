@@ -95,5 +95,23 @@ namespace AxolotlAtheneum.BusinessLayer
 
         }
 
+        public void sendPromo(string email, string discountCode, string discount)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("axolotl.atheneum@gmail.com");
+            mail.To.Add(email);
+            mail.Subject = "New Promotional Discount from Axolotl Atheneum";
+            mail.Body = "Cool new promotion! Enter the discount code: " + discountCode + " for a discount of " + discount;
+
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("axolotl.atheneum", "MidTermCurve");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+        }
+
     }
 }

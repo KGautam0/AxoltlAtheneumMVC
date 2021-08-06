@@ -20,7 +20,10 @@ namespace AxolotlAtheneum.BusinessLayer
 
         public void addPromo(string name, string code, string amt)
         {
-
+            EmailSender messenger = new EmailSender();
+            List<User> subscribers = USERDAL.getSubscribedUsers();
+            foreach (User user in subscribers)
+                messenger.sendPromo(user.email, code, amt);
         }
 
         public Book addBook(string isbn, string category, string author, string title, string edition, string publisher, string year, string quantity, string threshold, 
