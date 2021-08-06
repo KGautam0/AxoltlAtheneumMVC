@@ -190,8 +190,16 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             cart = bo.getCart(loggeduser);
             Order order = (Order) new theFactory().factory(14);
-            
-            return View("checkTest", bo.getCart(loggeduser));
+            if(loggeduser.address !=null)
+            order.ShippingAddress = loggeduser.address;
+            if(loggeduser.cards.Count != 0)
+            order.PaymentMethod = loggeduser.cards[0];
+            order.price = cart.Total;
+            order.Items = cart.Items;
+
+
+             
+            return View("checkTest", order);
         }
 
         public ActionResult Confirm(ShoppingCart cart)
@@ -209,7 +217,7 @@ namespace AxolotlAtheneum.Controllers
                 User loggeduser = (User)Session["Logged_User"];
                 bo.getCart(loggeduser).Discount = promo.ValueOff;
             }
-            return Cart();
+            return RedirectToAction("Cart"); ;
         }
 
     }
