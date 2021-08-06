@@ -11,7 +11,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class DAL
     {
-        private String connectionstring = "";
+        private String connectionstring = "server=localhost;user id=root;persistsecurityinfo=True;database=pogstore; Pwd=Kappa123!";
 
         public bool insertUSER(User x)
         {
@@ -736,7 +736,10 @@ namespace AxolotlAtheneum.DataAccessLayer
             }
             cnn.Close();
 
-            return promos[0];
+            if (promos.Count != 0)
+                return promos[0];
+            else
+                return null;
         }
 
 

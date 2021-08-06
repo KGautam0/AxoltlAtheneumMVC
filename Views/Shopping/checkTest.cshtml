@@ -1,12 +1,25 @@
-﻿@model AxolotlAtheneum.Models.ShoppingCart
+﻿@model AxolotlAtheneum.Models.Order
 
 @{
     ViewBag.Title = "View";
 }
 
-<h2>View</h2>
-<div id="div1" style="height:288px; overflow:auto;">
-<table class="table">
+<h2>Checkout</h2>
+
+
+@if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
+
+{
+
+    <p> You do not have a valid shipping address or credit card, please add one </p> <a href="@Url.Action("EditAccount", "Account")">here. </a>
+
+}
+
+@if ((Model.ShippingAddress != null) | (Model.PaymentMethod != null))
+{
+
+    <div id = "div1" style = "height:288px; overflow:auto;">
+   <table class="table">
     <tr>
         <th>
             Title
@@ -25,27 +38,47 @@
 
 
     @foreach (var item in Model.Items)
-    {
+        {
         <tr>
             <td>
                 @item.Key.Title
-            </td>
-            <td>
-                <img src="@Url.Content(@item.Key.CoverPictureURL)" width="10%" length="10%">
-            </td>
-            <td>
-                @item.Key.Author
-            </td>
-            <td>
-                @item.Key.SellingPrice
-            </td>
-        </tr>
-    }
-
-</table>
+            </td >
+            <td >
+                <img src = "@Url.Content(@item.Key.CoverPictureURL)" width = "10%" length = "10%" >
 
 
+                 </td >
+
+
+                 <td >
+                     @item.Key.Author
+                 </td >
+
+
+                 <td >
+                     @item.Key.SellingPrice
+                 </td >
+
+
+             </tr >
+        }
+           
+    
 
 
 
- </div>
+         </table>
+
+
+
+
+
+            </div>
+
+            
+
+                    }
+
+
+
+
