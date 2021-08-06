@@ -1,4 +1,5 @@
 ﻿using AxolotlAtheneum.BusinessLayer;
+using AxolotlAtheneum.Factory;
 using AxolotlAtheneum.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace AxolotlAtheneum.Controllers
 {
     public class ShoppingController : Controller
     {
-        ShoppingBO bo = new ShoppingBO();
+        ShoppingBO bo = (ShoppingBO)new theFactory().factory(4);
         public ActionResult Index()
         {
             return View("Search");
@@ -58,7 +59,7 @@ namespace AxolotlAtheneum.Controllers
             List<Book> books = bo.getFilteredBooks(searchParam, qCategory);
 
             return View("Search", books);
-                
+
         }
 
         public ActionResult Nonfiction()
@@ -80,7 +81,7 @@ namespace AxolotlAtheneum.Controllers
         {
             return Query("Poems", null, null, null, null, "on");
         }
-        
+
         public ActionResult Historical()
         {
             return Query("Historical", null, null, null, null, "on");

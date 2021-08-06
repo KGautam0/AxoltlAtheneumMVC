@@ -40,7 +40,7 @@ namespace AxolotlAtheneum.Factory
                     {
                         return new Random();
                     }
-                case(7):
+                case (7):
                     {
                         return new DAL();
 
@@ -50,9 +50,36 @@ namespace AxolotlAtheneum.Factory
                         return new EmailSender();
 
                     }
+                case (9):
+                    {
+                        return new PaymentCard();
+
+                    }
+
+                case (10):
+                    {
+                        return new Book();
+
+                    }
+                case (11):
+                    {
+                        return new List<Book>();
+
+                    }
+                case (12):
+                    {
+                        return new List<User>();
+
+                    }
+                case (13):
+                    {
+                        return new ShoppingCart();
+
+                    }
+
 
             }
-        
-         }
+            return null;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AxolotlAtheneum.Models;
+﻿using AxolotlAtheneum.Factory;
+using AxolotlAtheneum.Models;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -23,11 +24,11 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Serialize reference type parameter 
-            String cardString = JsonConvert.SerializeObject(x.card);
+            String cardString = JsonConvert.SerializeObject(x.cards);
             String addressString = JsonConvert.SerializeObject(x.address);
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
-            
+
             cmnd.Parameters.AddWithValue("p_firstName", x.firstName);
             cmnd.Parameters.AddWithValue("p_lastName", x.lastName);
             cmnd.Parameters.AddWithValue("p_email", x.email);
@@ -62,7 +63,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Serialize reference type parameter 
-            String cardString = JsonConvert.SerializeObject(x.card);
+            String cardString = JsonConvert.SerializeObject(x.cards);
             String addressString = JsonConvert.SerializeObject(x.address);
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
@@ -90,7 +91,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 
 
             //Close Connection
-            List<User> UserList= EMretrieveUSER(x.email, x.password);
+            List<User> UserList = EMretrieveUSER(x.email, x.password);
             cnn.Close();
             return UserList;
         }
@@ -112,7 +113,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Set Values to be passed into the stored procedure for insertion into User Table.
             cmnd.Parameters.AddWithValue("p_Email", email);
             cmnd.Parameters.AddWithValue("p_Password", password);
-            
+
             //Open Connection
             cnn.Open();
 
@@ -122,7 +123,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             while (reader.Read())
             {
 
-                User tempuser = new User();
+                User tempuser = (User)new theFactory().factory(1);
                 if (!(reader["userID"] is DBNull))
                 {
                     tempuser.userID = (string)reader["userID"];
@@ -145,10 +146,10 @@ namespace AxolotlAtheneum.DataAccessLayer
                 string cardJson = reader["card"] as string;
                 if (cardJson != null)
                 {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
-                    tempuser.card = userCard;
+                    List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>(cardJson);
+                    tempuser.cards = userCard;
                 }
-                
+
                 userList.Add(tempuser);
 
             }
@@ -160,11 +161,11 @@ namespace AxolotlAtheneum.DataAccessLayer
             //Return User List
             return userList;
         }
-        public System.Collections.Generic.List<User> IDretrieveUSER( String password, string userID)
+        public System.Collections.Generic.List<User> IDretrieveUSER(String password, string userID)
         {
             //Create User list to store records
 
-            List<User> userList = new List<User>();
+            List<User> userList = (List<User>)new theFactory().factory(12);
 
             //Create  SQL Connection
             MySqlConnection cnn = new MySqlConnection(connectionstring);
@@ -175,7 +176,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
-            
+
             cmnd.Parameters.AddWithValue("p_Password", password);
             cmnd.Parameters.AddWithValue("p_userID", userID);
             //Open Connection
@@ -187,7 +188,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             while (reader.Read())
             {
 
-                User tempuser = new User();
+                User tempuser = (User)new theFactory().factory(1);
                 if (!(reader["userID"] is DBNull))
                 {
                     tempuser.userID = (string)reader["userID"];
@@ -209,8 +210,8 @@ namespace AxolotlAtheneum.DataAccessLayer
                 string cardJson = reader["card"] as string;
                 if (cardJson != null)
                 {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
-                    tempuser.card = userCard;
+                    List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>(cardJson);
+                    tempuser.cards = userCard;
                 }
                 userList.Add(tempuser);
 
@@ -250,7 +251,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             while (reader.Read())
             {
 
-                User tempuser = new User();
+                User tempuser = (User)new theFactory().factory(1);
                 if (!(reader["userID"] is DBNull))
                 {
                     tempuser.userID = (string)reader["userID"];
@@ -272,8 +273,8 @@ namespace AxolotlAtheneum.DataAccessLayer
                 string cardJson = reader["card"] as string;
                 if (cardJson != null)
                 {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
-                    tempuser.card = userCard;
+                    List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>(cardJson);
+                    tempuser.cards = userCard;
                 }
                 userList.Add(tempuser);
 
@@ -287,7 +288,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             return userList;
         }
 
-        public void updatePassword(String email, String pass )
+        public void updatePassword(String email, String pass)
         {
             //Create  SQL Connection with Connection String
             MySqlConnection cnn = new MySqlConnection(connectionstring);
@@ -298,15 +299,15 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Serialize reference type parameter 
-            
+
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
 
-           
+
             cmnd.Parameters.AddWithValue("p_email", email);
-           
+
             cmnd.Parameters.AddWithValue("p_Password", pass);
-            
+
 
             //Open Connection
             cnn.Open();
@@ -320,7 +321,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Close Connection
             cnn.Close();
-            
+
         }
 
         public ShoppingCart addBookToCart(User user, int isbn, int quantity, double price)
@@ -388,12 +389,12 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Execute Reader
             var reader = cmnd.ExecuteReader();
-            List<Book> books = new List<Book>();
+            List<Book> books = (List<Book>)new theFactory().factory(11);
 
             while (reader.Read())
             {
 
-                Book b = new Book();
+                Book b = (Book)new theFactory().factory(10);
                 if (!(reader["ISBN"] is DBNull))
                 {
                     b.ISBN = (int)reader["ISBN"];
@@ -430,31 +431,32 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             //Execute Reader
             var reader = cmnd.ExecuteReader();
-            ShoppingCart cart = new ShoppingCart();
+            ShoppingCart cart = (ShoppingCart)new theFactory().factory(13);
             cart.Items = new Dictionary<Book, int>();
             Dictionary<int, int> items = new Dictionary<int, int>(); //isbn, int
 
             while (reader.Read())
             {
-                if (!(reader["Book_ISBN"] is DBNull) && !(reader["Book_Quantity"] is DBNull)) {
+                if (!(reader["Book_ISBN"] is DBNull) && !(reader["Book_Quantity"] is DBNull))
+                {
                     if (!items.ContainsKey((int)reader["Book_ISBN"]))
                         items.Add((int)reader["Book_ISBN"], (int)reader["Book_Quantity"]);
                     else
                         items[(int)reader["Book_ISBN"]] += (int)reader["Book_Quantity"];
                 }
-                
+
             }
             cnn.Close();
 
             cart.UserID = user.userID;
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 //find book based on isbn
                 Book book = filterBooks(item.Key.ToString(), QueryCategory.ISBN.ToString())[0];
                 if (book != null)
                 {
                     //add book and its quantity to cart, and change cart total $
-                    
+
                     cart.Items.Add(book, item.Value);
                     cart.Total += (book.SellingPrice * item.Value);
                 }
@@ -479,7 +481,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             var reader = cmnd.ExecuteReader();
             while (reader.Read())
             {
-                Book b = new Book();
+                Book b = (Book)new theFactory().factory(10);
                 if (!(reader["ISBN"] is DBNull))
                 {
                     b.ISBN = (int)reader["ISBN"];
@@ -497,7 +499,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 
                     results.Add(b);
                 }
-                
+
             }
             cnn.Close();
             return results;
@@ -507,8 +509,8 @@ namespace AxolotlAtheneum.DataAccessLayer
 
         public List<Book> getCartBooks(User x)
         {
-            
-            List<Book> bookList = new List<Book>();
+
+            List<Book> bookList = (List<Book>)new theFactory().factory(11);
             List<String> isbnList = new List<String>();
             MySqlConnection cnn = new MySqlConnection(connectionstring);
             MySqlCommand cmnd = new MySqlCommand("get_cartBooks", cnn);
@@ -519,7 +521,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             var reader = cmnd.ExecuteReader();
             while (reader.Read())
             {
-              
+
                 if (!(reader["ISBN"] is DBNull))
                 {
                     String isbn = ((int)reader["Book_ISBN"]).ToString();
@@ -529,8 +531,8 @@ namespace AxolotlAtheneum.DataAccessLayer
                     {
                         isbnList.Add(isbn);
                     }
-                    
-                    
+
+
                 }
 
             }
@@ -538,14 +540,14 @@ namespace AxolotlAtheneum.DataAccessLayer
             cnn.Close();
 
             cmnd = new MySqlCommand("get_books", cnn);
-            
+
             cmnd.Parameters.AddWithValue("p_userID", x.userID);
             cnn.Open();
             foreach (String u in isbnList)
             {
                 cmnd.Parameters.AddWithValue("p_ISBN", u);
                 reader = cmnd.ExecuteReader();
-                Book b = new Book();
+                Book b = (Book)new theFactory().factory(10);
                 if (!(reader["ISBN"] is DBNull))
                 {
                     b.ISBN = (int)reader["ISBN"];

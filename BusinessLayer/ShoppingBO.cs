@@ -4,16 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AxolotlAtheneum.Factory;
 
 namespace AxolotlAtheneum.BusinessLayer
 {
     public class ShoppingBO
     {
-        DAL USERDAL = new DAL();
+        DAL USERDAL = (DAL)new theFactory().factory(7);
 
         public List<Book> getFilteredBooks(string query, QueryCategory category)
         {
-            List<Book> books = new List<Book>();
+            List<Book> books = (List<Book>)new theFactory().factory(11);
             books = USERDAL.filterBooks(query, category.ToString());
             return books;
         }
@@ -23,10 +24,10 @@ namespace AxolotlAtheneum.BusinessLayer
 
         }
 
-        public Book addBook(string isbn, string category, string author, string title, string edition, string publisher, string year, string quantity, string threshold, 
+        public Book addBook(string isbn, string category, string author, string title, string edition, string publisher, string year, string quantity, string threshold,
                 string buyingPrice, string sellingPrice, string cover)
         {
-            Book book = new Book();
+            Book book = (Book)new theFactory().factory(10);
             book.ISBN = int.Parse(isbn);
             book.Category = category;
             book.Author = author;
@@ -68,10 +69,7 @@ namespace AxolotlAtheneum.BusinessLayer
             return USERDAL.removeFromCart(user, book);
         }
 
-        public void insertOrder(Order order)
-        {
-            USERDAL.insertOrder(order);
-        }
+       
 
 
     }

@@ -1,4 +1,5 @@
 ﻿using AxolotlAtheneum.BusinessLayer;
+using AxolotlAtheneum.Factory;
 using AxolotlAtheneum.Models;
 using System;
 using System.Text.RegularExpressions;
@@ -8,7 +9,7 @@ namespace AxolotlAtheneum.Controllers
 {
     public class AccountController : Controller
     {
-        userBO USERBO = new userBO();
+        userBO USERBO = (userBO)new theFactory().factory(5);
         // GET: Login
         public ActionResult Index()
         {
@@ -19,7 +20,7 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult rendereditAddress()
         {
             User loggeduser = (User)Session["Logged_User"];
-            return PartialView("_editAddress",loggeduser.address);
+            return PartialView("_editAddress", loggeduser.address);
         }
 
         [ChildActionOnly]
@@ -31,7 +32,7 @@ namespace AxolotlAtheneum.Controllers
         [ChildActionOnly]
         public ActionResult rendernewCard()
         {
-            return PartialView("_newCard", new PaymentCard());
+            return PartialView("_newCard", new theFactory().factory(9));
         }
 
         [HttpPost]
@@ -42,16 +43,16 @@ namespace AxolotlAtheneum.Controllers
             {
                 return View("LoginFail");
             }
-            if (((regex.IsMatch(email))  |( (userID.Length <= 6 ) & (userID.Length >=0))) & ((password.Length <= 30) & (password.Length>0)))
+            if (((regex.IsMatch(email)) | ((userID.Length <= 6) & (userID.Length >= 0))) & ((password.Length <= 30) & (password.Length > 0)))
             {
                 User logged_user = null;
-                if ((userID != "") & (email !=""))
+                if ((userID != "") & (email != ""))
                     logged_user = USERBO.EMlogUSER(email, password);
                 logged_user = USERBO.EMlogUSER(email, password);
                 if (email == "")
-                logged_user= USERBO.IDlogUSER(userID, password);
-                if(userID == "")
-                logged_user = USERBO.EMlogUSER(email, password);
+                    logged_user = USERBO.IDlogUSER(userID, password);
+                if (userID == "")
+                    logged_user = USERBO.EMlogUSER(email, password);
                 if (logged_user == null)
                 {
                     return View("LoginFail");
@@ -85,9 +86,9 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult regPage()
         {
             User loggeduser = (User)Session["Logged_User"];
-            if(loggeduser == null)
+            if (loggeduser == null)
                 return View("Registration");
-            if (loggeduser.status.Equals(Status.Inactive)) 
+            if (loggeduser.status.Equals(Status.Inactive))
             {
                 return View("regSucc");
             }
@@ -104,19 +105,19 @@ namespace AxolotlAtheneum.Controllers
                 return View(loggeduser);
             return View("LoginCheck");
         }
-       
+
         public ActionResult editProfile(String newFName, String newLName)
         {
             User loggeduser = (User)Session["Logged_User"];
             if (newFName != null)
                 loggeduser.firstName = newFName;
-            if(newLName != null)
+            if (newLName != null)
                 loggeduser.lastName = newLName;
-            
+
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             USERBO.sendEditNotice((User)Session["Logged_User"], 1);
 
-            return RedirectToAction("EditAccount",loggeduser);
+            return RedirectToAction("EditAccount", loggeduser);
         }
 
         public ActionResult editPassword(String oldPass, String newPass)
@@ -138,14 +139,14 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             if (!ModelState.IsValid)
-                return View("EditAccFail",loggeduser);
+                return View("EditAccFail", loggeduser);
             loggeduser.address = newAddress;
 
 
-            Session["Logged_User"]=USERBO.updateUSER(loggeduser);
+            Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             loggeduser = (User)Session["Logged_User"];
             USERBO.sendEditNotice((User)Session["Logged_User"], 3);
-            return RedirectToAction("EditAccount",loggeduser);
+            return RedirectToAction("EditAccount", loggeduser);
         }
 
         [HttpPost]
@@ -161,7 +162,7 @@ namespace AxolotlAtheneum.Controllers
             loggeduser = (User)Session["Logged_User"];
             USERBO.sendEditNotice((User)Session["Logged_User"], 4);
             return RedirectToAction("EditAccount", loggeduser);
-            
+
         }
 
         [HttpPost]
@@ -174,7 +175,7 @@ namespace AxolotlAtheneum.Controllers
             }
             newCard.index = loggeduser.cards.Count;
             loggeduser.cards.Add(newCard);
-            
+
             Session["Logged_User"] = USERBO.updateUSER(loggeduser);
             loggeduser = (User)Session["Logged_User"];
             USERBO.sendEditNotice((User)Session["Logged_User"], 4);
@@ -198,18 +199,18 @@ namespace AxolotlAtheneum.Controllers
             loggeduser = (User)Session["Logged_User"];
             USERBO.sendEditNotice((User)Session["Logged_User"], 2);
             return RedirectToAction("EditAccount", loggeduser);
-            
+
         }
         [HttpPost]
-        public ActionResult verUser(Nullable <int> regCode)
+        public ActionResult verUser(Nullable<int> regCode)
         {
-            if(regCode == null)
+            if (regCode == null)
                 return View("verificationFail");
             User loggeduser = (User)Session["Logged_User"];
             if (loggeduser.actnum == regCode)
             {
                 loggeduser.status = Status.Active;
-                
+
                 loggeduser.userID = new Random().Next(5000).ToString();
                 USERBO.verUSER(loggeduser);
                 USERBO.updateUSER(loggeduser);
@@ -237,9 +238,9 @@ namespace AxolotlAtheneum.Controllers
 
                 return View("ResetPasswordSub");
             }
-            
-            
-            
+
+
+
             return RedirectToAction("Index", "Home");
 
         }
