@@ -4,80 +4,76 @@
     ViewBag.Title = "View";
 }
 
-<h2>Checkout</h2>
+<h2 text-align:>Checkout</h2>
 
 
 @if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
 
 {
 
-    <p> You do not have a valid shipping address or credit card, please add one </p> <a href="@Url.Action("EditAccount", "Account")">here. </a>
+    <p> You do not have a valid shipping address or credit card, please add one <a href="@Url.Action("EditAccount", "Account")">here. </a></p>
 
 }
 
 @if ((Model.ShippingAddress != null) | (Model.PaymentMethod != null))
 {
 
-    <div id = "div1" style = "height:288px; overflow:auto;">
-   <table class="table">
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Cover
-        </th>
-        <th>
-            Author
-        </th>
-        <th>
-            Individual Price
-        </th>
-        <th></th>
-    </tr>
+    <div id="div1" style="height:288px; overflow:auto;">
+        <table class="table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Cover
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Individual Price
+                </th>
+                <th></th>
+            </tr>
 
 
-    @foreach (var item in Model.Items)
-        {
-        <tr>
-            <td>
-                @item.Key.Title
-            </td >
-            <td >
-                <img src = "@Url.Content(@item.Key.CoverPictureURL)" width = "10%" length = "10%" >
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.Key.Title
+                    </td>
+                    <td>
+                        <img src="@Url.Content(@item.Key.CoverPictureURL)" width="10%" length="10%">
 
 
-                 </td >
+                    </td>
 
 
-                 <td >
-                     @item.Key.Author
-                 </td >
+                    <td>
+                        @item.Key.Author
+                    </td>
 
 
-                 <td >
-                     @item.Key.SellingPrice
-                 </td >
+                    <td>
+                        @item.Key.SellingPrice
+                    </td>
 
 
-             </tr >
-        }
-           
-    
+                </tr>
+            }
 
+        </table>
+    </div>
 
-
-         </table>
-
-
-
-
-
-            </div>
-
-            
-
-                    }
+    <div style="text-align: center">
+        <a class="book-genre" href="@Url.Action("Checkout", Model)">
+            <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
+                 style="width:10em;">
+            <div class="centered">Checkout</div>
+        </a>
+    </div>
+}
 
 
 

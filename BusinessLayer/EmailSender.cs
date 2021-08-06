@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.IO;
 using System.Net.Mail;
 using System.Web;
 using Dnp.Net;
@@ -111,6 +112,23 @@ namespace AxolotlAtheneum.BusinessLayer
 
             SmtpServer.Send(mail);
 
+        }
+
+        public void sendCartConfirmation(User x)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("axolotl.atheneum@gmail.com");
+            mail.To.Add(x.email);
+            mail.Subject = "Order Confirmation from Axolotl Atheneum";
+            mail.Body = "Thank you for Shopping at Axolotl Atheneum. " +
+                "Check your Order History for more information!";
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("axolotl.atheneum", "MidTermCurve");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
         }
 
     }
