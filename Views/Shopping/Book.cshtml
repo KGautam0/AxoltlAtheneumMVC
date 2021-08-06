@@ -24,7 +24,7 @@
                     <h6> Price: $@Model.SellingPrice </h6>
                     @if (Model.QuantityInStock > 0)
             {
-                <a href="@Url.Action("AddToCart", "Shopping", Model)" class="btn btn-default" role="button">Add to Cart</a>
+                <a href="@Url.Action("AddToCart", "Shopping", Model)" type="button" class="btn btn-warning">Add to Cart</a>
             }
                     else
             {

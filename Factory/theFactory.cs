@@ -83,6 +83,22 @@ namespace AxolotlAtheneum.Factory
 
                     }
 
+                case (15):
+                    {
+                        return new Promotion();
+                    }
+
+                case (16):
+                    {
+                        return new List<Order>();
+
+                    }
+                case (17):
+                    {
+                        return new List<Promotion>();
+
+                    }
+
 
             }
             return null;

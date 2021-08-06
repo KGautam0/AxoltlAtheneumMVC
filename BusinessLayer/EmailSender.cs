@@ -95,14 +95,14 @@ namespace AxolotlAtheneum.BusinessLayer
 
         }
 
-        public void sendPromo(string email, string discountCode, string discount)
+        public void sendPromo(string email, string discountCode, string discount, DateTime start, DateTime end)
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("axolotl.atheneum@gmail.com");
             mail.To.Add(email);
             mail.Subject = "New Promotional Discount from Axolotl Atheneum";
-            mail.Body = "Cool new promotion! Enter the discount code: " + discountCode + " for a discount of " + discount;
+            mail.Body = "Cool new promotion! Enter the discount code: " + discountCode + " for a discount of " + discount + " starting on " + start + " and ending on " + end;
 
             SmtpServer.Port = 587;
             SmtpServer.UseDefaultCredentials = false;
