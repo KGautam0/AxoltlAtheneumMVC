@@ -10,6 +10,7 @@ namespace AxolotlAtheneum.Models
         public string UserID { get; set; }
         public Dictionary<Book, int> Items { get; set; } 
         public double Total { get; set; }
+        public double Discount { get; set; }
          
     }
 }

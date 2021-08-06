@@ -199,5 +199,16 @@ namespace AxolotlAtheneum.Controllers
             return View("OrderConfirmation");
         }
 
+        public ActionResult userAddPromo(string promoCode)
+        {
+            Promotion promo = bo.getPromo(promoCode);
+            if (promo != null)
+            {
+                User loggeduser = (User)Session["Logged_User"];
+                bo.getCart(loggeduser).Discount = promo.ValueOff;
+            }
+            return Cart();
+        }
+
     }
 }

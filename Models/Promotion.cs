@@ -9,7 +9,7 @@ namespace AxolotlAtheneum.Models
     {
         public String PromoCode { get; set; }
         public String PromoName { get; set; }
-        public float ValueOff { get; set; }
+        public double ValueOff { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 

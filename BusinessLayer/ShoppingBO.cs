@@ -72,7 +72,10 @@ namespace AxolotlAtheneum.BusinessLayer
             return USERDAL.removeFromCart(user, book);
         }
 
-       
+       public Promotion getPromo(string promoCode)
+        {
+            return USERDAL.getPromo(promoCode);
+        }
 
 
     }
