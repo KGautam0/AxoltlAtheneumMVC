@@ -9,7 +9,7 @@ namespace AxolotlAtheneum.BusinessLayer
 {
     public class ShoppingBO
     {
-        userDAL USERDAL = new userDAL();
+        DAL USERDAL = new DAL();
 
         public List<Book> getFilteredBooks(string query, QueryCategory category)
         {
@@ -59,6 +59,9 @@ namespace AxolotlAtheneum.BusinessLayer
         {
             return USERDAL.getCart(user);
         }
+
+
+
 
         public ShoppingCart removeFromCart(User user, Book book)
         {

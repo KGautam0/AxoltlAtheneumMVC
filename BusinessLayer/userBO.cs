@@ -9,7 +9,7 @@ namespace AxolotlAtheneum.BusinessLayer
 {
     public class userBO
     {
-        userDAL USERDAL = new userDAL();
+        DAL USERDAL = new DAL();
         public void regUSER(User x)
         {
            

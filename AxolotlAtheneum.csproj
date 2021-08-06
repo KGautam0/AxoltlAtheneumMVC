@@ -181,7 +181,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
-    <Compile Include="DataAccessLayer\userDAL.cs" />
+    <Compile Include="DataAccessLayer\DAL.cs" />
+    <Compile Include="Factory\theFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -642,6 +643,7 @@
     <Content Include="Views\Shopping\ManageBooks.cshtml" />
     <Content Include="Views\Shopping\Checkout.cshtml" />
     <Content Include="Views\Shopping\OrderConfirmation.cshtml" />
+    <Content Include="Views\Shopping\checkTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AxololtlAtheneumMVC6\v16\" />

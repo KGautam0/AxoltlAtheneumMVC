@@ -168,7 +168,8 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult Checkout(ShoppingCart cart)
         {
-            return View("Checkout");
+            User loggeduser = (User)Session["Logged_User"];
+            return View("checkTest", bo.getCart(loggeduser));
         }
 
         public ActionResult Confirm(ShoppingCart cart)

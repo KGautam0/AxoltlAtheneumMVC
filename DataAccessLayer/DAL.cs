@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 
 namespace AxolotlAtheneum.DataAccessLayer
 {
-    public class userDAL
+    public class DAL
     {
-        private String connectionstring = "server=localhost;user id=root; Pwd=2020CoffeeXD!; database=axolotlatheneum";
+        private String connectionstring = "server=localhost;user id=root; Pwd=Kappa123!; database=pogstore";
 
         public bool insertUSER(User x)
         {
@@ -501,6 +501,72 @@ namespace AxolotlAtheneum.DataAccessLayer
             }
             cnn.Close();
             return results;
+        }
+
+
+
+        public List<Book> getCartBooks(User x)
+        {
+            
+            List<Book> bookList = new List<Book>();
+            List<String> isbnList = new List<String>();
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("get_cartBooks", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_userID", x.userID);
+
+            cnn.Open();
+            var reader = cmnd.ExecuteReader();
+            while (reader.Read())
+            {
+              
+                if (!(reader["ISBN"] is DBNull))
+                {
+                    String isbn = ((int)reader["Book_ISBN"]).ToString();
+                    int quant = ((int)reader["Book_Quantity"]);
+
+                    for (int y = 0; y < quant; y++)
+                    {
+                        isbnList.Add(isbn);
+                    }
+                    
+                    
+                }
+
+            }
+            reader.Close();
+            cnn.Close();
+
+            cmnd = new MySqlCommand("get_books", cnn);
+            
+            cmnd.Parameters.AddWithValue("p_userID", x.userID);
+            cnn.Open();
+            foreach (String u in isbnList)
+            {
+                cmnd.Parameters.AddWithValue("p_ISBN", u);
+                reader = cmnd.ExecuteReader();
+                Book b = new Book();
+                if (!(reader["ISBN"] is DBNull))
+                {
+                    b.ISBN = (int)reader["ISBN"];
+                    b.Category = (string)reader["Category"];
+                    b.Author = (string)reader["Author"];
+                    b.Title = (string)reader["Title"];
+                    b.CoverPictureURL = (string)reader["Cover_Picture"];
+                    b.Edition = (int)reader["Edition"];
+                    b.Publisher = (string)reader["Publisher"];
+                    b.PublicationYear = (int)reader["Publication_Year"];
+                    b.QuantityInStock = (int)reader["Quantity"];
+                    b.MinimumThreshold = (int)reader["Minimum_Thresh"];
+                    b.BuyingPrice = (double)reader["Buying_Price"];
+                    b.SellingPrice = (double)reader["Selling_Price"];
+
+                    bookList.Add(b);
+                }
+
+            }
+            cnn.Close();
+            return bookList;
         }
 
         public ShoppingCart removeFromCart(User user, Book book)

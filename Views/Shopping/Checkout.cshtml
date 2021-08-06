@@ -1,18 +1,13 @@
-﻿<main>
+﻿@model AxolotlAtheneum.Models.ShoppingCart
+<main>
+    
+
     <div class="container-md">
         <div class="row shelf"> </div>
         <div class="row">
             <div class="col">
                 <div class="container">
                     <fieldset class="leftside">
-                        <table id="items_table">
-                            <?php foreach ($orders as $order) : ?>
-                            <tr>
-                                <td><?php echo $order['productName']; ?></td>
-                                <td><?php echo $order['listPrice']; ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
                     </fieldset>
 
                     <script src="../js/payment-JS.js"></script>
