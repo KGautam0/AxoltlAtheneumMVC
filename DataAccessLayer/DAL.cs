@@ -11,7 +11,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class DAL
     {
-        private String connectionstring = "";
+        private String connectionstring = "server=localhost;user id=root; Pwd=042898; database=database";
 
         public bool insertUSER(User x)
         {
@@ -752,6 +752,38 @@ namespace AxolotlAtheneum.DataAccessLayer
                 return promos[0];
             else
                 return null;
+        }
+
+        public bool insertPromo(Promotion x)
+        {
+            //Create  SQL Connection with Connection String
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+
+            //Create SQL Command with passed in stored proceduire name and SQL connection object
+            MySqlCommand cmnd = new MySqlCommand("addPromotion", cnn);
+            //Set Command Type, should  be stored procedure for this project
+            cmnd.CommandType = CommandType.StoredProcedure;
+
+
+         
+
+            //Set Values to be passed into the stored procedure for insertion into User Table.
+
+            cmnd.Parameters.AddWithValue("Promotion_Name", x.PromoName);
+            cmnd.Parameters.AddWithValue("Promotion_Code", x.PromoCode);
+            cmnd.Parameters.AddWithValue("Promotion_Start", x.StartDate);
+            cmnd.Parameters.AddWithValue("Promotion_End", x.EndDate);
+            cmnd.Parameters.AddWithValue("Promotion_Discount", x.ValueOff);
+
+            //Open Connection
+            cnn.Open();
+
+            //Execute Stored Procedure
+            cmnd.ExecuteNonQuery();
+
+            //Close Connection
+            cnn.Close();
+            return true;
         }
 
 
