@@ -1,66 +1,66 @@
-﻿@model AxolotlAtheneum.Models.User
-
+﻿@model AxolotlAtheneum.Models.ShoppingCart
 <main>
+    
+
     <div class="container-md">
         <div class="row shelf"> </div>
         <div class="row">
             <div class="col">
                 <div class="container">
+                    <fieldset class="leftside">
+                    </fieldset>
 
                     <script src="../js/payment-JS.js"></script>
 
-                    @if (Model.address != null)
-                    {
-                        <h4>Address on File</h4>
+                    <form>
+                        <fieldset class="rightside">
+                            <fieldset class="address_box">
+                                <h2>Shipping Address</h2>
+                                <label for="address">Address Line </label>
+                                <input type="text" name="address" id="address" required placeholder="Street number, Street, City">
+                                <text for="address" id="addressText"> * </text><br>
 
-                        <p>Street: @Html.DisplayFor(m => m.address.Street)</p>
-                        <p>@Html.DisplayFor(m => m.address.Street2)</p>
-                        <p>City: @Html.DisplayFor(m => m.address.City)</p>
-                        <p>State: @Html.DisplayFor(m => m.address.State)</p>
-                        <p>Zip code: @Html.DisplayFor(m => m.address.Zip)</p>
-                    }
-                    else
-                    {
-                        <fieldset class="edit_address">
-                            <h3>No Shipping Address on File</h3>
-                            <p>Please enter your new address information:</p>
-                            <p>Each Entry must be less than 100 characters</p>
-                            @{Html.RenderAction("rendereditAddress", "Account", Model.address);}
-                        </fieldset>
-                    }
+                                <label for="state">State </label>
+                                <input type="text" name="state" id="state" required>
+                                <text for="state" id="stateText"> * </text><br>
 
-                    @using (Html.BeginForm("SelectCard", "Shopping", FormMethod.Get))
-                    {
-                         if (Model.cards != null && Model.cards.Count > 0)
-                        {
-                            <fieldset class="search">
-                                <input type="radio" name="param" id="card0" checked>Card ending in @Model.cards[0].cardNumber.Substring(12)
-                                <input type="radio" name="param" id="card1">Card ending in @Model.cards[1].cardNumber.Substring(12)
-                                <input type="radio" name="param" id="card2">Card ending in @Model.cards[1].cardNumber.Substring(12)
+                                <label for="zip">Zip Code </label>
+                                <input type="text" name="zip" id="zip" required placeholder="XXXXX">
+                                <text for="zip" id="zipText"> * </text><br>
+
+                                <br>
                             </fieldset>
 
-                        }
-                        else
-                        {
-                            <fieldset class="edit_payment">
-                                <h3>No Payment Card on File</h3>
-                                <p>Please enter your card information:</p>
-                                @{Html.RenderAction("rendernewCard", "Account");}
+                            <fieldset class="payment_box">
+                                <h2>Payment Information</h2>
+                                <label for="cNum">Card Number </label>
+                                <input type="text" name="cNum" id="cNum" required placeholder="XXXX-XXXX-XXXX-XXXX">
+                                <text for="cNum" id="cNumText"> * </text><br>
+
+                                <label for="expDate">Expiration Date </label>
+                                <input type="text" name="expDate" id="expDate" required placeholder="XX-XX">
+                                <text for="expDate" id="expDateText"> * </text><br>
+
+                                <label for="vCode">Verification Code </label>
+                                <input type="password" name="vCode" id="vCode" required placeholder="XXX">
+                                <text for="vCode" id="vCodeText"> * </text><br>
+
+                                <label for="cName">Name on Card </label>
+                                <input type="text" name="cName" id="cName" required placeholder="First, Last">
+                                <text for="cName" id="cNameText"> * </text><br>
                             </fieldset>
-                        }
 
-                        <br>
-                        <div class="form-group" style="padding-left: 200px;">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-star"></span> Submit Order
-                                </button>
-                            </div>
-                        </div>
+                            <fieldset class="promotion_box">
+                                <h2>Promotion</h2>
+                                <input type="text" name="promotionText" id="promotionText" placeholder="Enter Promo Code">
+                            </fieldset>
 
-                    }
+                    </form>
 
+                    <a href="@Url.Action("OrderConfirmation", Model)" type="button" class="btn btn-warning">Checkout</a>
+                    </fieldset>
 
+                    </form>
                 </div>
             </div>
         </div>

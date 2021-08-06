@@ -181,7 +181,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
-    <Compile Include="DataAccessLayer\userDAL.cs" />
+    <Compile Include="DataAccessLayer\DAL.cs" />
+    <Compile Include="Factory\theFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,7 +274,6 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
-    <Content Include="CartProcedure\createOrderTable.sql" />
     <Content Include="CartProcedure\addBooktoCart.sql" />
     <Content Include="CartProcedure\addPromotion.sql" />
     <Content Include="CartProcedure\addToOrders.sql" />
@@ -641,10 +641,9 @@
     <Content Include="Views\Shopping\Search.cshtml" />
     <Content Include="Views\Shopping\_BookItem.cshtml" />
     <Content Include="Views\Shopping\ManageBooks.cshtml" />
-    <Content Include="Views\Shopping\_CheckoutItems.cshtml" />
-    <Content Include="Views\Shopping\OrderConfirmation.cshtml" />
     <Content Include="Views\Shopping\Checkout.cshtml" />
-    <Content Include="Views\Account\_newCard.cshtml" />
+    <Content Include="Views\Shopping\OrderConfirmation.cshtml" />
+    <Content Include="Views\Shopping\checkTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AxololtlAtheneumMVC6\v16\" />
