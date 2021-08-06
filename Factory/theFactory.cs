@@ -50,11 +50,9 @@ namespace AxolotlAtheneum.Factory
                         return new EmailSender();
 
                     }
-                    
-                       
+
             }
-                    
-                return null;
+        
          }
     }
 }
