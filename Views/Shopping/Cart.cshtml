@@ -35,7 +35,24 @@ else
 
                 }
 
-                <h3>Shopping Cart Total: $@Model.Total</h3>
+                @using (Html.BeginForm("userAddPromo", "Shopping", FormMethod.Post))
+                {
+                    <label for="newFName">Promo Code: </label>
+                    <input type="text" name="promoCode" id="promoCode" required placeholder="DISCOUNT"><br>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Submit
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <h4>Shopping Cart Subtotal: $@Model.Total</h4>
+                @if (Model.Discount != 0)
+                {
+                    <h4>Promotional Discount: -$@Model.Discount</h4>
+                }
                 <br></br>
                 <a href="@Url.Action("Checkout")">Checkout</a>
             </div>
