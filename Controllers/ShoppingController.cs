@@ -109,6 +109,24 @@ namespace AxolotlAtheneum.Controllers
             return Book(book);
         }
 
+        public ActionResult Top1()
+        {
+            Book book = bo.getFilteredBooks("18571", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
+        public ActionResult Top2()
+        {
+            Book book = bo.getFilteredBooks("97872", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
+        public ActionResult Top3()
+        {
+            Book book = bo.getFilteredBooks("818404397", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
         public ActionResult Author1()
         {
             return Query("McDougal, Holt", null, "on", null, null, null);
@@ -124,11 +142,11 @@ namespace AxolotlAtheneum.Controllers
             return Query("Stoker, Bram", null, "on", null, null, null);
         }
 
-        public ActionResult addPromo(string promoName, string promoCode, string discount)
+        public ActionResult addPromo(string addPromoName, string addPromoCode, string addPromoDiscount)
         {
-            if (promoName != null && promoCode != null && discount != null)
+            if (addPromoName != null && addPromoCode != null && addPromoDiscount != null)
             {
-                bo.addPromo(promoName, promoCode, discount);
+                bo.addPromo(addPromoName, addPromoCode, addPromoDiscount);
             }
             return View("Homepage", "Account");
         }
