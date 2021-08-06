@@ -196,6 +196,8 @@ namespace AxolotlAtheneum.Controllers
 
         public ActionResult Confirm(ShoppingCart cart)
         {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.confORDER(loggeduser);
             return View("OrderConfirmation");
         }
 

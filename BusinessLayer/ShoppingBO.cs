@@ -78,5 +78,13 @@ namespace AxolotlAtheneum.BusinessLayer
         }
 
 
+        public void confORDER(User x)
+        {
+
+            EmailSender messenger = (EmailSender)new theFactory().factory(8);
+            messenger.sendCartConfirmation(x);
+
+        }
+
     }
 }
