@@ -112,21 +112,21 @@ namespace AxolotlAtheneum.DataAccessLayer
                 }
                 tempuser.cards = new List<PaymentCard>();
                 string cardJson = reader["card0"] as string;
-                if (cardJson != "")
+                if (cardJson != "" && cardJson != null)
                 {
                     PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
                     tempuser.cards.Add(userCard);
                     tempuser.cards[0].index = 0;
                 }
                 cardJson = reader["card1"] as string;
-                if (cardJson != "")
+                if (cardJson != "" && cardJson != null)
                 {
                     PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
                     tempuser.cards.Add(userCard);
                     tempuser.cards[1].index = 1;
                 }
                 cardJson = reader["card2"] as string;
-                if (cardJson != "")
+                if (cardJson != "" && cardJson != null)
                 {
                     PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(cardJson);
                     tempuser.cards.Add(userCard);
@@ -370,6 +370,11 @@ namespace AxolotlAtheneum.DataAccessLayer
             cnn.Close();
 
             return getCart(user);
+        }
+
+        public void insertOrder(Order order)
+        {
+            
         }
 
 

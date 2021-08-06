@@ -6,7 +6,6 @@
         <div class="row">
             <div class="col">
                 <div class="container">
-                    @{ Html.RenderAction("CheckoutItems"); }
 
                     <script src="../js/payment-JS.js"></script>
 
@@ -17,7 +16,7 @@
                         <p>Street: @Html.DisplayFor(m => m.address.Street)</p>
                         <p>@Html.DisplayFor(m => m.address.Street2)</p>
                         <p>City: @Html.DisplayFor(m => m.address.City)</p>
-                        <p>State: @Html.DisplayFor(m => m.address.State.ToString())</p>
+                        <p>State: @Html.DisplayFor(m => m.address.State)</p>
                         <p>Zip code: @Html.DisplayFor(m => m.address.Zip)</p>
                     }
                     else
@@ -30,19 +29,36 @@
                         </fieldset>
                     }
 
-                    @if (Model.card0 != null)
+                    @using (Html.BeginForm("SelectCard", "Shopping", FormMethod.Get))
                     {
-                        <p>Credit Card: @Html.DisplayFor(m => m.card0.cardNumber)</p>
-                    }
-                    else
-                    {
-                        <fieldset class="edit_payment">
-                            <h3>No Payment Card on File</h3>
-                            <p>Please enter your card information:</p>
-                            @{Html.RenderAction("rendereditCard", "Account", Model.card0);}
-                        </fieldset>
-                    }
+                         if (Model.cards != null && Model.cards.Count > 0)
+                        {
+                            <fieldset class="search">
+                                <input type="radio" name="param" id="card0" checked>Card ending in @Model.cards[0].cardNumber.Substring(12)
+                                <input type="radio" name="param" id="card1">Card ending in @Model.cards[1].cardNumber.Substring(12)
+                                <input type="radio" name="param" id="card2">Card ending in @Model.cards[1].cardNumber.Substring(12)
+                            </fieldset>
 
+                        }
+                        else
+                        {
+                            <fieldset class="edit_payment">
+                                <h3>No Payment Card on File</h3>
+                                <p>Please enter your card information:</p>
+                                @{Html.RenderAction("rendernewCard", "Account");}
+                            </fieldset>
+                        }
+
+                        <br>
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-star"></span> Submit Order
+                                </button>
+                            </div>
+                        </div>
+
+                    }
 
 
                 </div>

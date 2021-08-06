@@ -65,6 +65,11 @@ namespace AxolotlAtheneum.BusinessLayer
             return USERDAL.removeFromCart(user, book);
         }
 
+        public void insertOrder(Order order)
+        {
+            USERDAL.insertOrder(order);
+        }
+
 
     }
 }

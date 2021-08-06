@@ -108,17 +108,33 @@ namespace AxolotlAtheneum.Controllers
             return Book(book);
         }
 
+        public ActionResult Top1()
+        {
+            Book book = bo.getFilteredBooks("18571", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+        public ActionResult Top2()
+        {
+            Book book = bo.getFilteredBooks("97872", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+        public ActionResult Top3()
+        {
+            Book book = bo.getFilteredBooks("818404397", QueryCategory.ISBN)[0];
+            return Book(book);
+        }
+
         public ActionResult Author1()
         {
             return Query("McDougal, Holt", null, "on", null, null, null);
         }
 
-        public ActionResult Author2()
+        public ActionResult Author3()
         {
             return Query("Shikibu, Murasaki", null, "on", null, null, null);
         }
 
-        public ActionResult Author3()
+        public ActionResult Author2()
         {
             return Query("Stoker, Bram", null, "on", null, null, null);
         }
@@ -172,7 +188,7 @@ namespace AxolotlAtheneum.Controllers
             return View("Checkout", loggeduser);
         }
 
-        public ActionResult Confirm(ShoppingCart cart)
+        public ActionResult ConfirmOrder(ShoppingCart cart)
         {
             return View("OrderConfirmation");
         }
@@ -181,6 +197,27 @@ namespace AxolotlAtheneum.Controllers
         {
             User loggeduser = (User)Session["Logged_User"];
             return PartialView("_CheckoutItems", bo.getCart(loggeduser));
+        }
+
+        public ActionResult SelectCard(string card0, string card1, string card2)
+        {
+            User user = (User)Session["Logged_User"];
+            ShoppingCart cart = bo.getCart(user);
+            Order order = new Order();
+            order.DateOrdered = new DateTime();
+            order.OrderStatus = OrderStatus.Pending;
+            order.OrderID = new Random().Next(5000);
+            order.ShippingAddress = user.address;
+            order.userID = int.Parse(user.userID);
+            order.price = cart.Total;
+            order.Items = cart.Items;
+            if (card2 != null && card2.Equals("on"))
+                order.PaymentMethod = user.cards[2];
+            else if (card1 != null && card1.Equals("on"))
+                order.PaymentMethod = user.cards[1];
+            else order.PaymentMethod = user.cards[0];
+            bo.insertOrder(order);
+            return View("OrderConfirmation", order);
         }
 
     }

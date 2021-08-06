@@ -3,7 +3,7 @@
     ViewBag.Title = "EditAccount";
 }
 
-<h2>EditAccount</h2>
+<h1 style="text-align:center">Edit Account</h1>
 @model AxolotlAtheneum.Models.User
 <div class="container-md">
     <div class="row shelf"> </div>
@@ -50,17 +50,17 @@
 
                 @using (Html.BeginForm("editPassword", "Account", FormMethod.Post))
                 {
-            <fieldset class="edit_name">
+                    <fieldset class="edit_name">
 
-                <p> Account email: @Html.DisplayFor(m => m.email)</p>
-                <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
+                        <p> Account email: @Html.DisplayFor(m => m.email)</p>
+                        <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
 
-                <p> Password: </p>
-                <label for="newPass">Change Password: </label>
-                <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
-                <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
+                        <p> Password: </p>
+                        <label for="newPass">Change Password: </label>
+                        <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
+                        <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
 
-            </fieldset>
+                    </fieldset>
                     <div class="form-group" style="padding-left: 200px;">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-warning">
@@ -208,7 +208,10 @@
 
 
 
-            </div>
         </div>
+        <!-- Footer -->
+        <footer class="p-2 position-relative container-md wood-label">
+            <p>Axolotl Atheneum &copy; 2021 </p>
+        </footer>
     </div>
 </div>
