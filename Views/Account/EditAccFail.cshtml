@@ -3,12 +3,10 @@
     ViewBag.Title = "EditAccount";
 }
 
-<h2>Edit Account</h2>
-<h2>Your entry was invalid, please read each field's rules and try again.</h2>
-
-
+<h1 style="text-align:center">Edit Account</h1>
 @model AxolotlAtheneum.Models.User
 <div class="container-md">
+    <h2>Your entry was invalid, please read each field's rules and try again.</h2>
     <div class="row shelf"> </div>
     <div class="row">
         <div class="col">
@@ -24,13 +22,13 @@
             <!-- Collapsed Content -->
             <div class="collapse navbar-collapse" id="editProfile">
 
-                @using (Html.BeginForm("editName", "Account", FormMethod.Post))
+                @using (Html.BeginForm("editProfile", "Account", FormMethod.Post))
                 {
                     <fieldset class="edit_name">
 
                         <h3>Change Name</h3>
                         <p>Please update your Name:</p>
-                        <p>Maximum legnth is 30 characters.</p>
+                        <p>Maximum length is 30 characters.</p>
 
                         <p> Current First Name:   @Html.DisplayFor(m => m.firstName) </p>
                         <label for="newFName">First Name: </label>
@@ -41,12 +39,33 @@
                         <label for="newLName">Last Name: </label>
                         <input type="text" name="newLName" id="newLName" required placeholder="Doe"><br>
 
+                    </fieldset>
+                    <div class="form-group" style="padding-left: 200px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-star"></span> Submit
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                @using (Html.BeginForm("editPassword", "Account", FormMethod.Post))
+                {
+                    <fieldset class="edit_name">
+
+                        <p> Account email: @Html.DisplayFor(m => m.email)</p>
+                        <p> Account user ID: @Html.DisplayFor(m => m.userID)</p>
+
+                        <p> Password: </p>
+                        <label for="newPass">Change Password: </label>
+                        <input type="password" name="oldPass" id="oldPass" required placeholder="Current Password" />
+                        <input type="password" name="newPass" id="newPass" required placeholder="NewPassword" />
 
                     </fieldset>
                     <div class="form-group" style="padding-left: 200px;">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-star"></span> Login
+                                <span class="glyphicon glyphicon-star"></span> Submit
                             </button>
                         </div>
                     </div>
@@ -60,7 +79,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editPhone">
                     <span class="login-button">
                         <img src="@Url.Content("~/Images/BookSpineG.png")" alt="Edit Phone #" style="width:10em;">
-                        <div class="centered">Edit Phone #</div>
+                        <div class="centered">Edit Contact</div>
                     </span>
                 </button>
             </div>
@@ -71,8 +90,6 @@
 
                     <fieldset class="edit_phone">
                         <h3>Change Phone Number</h3>
-
-
                         <p>Please change your Phone Number:</p>
 
                         <p> Current Phone Number: @Html.DisplayFor(m => m.phonenumber)</p>
@@ -84,7 +101,7 @@
                         <div class="form-group" style="padding-left: 200px;">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-star"></span> Login
+                                    <span class="glyphicon glyphicon-star"></span> Submit
                                 </button>
                             </div>
                         </div>
@@ -92,7 +109,45 @@
                     </fieldset>
 
                 }
+
+                @using (Html.BeginForm("changeSubscription", "Account", FormMethod.Post))
+                {
+
+                    <fieldset class="edit_phone">
+                        <h3>Change Subscription Status</h3>
+
+                        @if (Model.isSubscribed == 1)
+                        {
+                            <p> You are currently Subscribed to receive promotional emails.</p>
+                        }
+                        else
+                        {
+                            <p> You are currently Not Subscribed to receive promotional emails.</p>
+                        }
+                        <div class="form-group" style="padding-left: 200px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                @if (Model.isSubscribed == 1)
+                                {
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Unsubscribe
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-star"></span> Subscribe
+                                    </button>
+                                }
+
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                }
+
             </div>
+
 
         </div>
     </div>
@@ -114,7 +169,7 @@
                     <h3>Change Shipping Address</h3>
                     <p>Please enter your new address information:</p>
                     <p>Each Entry must be less than 100 characters</p>
-                    @{Html.RenderAction("rendereditAddress", "Account");}
+                    @{Html.RenderAction("rendereditAddress", "Account", Model.address);}
                 </fieldset>
 
 
@@ -134,14 +189,30 @@
             <!-- Collapsed Content -->
             <div class="collapse navbar-collapse" id="editCard">
 
-                <fieldset class="edit_payment">
-                    <h3>Change Payment Card</h3>
-                    <p>Please enter your card information:</p>
-                    @{Html.RenderAction("rendereditCard", "Account");}
-                </fieldset>
+                @foreach (var card in @Model.cards)
+                {
+                    <fieldset class="edit_payment">
+                        <h3>Edit Payment Card</h3>
+                        <p>Please enter your card information:</p>
+                        @{Html.RenderAction("rendereditCard", "Account", card);}
+                    </fieldset>
+                }
+                @if (Model.cards.Count < 3)
+                {
+                    <fieldset class="edit_payment">
+                        <h3>Enter New Payment Card</h3>
+                        <p>Please enter your card information:</p>
+                        @{Html.RenderAction("rendernewCard", "Account");}
+                    </fieldset>
+                }
+
+
 
 
             </div>
+            <!-- Footer -->
+            <footer class="p-2 position-relative container-md wood-label">
+                <p>Axolotl Atheneum &copy; 2021 </p>
+            </footer>
         </div>
     </div>
-</div>
