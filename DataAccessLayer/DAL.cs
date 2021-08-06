@@ -77,9 +77,9 @@ namespace AxolotlAtheneum.DataAccessLayer
             List<String> cardList = new List<String>();
 
 
-            cardList.Add(JsonConvert.SerializeObject(null));
-            cardList.Add(JsonConvert.SerializeObject(null));
-            cardList.Add(JsonConvert.SerializeObject(null));
+            cardList.Add(JsonConvert.SerializeObject(x.cards[0]));
+            cardList.Add(JsonConvert.SerializeObject(x.cards[1]));
+            cardList.Add(JsonConvert.SerializeObject(x.cards[2]));
 
             String addressString = JsonConvert.SerializeObject(x.address);
 
