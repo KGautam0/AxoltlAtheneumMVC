@@ -53,7 +53,7 @@ namespace AxolotlAtheneum.Models
         public Address address { get; set; }
 
         [DisplayName("Payment Cards")]
-        public List<PaymentCard> cards { get; set; }
+        public List<PaymentCard> cards { get; set; } = new List<PaymentCard>();
 
 
     }

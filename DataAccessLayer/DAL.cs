@@ -24,7 +24,16 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Serialize reference type parameter 
-            String cardString = JsonConvert.SerializeObject(x.cards);
+            List<String> cardList = new List<String>();
+
+            
+              cardList.Add(JsonConvert.SerializeObject(null));
+              cardList.Add(JsonConvert.SerializeObject(null));
+              cardList.Add(JsonConvert.SerializeObject(null));
+
+
+
+
             String addressString = JsonConvert.SerializeObject(x.address);
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
@@ -36,7 +45,9 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_Password", x.password);
             cmnd.Parameters.AddWithValue("p_Status", x.status);
             cmnd.Parameters.AddWithValue("p_Address", addressString);
-            cmnd.Parameters.AddWithValue("p_Card", cardString);
+            cmnd.Parameters.AddWithValue("p_Card0", cardList[0]);
+            cmnd.Parameters.AddWithValue("p_Card1", cardList[1]);
+            cmnd.Parameters.AddWithValue("p_Card2", cardList[2]);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
             cmnd.Parameters.AddWithValue("p_isAdmin", (x.status.Equals(Status.Admin)) ? 1 : 0);
 
@@ -63,7 +74,13 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.CommandType = CommandType.StoredProcedure;
 
             //Serialize reference type parameter 
-            String cardString = JsonConvert.SerializeObject(x.cards);
+            List<String> cardList = new List<String>();
+
+
+            cardList.Add(JsonConvert.SerializeObject(null));
+            cardList.Add(JsonConvert.SerializeObject(null));
+            cardList.Add(JsonConvert.SerializeObject(null));
+
             String addressString = JsonConvert.SerializeObject(x.address);
 
             //Set Values to be passed into the stored procedure for insertion into User Table.
@@ -76,8 +93,11 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_Phonenumber", x.phonenumber);
             cmnd.Parameters.AddWithValue("p_Status", x.status);
             cmnd.Parameters.AddWithValue("p_Address", addressString);
-            cmnd.Parameters.AddWithValue("p_Card", cardString);
+            cmnd.Parameters.AddWithValue("p_Card0", cardList[0]);
+            cmnd.Parameters.AddWithValue("p_Card1", cardList[1]);
+            cmnd.Parameters.AddWithValue("p_Card2", cardList[2]);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
+            cmnd.Parameters.AddWithValue("p_isSubscribed", x.isSubscribed);
             cmnd.Parameters.AddWithValue("p_isAdmin", (x.status.Equals(Status.Admin)) ? 1 : 0);
 
             //Open Connection
@@ -143,11 +163,23 @@ namespace AxolotlAtheneum.DataAccessLayer
                     Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
                     tempuser.address = userAddress;
                 }
-                string cardJson = reader["card"] as string;
-                if (cardJson != null)
+                string card0Json = reader["card0"] as string;
+                string card1Json = reader["card1"] as string;
+                string card2Json = reader["card2"] as string;
+                if (card0Json != null)
                 {
-                    List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>(cardJson);
-                    tempuser.cards = userCard;
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card0Json);
+                    tempuser.cards.Add(userCard);
+                }
+                if (card1Json != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card1Json);
+                    tempuser.cards.Add(userCard);
+                }
+                if (card2Json != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card2Json);
+                    tempuser.cards.Add(userCard);
                 }
 
                 userList.Add(tempuser);
@@ -207,11 +239,23 @@ namespace AxolotlAtheneum.DataAccessLayer
                     Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
                     tempuser.address = userAddress;
                 }
-                string cardJson = reader["card"] as string;
-                if (cardJson != null)
+                string card0Json = reader["card0"] as string;
+                string card1Json = reader["card1"] as string;
+                string card2Json = reader["card2"] as string;
+                if (card0Json != null)
                 {
-                    List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>(cardJson);
-                    tempuser.cards = userCard;
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card0Json);
+                    tempuser.cards.Add(userCard);
+                }
+                if (card1Json != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card1Json);
+                    tempuser.cards.Add(userCard);
+                }
+                if (card2Json != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card2Json);
+                    tempuser.cards.Add(userCard);
                 }
                 userList.Add(tempuser);
 
@@ -270,11 +314,23 @@ namespace AxolotlAtheneum.DataAccessLayer
                     Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
                     tempuser.address = userAddress;
                 }
-                string cardJson = reader["card"] as string;
-                if (cardJson != null)
+                string card0Json = reader["card0"] as string;
+                string card1Json = reader["card1"] as string;
+                string card2Json = reader["card2"] as string;
+                if (card0Json != null)
                 {
-                    List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>(cardJson);
-                    tempuser.cards = userCard;
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card0Json);
+                    tempuser.cards.Add(userCard);
+                }
+                if (card1Json != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card1Json);
+                    tempuser.cards.Add(userCard);
+                }
+                if (card2Json != null)
+                {
+                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card2Json);
+                    tempuser.cards.Add(userCard);
                 }
                 userList.Add(tempuser);
 
