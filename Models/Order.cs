@@ -12,6 +12,9 @@ namespace AxolotlAtheneum.Models
         public OrderStatus OrderStatus { get; set; }
         public Address ShippingAddress { get; set; }
         public PaymentCard PaymentMethod { get; set; }
+        public double price { get; set; }
+        public int userID { get; set; }
+        public List<Book> items { get; set; }
 
     }
 }

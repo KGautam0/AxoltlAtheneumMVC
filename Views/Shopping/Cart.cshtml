@@ -16,27 +16,35 @@ else
                 {
 
                     <div class="container">
-                        <h2></h2> <p>$ @item.Key.SellingPrice</p>
-                        <div class="col">
-                            <a href="@Url.Action("Book", "Shopping", item.Key)">
-                                <img src="@Url.Content(item.Key.CoverPictureURL)" width="15%" align="left">
-                            </a>
-                        </div>
-                        <div class="col" style="padding-left:275px">
-                            <h4>@item.Key.Title by @item.Key.Author: </h4>
-                            <h6> You currently have @item.Value copies in your shopping cart. </h6>
-                            <a href="@Url.Action("RemoveFromCart", "Shopping", item.Key)" class="btn btn-default" role="button">Remove from Cart</a>
+                        <div class="row">
+                            <div class="col" style="padding-left:150px">
+                                <a href="@Url.Action("Book", "Shopping", item.Key)">
+                                    <img src="@Url.Content(item.Key.CoverPictureURL)" width="200em" align="left">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <br />
+                                <h5>@item.Key.Title by @item.Key.Author: </h5>
+                                <h6> You currently have @item.Value copies in your shopping cart. </h6>
+                                <p>$ @item.Key.SellingPrice</p>
+                                <a href="@Url.Action("RemoveFromCart", "Shopping", item.Key)" class="btn btn-default" role="button">Remove from Cart</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="row shelf"> </div>
 
                 }
 
                 <h3>Shopping Cart Total: $@Model.Total</h3>
                 <br></br>
-                <a href="@Url.Action("Checkout", Model)">Checkout</a>
+                <a href="@Url.Action("Checkout")">Checkout</a>
             </div>
         </div>
     </div>
-    
+    <!-- Footer -->
+    <footer class="p-2 position-relative container-md wood-label">
+        <p>Axolotl Atheneum &copy; 2021 </p>
+    </footer>
+
 
 }

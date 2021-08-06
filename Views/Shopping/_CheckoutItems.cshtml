@@ -1,0 +1,13 @@
+﻿@model AxolotlAtheneum.Models.ShoppingCart 
+
+<fieldset class="leftside">
+    <table id="items_table">
+        @foreach (var order in Model.Items)
+        {
+            <tr>
+                <td>@order.Key.Title by @order.Key.Author: @order.Key.ISBN</td>
+                <td>@order.Value copies: $@order.Key.SellingPrice each</td>
+            </tr>
+        }
+    </table>
+</fieldset>
