@@ -11,7 +11,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class DAL
     {
-        private String connectionstring = "server=localhost;user id=root; Pwd=Kappa123!; database=pogstore";
+        private String connectionstring = "";
 
         public bool insertUSER(User x)
         {
@@ -707,6 +707,36 @@ namespace AxolotlAtheneum.DataAccessLayer
             }
 
             return users;
+        }
+
+        public Promotion getPromo(string promoCode)
+        {
+            MySqlConnection cnn = new MySqlConnection(connectionstring);
+            MySqlCommand cmnd = new MySqlCommand("getPromotion", cnn);
+            cmnd.CommandType = CommandType.StoredProcedure;
+            cmnd.Parameters.AddWithValue("p_promotionCode", promoCode);
+
+            cnn.Open();
+            List<Promotion> promos = new List<Promotion>();
+            var reader = cmnd.ExecuteReader();
+            while (reader.Read())
+            {
+                Promotion promo = new Promotion();
+                if (!(reader["Promotion_Code"] is DBNull))
+                {
+                    promo.PromoCode = (string)reader["Promotion_Code"];
+                }
+                if (!(reader["Promotion_Name"] is DBNull))
+                {
+                    promo.PromoName = (string)reader["Promotion_Name"];
+                }
+                promo.StartDate = (DateTime)reader["Promotion_Start"];
+                promo.EndDate = (DateTime)reader["Promotion_End"];
+                promo.ValueOff = (double)reader["Promotion_Discount"];
+            }
+            cnn.Close();
+
+            return promos[0];
         }
 
 
