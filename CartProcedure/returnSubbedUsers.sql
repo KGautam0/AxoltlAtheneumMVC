@@ -1,4 +1,4 @@
 CREATE PROCEDURE returnSubbedUsers()
 BEGIN
-SELECT * FROM users WHERE isSubscribed = 1;
+SELECT * FROM users WHERE promoEmails = 1;
 END;

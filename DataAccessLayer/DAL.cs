@@ -1,4 +1,5 @@
-﻿using AxolotlAtheneum.Models;
+﻿using AxolotlAtheneum.Factory;
+using AxolotlAtheneum.Models;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -122,7 +123,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             while (reader.Read())
             {
 
-                User tempuser = new User();
+                User tempuser = (User)new theFactory().factory(1);
                 if (!(reader["userID"] is DBNull))
                 {
                     tempuser.userID = (string)reader["userID"];
