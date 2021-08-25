@@ -2,6 +2,7 @@
 using AxolotlAtheneum.Factory;
 using AxolotlAtheneum.Models;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
@@ -88,6 +89,7 @@ namespace AxolotlAtheneum.Controllers
             User loggeduser = (User)Session["Logged_User"];
             if (loggeduser == null)
                 return View("Registration");
+
             if (loggeduser.status.Equals(Status.Inactive))
             {
                 return View("regSucc");
@@ -266,6 +268,19 @@ namespace AxolotlAtheneum.Controllers
                 { return View("RegistrationDupe"); }
                 x.status = Status.Inactive;
                 x.actnum = new Random().Next(1000);
+
+                x.cards = new List<PaymentCard>();
+
+                for (int z = 0; z < 3; z++)
+                    {
+                    x.cards.Add( new PaymentCard());
+                    x.cards[z].cardNumber = "xxxxxxxxxxxxxxxx";
+                    x.cards[z].cardSecNumber = "xxx";
+                    }    
+
+
+
+
                 USERBO.regUSER(x);
 
                 Session["Logged_User"] = x;

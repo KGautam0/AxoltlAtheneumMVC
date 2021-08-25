@@ -31,7 +31,7 @@ namespace AxolotlAtheneum.BusinessLayer
             promo.ValueOff = amt;
             promo.StartDate = start;
             promo.EndDate = end;
-            USERDAL.insertPromo(promo);
+            USERDAL.addPromo(promo);
 
         }
 
@@ -94,6 +94,17 @@ namespace AxolotlAtheneum.BusinessLayer
             USERDAL.addToOrder(y);
 
             messenger.sendCartConfirmation(x);
+
+        }
+
+        public List<Order> getORder(User x)
+        {
+
+            
+
+           return USERDAL.getOrders(x);
+
+            
 
         }
 

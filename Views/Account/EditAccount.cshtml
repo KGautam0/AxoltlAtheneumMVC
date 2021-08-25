@@ -180,38 +180,90 @@
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editCard">
                     <span class="login-button">
-                        <img src="@Url.Content("~/Images/BookSpineP.png")" )" alt="Edit Card" style="width:10em;">
-                        <div class="centered">Edit Card</div>
+                        <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Edit Card" style="width:10em;">
+                        <div class="centered">Edit Cards</div>
                     </span>
                 </button>
             </div>
             <!-- Collapsed Content -->
             <div class="collapse navbar-collapse" id="editCard">
-
-                @foreach (var card in @Model.cards)
+                @if ((Model.cards != null) && (Model.cards.Count > 0))
                 {
-                    <fieldset class="edit_payment">
-                        <h3>Edit Payment Card</h3>
-                        <p>Please enter your card information:</p>
-                        @{Html.RenderAction("rendereditCard", "Account", card);}
-                    </fieldset>
+                    <p>@Html.DropDownListFor(M => M.cards, new SelectList(Model.cards, "cardNumber", "cardNumber"), "Select a card", new { id = "cardList", onchange = "GetCreditcard()" })</p>
                 }
-                @if (Model.cards.Count < 3)
+                else
                 {
-                    <fieldset class="edit_payment">
-                        <h3>Enter New Payment Card</h3>
-                        <p>Please enter your card information:</p>
-                        @{Html.RenderAction("rendernewCard", "Account");}
-                    </fieldset>
+                    <p>No cards found. Please add a card. </p>
                 }
+                
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#editcreditCard" id="showCreditCard">
+                    <span class="login-button">
+                        <img src="@Url.Content("~/Images/BookSpineP.png")" alt="Edit Card" style="width:10em;">
+                        <div class="centered">Edit Card</div>
+                    </span>
+                </button>
 
+
+                <fieldset class="edit_payment">
+                    <h3>Change Payment Card</h3>
+                    <p>Please enter your card information:</p>
+                    @* @{Html.RenderAction("rendereditCard", "Account");}*@
+                </fieldset>
+                <div id="editcreditCard" class="collapse navbar-collapse">
+
+                    @{
+
+
+                        Html.RenderPartial("_editCard", Model.cards[0]);
+                    }
+
+                </div>
 
 
             </div>
-
 
         </div><!-- Footer -->
         <footer class="p-2 position-relative container-md wood-label">
             <p>Axolotl Atheneum &copy; 2021 </p>
         </footer>
     </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $(window).on('load', function () {
+            GetCreditcard();
+        });
+    });
+
+    function GetCreditcard() {
+        var cardNumber = $('#cards').val();
+        $("#showCreditCard").trigger('click');
+       //alert(cardNumber);
+        var cards = [];
+        var currentCardExpMon = '';
+        var currentCardExpYrs = '';
+        var currentCardType = '';
+        var currentCardCVV = '';
+
+        cards =@Html.Raw(Json.Encode(Model.cards));
+        for (var i = 0; i < cards.length; i++) {
+            //alert(cards[i].cardNumber);
+            if (cardNumber == cards[i].cardNumber) {
+                currentCardExpMon = cards[i].expMonth;
+                currentCardExpYrs = cards[i].expYear;
+                currentCardType = cards[i].cardType;
+                currentCardCVV = cards[i].cardSecNumber;
+            }
+        }
+        $('#card_cardNumber').val(cardNumber);
+        $('#card_expMonth').val(currentCardExpMon)  ;
+        $('#card_expYear').val(currentCardExpYrs)  ;
+        $('#card_cardType').val(currentCardType) ;
+        $('#card_cardSecNumber').val(currentCardCVV)  ;
+        //alert(currentCardType);
+
+    }
+    </script>

@@ -11,7 +11,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 {
     public class DAL
     {
-        private String connectionstring = "";
+        private String connectionstring = "server=localhost;user id=root;persistsecurityinfo=True;database=pogstore; Pwd=Kappa123!";
 
         public bool insertUSER(User x)
         {
@@ -25,17 +25,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 
 
             //Serialize reference type parameter 
-            List<String> cardList = new List<String>();
-            if (x.cards != null)
-            {
-
-                if (x.cards.Count > 0)
-                    cardList.Add(JsonConvert.SerializeObject(x.cards[0]));
-                if (x.cards.Count > 1)
-                    cardList.Add(JsonConvert.SerializeObject(x.cards[1]));
-                if (x.cards.Count > 2)
-                    cardList.Add(JsonConvert.SerializeObject(x.cards[2]));
-            }
+            String cardList = JsonConvert.SerializeObject(x.cards);
             
 
             String addressString = JsonConvert.SerializeObject(x.address);
@@ -49,9 +39,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_Password", x.password);
             cmnd.Parameters.AddWithValue("p_Status", x.status);
             cmnd.Parameters.AddWithValue("p_Address", addressString);
-            cmnd.Parameters.AddWithValue("p_Card0", cardList[0]);
-            cmnd.Parameters.AddWithValue("p_Card1", cardList[1]);
-            cmnd.Parameters.AddWithValue("p_Card2", cardList[2]);
+            cmnd.Parameters.AddWithValue("p_Cards", cardList);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
             cmnd.Parameters.AddWithValue("p_isAdmin", (x.status.Equals(Status.Admin)) ? 1 : 0);
 
@@ -79,17 +67,9 @@ namespace AxolotlAtheneum.DataAccessLayer
 
 
             //Serialize reference type parameter 
-            List<String> cardList = new List<String>();
-            if (x.cards != null)
-            {
-
-                if (x.cards.Count > 0)
-                    cardList.Add(JsonConvert.SerializeObject(x.cards[0]));
-                if (x.cards.Count > 1)
-                    cardList.Add(JsonConvert.SerializeObject(x.cards[1]));
-                if (x.cards.Count > 2)
-                    cardList.Add(JsonConvert.SerializeObject(x.cards[2]));
-            }
+            String cardList = JsonConvert.SerializeObject(x.cards);
+           
+           
             
 
             String addressString = JsonConvert.SerializeObject(x.address);
@@ -104,9 +84,7 @@ namespace AxolotlAtheneum.DataAccessLayer
             cmnd.Parameters.AddWithValue("p_Phonenumber", x.phonenumber);
             cmnd.Parameters.AddWithValue("p_Status", x.status);
             cmnd.Parameters.AddWithValue("p_Address", addressString);
-            cmnd.Parameters.AddWithValue("p_Card0", cardList[0]);
-            cmnd.Parameters.AddWithValue("p_Card1", cardList[1]);
-            cmnd.Parameters.AddWithValue("p_Card2", cardList[2]);
+            cmnd.Parameters.AddWithValue("p_Cards", cardList);
             cmnd.Parameters.AddWithValue("p_Actnum", x.actnum);
             cmnd.Parameters.AddWithValue("p_isSubscribed", x.isSubscribed);
             cmnd.Parameters.AddWithValue("p_isAdmin", (x.status.Equals(Status.Admin)) ? 1 : 0);
@@ -175,24 +153,10 @@ namespace AxolotlAtheneum.DataAccessLayer
                     tempuser.address = userAddress;
                 }
 
-                string card0Json = reader["card0"] as string;
-                string card1Json = reader["card1"] as string;
-                string card2Json = reader["card2"] as string;
-                if (card0Json != null && card0Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card0Json);
-                    tempuser.cards.Add(userCard);
-                }
-                if (card1Json != null && card1Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card1Json);
-                    tempuser.cards.Add(userCard);
-                }
-                if (card2Json != null && card2Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card2Json);
-                    tempuser.cards.Add(userCard);
-                }
+
+                List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>((string)reader["cards"]);
+                tempuser.cards= userCard;
+               
 
                 userList.Add(tempuser);
 
@@ -251,24 +215,8 @@ namespace AxolotlAtheneum.DataAccessLayer
                     Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
                     tempuser.address = userAddress;
                 }
-                string card0Json = reader["card0"] as string;
-                string card1Json = reader["card1"] as string;
-                string card2Json = reader["card2"] as string;
-                if (card0Json != null && card0Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card0Json);
-                    tempuser.cards.Add(userCard);
-                }
-                if (card1Json != null && card1Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card1Json);
-                    tempuser.cards.Add(userCard);
-                }
-                if (card2Json != null && card2Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card2Json);
-                    tempuser.cards.Add(userCard);
-                }
+                List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>((string)reader["cards"]);
+                tempuser.cards = userCard;
                 userList.Add(tempuser);
 
             }
@@ -326,24 +274,8 @@ namespace AxolotlAtheneum.DataAccessLayer
                     Address userAddress = JsonConvert.DeserializeObject<Address>(addressJson);
                     tempuser.address = userAddress;
                 }
-                string card0Json = reader["card0"] as string;
-                string card1Json = reader["card1"] as string;
-                string card2Json = reader["card2"] as string;
-                if (card0Json != null && card0Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card0Json);
-                    tempuser.cards.Add(userCard);
-                }
-                if (card1Json != null && card1Json != "")
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card1Json);
-                    tempuser.cards.Add(userCard);
-                }
-                if (card2Json != null)
-                {
-                    PaymentCard userCard = JsonConvert.DeserializeObject<PaymentCard>(card2Json);
-                    tempuser.cards.Add(userCard);
-                }
+                List<PaymentCard> userCard = JsonConvert.DeserializeObject<List<PaymentCard>>((string)reader["cards"]);
+                tempuser.cards = userCard;
                 userList.Add(tempuser);
 
             }
@@ -757,14 +689,16 @@ namespace AxolotlAtheneum.DataAccessLayer
         public void addToOrder(Order x)
         {
             MySqlConnection cnn = new MySqlConnection(connectionstring);
-            MySqlCommand cmnd = new MySqlCommand("addToOrder", cnn);
+            MySqlCommand cmnd = new MySqlCommand("addToOrders", cnn);
             cmnd.CommandType = CommandType.StoredProcedure;
             cmnd.Parameters.AddWithValue("p_OrderID", x.OrderID);
-            cmnd.Parameters.AddWithValue("p_CustomerID", x.userID);
+            cmnd.Parameters.AddWithValue("p_CustomerID", x.orderuserID);
             cmnd.Parameters.AddWithValue("p_OrderPrice", x.price);
             cmnd.Parameters.AddWithValue("p_OrderAdress", JsonConvert.SerializeObject(x.ShippingAddress));
-            cmnd.Parameters.AddWithValue("p_OrderAdress", JsonConvert.SerializeObject(x.PaymentMethod));
-            cmnd.Parameters.AddWithValue("p_OrderAdress", JsonConvert.SerializeObject(x.Items));
+            cmnd.Parameters.AddWithValue("p_OrderPayment", JsonConvert.SerializeObject(x.PaymentMethod));
+            cmnd.Parameters.AddWithValue("p_OrderISBN", JsonConvert.SerializeObject(x.Items));
+            
+            cmnd.Parameters.AddWithValue("p_OrderStatus", x.OrderStatus);
             cnn.Open();
             cmnd.ExecuteNonQuery();
             
@@ -772,11 +706,11 @@ namespace AxolotlAtheneum.DataAccessLayer
 
             
         }
-        /*
+       
         public void addPromo(Promotion x)
         {
             MySqlConnection cnn = new MySqlConnection(connectionstring);
-            MySqlCommand cmnd = new MySqlCommand("addToOrder", cnn);
+            MySqlCommand cmnd = new MySqlCommand("addPromotion", cnn);
             cmnd.CommandType = CommandType.StoredProcedure;
             cmnd.Parameters.AddWithValue("p_PromoID", x.PromoName);
             cmnd.Parameters.AddWithValue("p_PromoCode", x.PromoCode);
@@ -791,7 +725,7 @@ namespace AxolotlAtheneum.DataAccessLayer
 
 
         }
-        */
+      
 
         public List<Order> getOrders(User x)
         {
@@ -808,7 +742,7 @@ namespace AxolotlAtheneum.DataAccessLayer
                 Order order = (Order)new theFactory().factory(14);
                 
                 order.OrderID = (int)reader["Order_ID"];
-                order.userID = (int)reader["User_ID"];
+                order.orderuserID = (int)reader["User_ID"];
                 order.DateOrdered = (DateTime)reader["Order_Time"];
                 order.price = (int)reader["Order_Price"];
 

@@ -1,16 +1,12 @@
 ﻿@model AxolotlAtheneum.Models.Order
 
-
+@{
+    ViewBag.Title = "asdfadfgae";
+}
 <h2 text-align:>Checkout</h2>
 
 
-@if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
 
-{
-
-    <p> You do not have a valid shipping address or credit card, please add one <a href="@Url.Action("EditAccount", "Account")">here. </a></p>
-
-}
 
 @if ((Model.ShippingAddress != null) | (Model.PaymentMethod != null))
 {
@@ -62,17 +58,38 @@
 
         </table>
     </div>
-    <p>Address : @Model.ShippingAddress.Street , @Model.ShippingAddress.City , @Model.ShippingAddress.State , @Model.ShippingAddress.Zip  </p>
-    <p>Card Selected : @Model.PaymentMethod.cardNumber , @Model.PaymentMethod.cardSecNumber</p>
-    <div style="text-align: center">
-        <a class="book-genre" href="@Url.Action("Checkout", Model)">
-            <img src="@Url.Content("~/Images/BookSpineR.png")" alt="Checkout"
-                 style="width:10em;">
-            <div class="centered">Checkout</div>
-        </a>
-    </div>
+
+
+
+
+
 }
 
+
+@if ((Model.ShippingAddress == null) | (Model.PaymentMethod == null))
+
+{
+
+    <p> You do not have a valid shipping address or credit card, please add one <a href="@Url.Action("EditAccount", "Account")">here. </a></p>
+
+}
+
+
+else
+{
+
+    <p> Your total is @Model.Total , please confirm below that the purchase details are correct. </p>
+
+    <p> Address : @Model.ShippingAddress.Street   <br> Card : @Model.PaymentMethod.cardNumber </p>
+
+    using (Html.BeginForm("confirmCheckout", "Shopping", Model)){
+    <button type="submit" class="btn btn-warning" href ="@Url.Action()">
+        <span class="glyphicon glyphicon-star">Confirm Checkout</span> 
+    </button>
+    }
+
+
+}
 
 
 

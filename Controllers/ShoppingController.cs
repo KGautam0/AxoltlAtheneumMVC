@@ -20,7 +20,7 @@ namespace AxolotlAtheneum.Controllers
         public ActionResult OrderHistory()
         {
             if (Session["Logged_User"] != null)
-                return View();
+                return View("OrderHistoryThis");
             return View("LoginCheck");
         }
 
@@ -146,7 +146,7 @@ namespace AxolotlAtheneum.Controllers
         {
             if (addPromoName != null && addPromoCode != null && addPromoDiscount != null)
             {
-                bo.addPromo(addPromoName, addPromoCode, addPromoDiscount);
+                bo.addPromo(addPromoName, addPromoCode, double.Parse(addPromoDiscount), DateTime.Now, new DateTime(2021, 12, 12));
             }
             return View("Homepage", "Account");
         }
@@ -185,20 +185,47 @@ namespace AxolotlAtheneum.Controllers
             return View("Cart", cart);
         }
 
-        public ActionResult CheckConfirm(Order x)
+        public ActionResult CheckConfirm()
         {
             User loggeduser = (User)Session["Logged_User"];
-            
-            ShoppingBO.
 
-             
-            return View("Checkout", order);
+            ShoppingBO shoppingBO = new ShoppingBO();
+            List<Order> x = shoppingBO.getORder(loggeduser);
+            
+            
+
+
+            return View("Checkout", x[0]);
+        }
+
+        public ActionResult Checkout(ShoppingCart x)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            ShoppingBO abc = new ShoppingBO();
+            Order order = new Order();
+            x = abc.getCart(loggeduser);
+            order.Items = x.Items;
+            order.Discount = x.Discount;
+            order.orderuserID = int.Parse(x.UserID);
+            order.ShippingAddress = loggeduser.address;
+            order.PaymentMethod = loggeduser.cards[0];
+            order.OrderStatus = OrderStatus.Pending;
+            abc.confORDER(loggeduser, order);
+
+            return View("Checktest", order);
         }
 
         public ActionResult Confirm(ShoppingCart cart)
         {
             User loggeduser = (User)Session["Logged_User"];
-            bo.confORDER(loggeduser);
+            
+            return View("OrderConfirmation");
+        }
+
+        public ActionResult confirmCheckout(Order x)
+        {
+            User loggeduser = (User)Session["Logged_User"];
+            bo.confORDER(loggeduser, x);
             return View("OrderConfirmation");
         }
 
